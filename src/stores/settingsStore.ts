@@ -102,6 +102,7 @@ import {
 } from "../utils/dictionaryPromptCap";
 import type { EnterpriseSetupMode } from "../types/enterpriseIdentity";
 import { getManagedScopeResolution } from "./enterpriseIdentityStore";
+import { OPENWHISPR_CLOUD_ENABLED } from "../config/accounts";
 
 let _ReasoningService: typeof import("../services/ReasoningService").default | null = null;
 
@@ -433,6 +434,7 @@ const BOOLEAN_SETTINGS = new Set([
   "uploadUseLocalWhisper",
   "allowOpenAIFallback",
   "allowLocalFallback",
+  "geminiUltrafastEnabled",
   "assemblyAiStreaming",
   "autoGenerateNoteTitle",
   "useCleanupModel",
@@ -1290,6 +1292,8 @@ export interface SettingsState
   setAllowOpenAIFallback: (value: boolean) => void;
   setAllowLocalFallback: (value: boolean) => void;
   setFallbackWhisperModel: (value: string) => void;
+  setGeminiUltrafastEnabled: (value: boolean) => void;
+  setGeminiUltrafastModel: (value: string) => void;
   setPreferredLanguage: (value: string) => void;
   setChineseScriptPreference: (value: ChineseScriptPreference) => void;
   setCloudTranscriptionProvider: (value: string) => void;
@@ -1689,6 +1693,66 @@ function syncAfterLocalWrite(method: "syncDictionaryNow" | "syncSnippetsNow"): v
   });
 }
 
+// OpenWhispr Cloud is unavailable without an OpenWhispr account (see
+// config/accounts.ts). Move every scope still on it, or on its "openwhispr"
+// default, to the user's own providers so nothing routes to a service that
+// would refuse it.
+const INFERENCE_MODE_KEYS = [
+  "transcriptionMode",
+  "cleanupMode",
+  "meetingTranscriptionMode",
+  "uploadTranscriptionMode",
+  "noteFormattingMode",
+  "translationMode",
+  "chatAgentMode",
+  "dictationAgentMode",
+];
+const CLOUD_MODE_KEYS = [
+  "cloudTranscriptionMode",
+  "cleanupCloudMode",
+  "translationCloudMode",
+  "chatAgentCloudMode",
+  "dictationAgentCloudMode",
+  "dictationAgentVisionCloudMode",
+];
+// Copied from dictation by migrateMeetingFollowFlags()/migrateUploadTranscription()
+// when set; empty means "same as dictation", so only an explicit "openwhispr" moves.
+const INHERITING_CLOUD_MODE_KEYS = [
+  "meetingCloudTranscriptionMode",
+  "uploadCloudTranscriptionMode",
+];
+// Onboarding writes these, and its BYOK steps read them to reopen on a saved
+// setup: before it finishes, their "openwhispr" is the untouched default, and
+// turning it into "providers" would show a provider the user never picked.
+// finishOpenWhisprCloudMigration() moves them once onboarding completes.
+const ONBOARDING_OWNED_KEYS = new Set(["transcriptionMode", "chatAgentMode"]);
+
+/** Returns the keys it changed, with their new values. */
+function migrateAwayFromOpenWhisprCloud(): Record<string, string> {
+  const changed: Record<string, string> = {};
+  if (!isBrowser || OPENWHISPR_CLOUD_ENABLED) return changed;
+  try {
+    const onboarded = localStorage.getItem("onboardingCompleted") === "true";
+    const migrate = (key: string, replacement: string, migrateUnset: boolean) => {
+      const value = localStorage.getItem(key);
+      if (value === "openwhispr" || (value === null && migrateUnset)) {
+        localStorage.setItem(key, replacement);
+        changed[key] = replacement;
+      }
+    };
+    for (const key of INFERENCE_MODE_KEYS) {
+      if (!onboarded && ONBOARDING_OWNED_KEYS.has(key)) continue;
+      migrate(key, "providers", true);
+    }
+    for (const key of CLOUD_MODE_KEYS) migrate(key, "byok", true);
+    for (const key of INHERITING_CLOUD_MODE_KEYS) migrate(key, "byok", false);
+  } catch {
+    // Storage unavailable: the readers fall back to their defaults.
+  }
+  return changed;
+}
+migrateAwayFromOpenWhisprCloud();
+
 export const useSettingsStore = create<SettingsState>()((set, get) => ({
   uiLanguage: normalizeUiLanguage(
     isBrowser ? localStorage.getItem("uiLanguage") || i18n.language : null
@@ -1701,6 +1765,8 @@ export const useSettingsStore = create<SettingsState>()((set, get) => ({
   allowOpenAIFallback: readBoolean("allowOpenAIFallback", false),
   allowLocalFallback: readBoolean("allowLocalFallback", false),
   fallbackWhisperModel: readString("fallbackWhisperModel", "base"),
+  geminiUltrafastEnabled: readBoolean("geminiUltrafastEnabled", false),
+  geminiUltrafastModel: readString("geminiUltrafastModel", "gemini-3.5-flash-lite"),
   preferredLanguage: readString("preferredLanguage", "auto"),
   chineseScriptPreference: normalizeChineseScriptPreference(
     readString("chineseScriptPreference", "as-transcribed")
@@ -2219,6 +2285,8 @@ export const useSettingsStore = create<SettingsState>()((set, get) => ({
   setAllowOpenAIFallback: createBooleanSetter("allowOpenAIFallback"),
   setAllowLocalFallback: createBooleanSetter("allowLocalFallback"),
   setFallbackWhisperModel: createStringSetter("fallbackWhisperModel"),
+  setGeminiUltrafastEnabled: createBooleanSetter("geminiUltrafastEnabled"),
+  setGeminiUltrafastModel: createStringSetter("geminiUltrafastModel"),
   setPreferredLanguage: createStringSetter("preferredLanguage"),
   setChineseScriptPreference: (value: ChineseScriptPreference) =>
     createStringSetter("chineseScriptPreference")(normalizeChineseScriptPreference(value)),
@@ -4513,4 +4581,16 @@ export async function initializeSettings(): Promise<void> {
       useSettingsStore.setState({ [data.key]: data.value });
     }
   });
+}
+
+/**
+ * Runs the OpenWhispr Cloud migration again once onboarding has finished, so
+ * the scopes onboarding left on their Cloud default move to the user's own
+ * providers without waiting for a restart.
+ */
+export function finishOpenWhisprCloudMigration(): void {
+  const changed = migrateAwayFromOpenWhisprCloud();
+  if (Object.keys(changed).length > 0) {
+    useSettingsStore.setState(changed as Partial<SettingsState>);
+  }
 }

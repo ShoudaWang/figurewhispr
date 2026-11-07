@@ -14,6 +14,7 @@ import { useAuth } from "./hooks/useAuth";
 import { useControlPanelWindowDrag } from "./hooks/useControlPanelWindowDrag";
 import { useTheme } from "./hooks/useTheme";
 import { mirrorActiveAccountScope } from "./lib/accountScopeMirror";
+import { ACCOUNTS_ENABLED } from "./lib/auth";
 import { usePolicyStore } from "./stores/policyStore";
 import { resolveSettledControlPanelWindowMode } from "./utils/controlPanelWindowMode.ts";
 import { resolveMacAccessibilityReadiness } from "./utils/macAccessibilityReadiness.ts";
@@ -107,6 +108,23 @@ function MainApp() {
   }, [autoSyncReady, isControlPanel]);
 
   useEffect(() => {
+    // Google settings sync runs in the dictation window: it is the one window
+    // that lives for the whole app session (the control panel can be closed).
+    if (!isDictationPanel || isAgentWindow()) return;
+    let stop = null;
+    let disposed = false;
+    import("./services/googleSettingsSync")
+      .then(({ startGoogleSettingsAutoSync }) => {
+        if (!disposed) stop = startGoogleSettingsAutoSync();
+      })
+      .catch(() => {});
+    return () => {
+      disposed = true;
+      stop?.();
+    };
+  }, [isDictationPanel]);
+
+  useEffect(() => {
     // The dictation window cannot resolve a session (see mirrorActiveAccountScope),
     // so its policy and managed identity follow the main process's account scope.
     if (!isDictationPanel) return;
@@ -133,7 +151,7 @@ function MainApp() {
     if (isControlPanel) {
       if (!resolved) {
         setShowOnboarding(true);
-      } else if (!isSignedIn && !authSkipped) {
+      } else if (ACCOUNTS_ENABLED && !isSignedIn && !authSkipped) {
         setNeedsReauth(true);
       }
     }
@@ -267,7 +285,7 @@ function LoadingFallback({ message }) {
         <svg
           viewBox="0 0 1024 1024"
           className="w-12 h-12 drop-shadow-[0_2px_8px_rgba(37,99,235,0.18)] dark:drop-shadow-[0_2px_12px_rgba(100,149,237,0.25)]"
-          aria-label="OpenWhispr"
+          aria-label="FigureWhispr"
         >
           <rect width="1024" height="1024" rx="241" fill="#2056DF" />
           <circle cx="512" cy="512" r="314" fill="#2056DF" stroke="white" strokeWidth="74" />

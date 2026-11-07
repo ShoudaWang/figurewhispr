@@ -1,13 +1,13 @@
 {
-  "appId": "com.gizmolabs.openwhispr",
+  "appId": "ai.figure.figurewhispr",
   "afterPack": "scripts/afterPack.js",
   "extraMetadata": {
     "windowsTrayIdentity": true
   },
-  "productName": "OpenWhispr",
+  "productName": "FigureWhispr",
   "protocols": {
-    "name": "OpenWhispr Protocol",
-    "schemes": ["openwhispr"]
+    "name": "FigureWhispr Protocol",
+    "schemes": ["figurewhispr"]
   },
   "directories": {
     "output": "dist"
@@ -268,7 +268,7 @@
     "include": "resources/nsis/installer.nsh"
   },
   "dmg": {
-    "title": "OpenWhispr",
+    "title": "FigureWhispr",
     "icon": "src/assets/icon.icns",
     "window": {
       "width": 540,

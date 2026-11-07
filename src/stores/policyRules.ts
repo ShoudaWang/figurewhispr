@@ -3,6 +3,7 @@ import type { InferenceMode, ShareVisibility } from "../types/electron";
 import type { OrgPolicy, PolicyScope } from "../types/policy";
 import type { SettingsState } from "./settingsStore";
 import { compareAppVersions } from "../utils/version.ts";
+import { OPENWHISPR_CLOUD_ENABLED } from "../config/accounts.ts";
 // The pure registry store keeps this policy module usable without browser globals.
 // Provider membership is code-pinned by catalog compatibility validation.
 import {
@@ -162,6 +163,7 @@ export function isModeAllowedByPolicy(
   scope: PolicyScope,
   mode: InferenceMode
 ): boolean {
+  if (mode === "openwhispr" && !OPENWHISPR_CLOUD_ENABLED) return false;
   return managedPolicyDecision(state, (policy) => policy[scope].allowedModes.includes(mode));
 }
 
@@ -775,6 +777,9 @@ export function filterModeOptionsByPolicy<T extends { id: InferenceMode }>(
   state: PolicyDecisionSnapshot,
   providerCatalog?: Pick<PolicySelectionCatalog, "byokProviders" | "enterpriseProviders">
 ): T[] {
+  if (!OPENWHISPR_CLOUD_ENABLED) {
+    options = options.filter((option) => option.id !== "openwhispr");
+  }
   if (state.status === "idle" || state.status === "unmanaged") return options;
   if (state.status !== "managed" || !state.policy) return [];
   return options.filter(
@@ -803,6 +808,9 @@ export function filterByokProviderOptionsByPolicy<T extends { id: string }>(
   scope: PolicyScope,
   state: PolicyDecisionSnapshot
 ): T[] {
+  if (!OPENWHISPR_CLOUD_ENABLED) {
+    options = options.filter((option) => option.id !== "openwhispr");
+  }
   if (state.status === "idle" || state.status === "unmanaged") return options;
   if (state.status !== "managed" || !state.policy) return [];
   return options.filter((option) => isProviderAllowedByPolicy(state, scope, option.id));
@@ -812,6 +820,9 @@ export function filterEnterpriseProviderOptionsByPolicy<T extends { id: string }
   options: T[],
   state: PolicyDecisionSnapshot
 ): T[] {
+  if (!OPENWHISPR_CLOUD_ENABLED) {
+    options = options.filter((option) => option.id !== "openwhispr");
+  }
   if (state.status === "idle" || state.status === "unmanaged") return options;
   if (state.status !== "managed" || !state.policy) return [];
   return options.filter((option) => isEnterpriseProviderAllowed(state, option.id));

@@ -5,8 +5,20 @@ const load = () => import("../../src/lib/settingsNav.ts");
 
 const ids = (nav, group) => nav.filter((entry) => !group || entry.group === group).map((e) => e.id);
 
-const SIGNED_IN_ADMIN = { isSignedIn: true, hasWorkspace: true, canManageSettings: true };
-const SIGNED_IN_MEMBER = { isSignedIn: true, hasWorkspace: true, canManageSettings: false };
+// These cases cover the legacy OpenWhispr-account nav, which builds can turn
+// back on (config/accounts.ts); the default build is tested at the bottom.
+const SIGNED_IN_ADMIN = {
+  isSignedIn: true,
+  hasWorkspace: true,
+  canManageSettings: true,
+  accountsEnabled: true,
+};
+const SIGNED_IN_MEMBER = {
+  isSignedIn: true,
+  hasWorkspace: true,
+  canManageSettings: false,
+  accountsEnabled: true,
+};
 
 test("signed out shows no workspace group", async () => {
   const { buildSettingsNav } = await load();
@@ -14,6 +26,7 @@ test("signed out shows no workspace group", async () => {
   const nav = buildSettingsNav({
     isSignedIn: false,
     hasWorkspace: false,
+    accountsEnabled: true,
     canManageSettings: false,
   });
 
@@ -48,7 +61,12 @@ test("everyone with a workspace sees Teamspaces, in order", async () => {
 
   // Teamspaces needs no capability: members read the list and join open ones.
   for (const canManageSettings of [false, true]) {
-    const nav = buildSettingsNav({ isSignedIn: true, hasWorkspace: true, canManageSettings });
+    const nav = buildSettingsNav({
+      isSignedIn: true,
+      hasWorkspace: true,
+      accountsEnabled: true,
+      canManageSettings,
+    });
 
     assert.deepEqual(
       ids(nav, "workspace").slice(0, 3),
@@ -99,7 +117,12 @@ test("admin sees Developer last in the workspace group", async () => {
 test("no workspace shows only General in the workspace group", async () => {
   const { buildSettingsNav } = await load();
 
-  const nav = buildSettingsNav({ isSignedIn: true, hasWorkspace: false, canManageSettings: true });
+  const nav = buildSettingsNav({
+    isSignedIn: true,
+    hasWorkspace: false,
+    accountsEnabled: true,
+    canManageSettings: true,
+  });
 
   assert.deepEqual(ids(nav, "workspace"), ["workspaceGeneral"]);
 });
@@ -137,7 +160,12 @@ test("hidden Developer falls back to General", async () => {
   assert.equal(
     resolveSettingsSection(
       "workspacePeople",
-      buildSettingsNav({ isSignedIn: true, hasWorkspace: false, canManageSettings: false })
+      buildSettingsNav({
+        isSignedIn: true,
+        hasWorkspace: false,
+        accountsEnabled: true,
+        canManageSettings: false,
+      })
     ),
     "workspaceGeneral"
   );
@@ -145,7 +173,12 @@ test("hidden Developer falls back to General", async () => {
   assert.equal(
     resolveSettingsSection(
       "workspace",
-      buildSettingsNav({ isSignedIn: false, hasWorkspace: false, canManageSettings: false })
+      buildSettingsNav({
+        isSignedIn: false,
+        hasWorkspace: false,
+        accountsEnabled: true,
+        canManageSettings: false,
+      })
     ),
     "account"
   );
@@ -157,6 +190,7 @@ test("a deep link without a workspace lands on the workspace group", async () =>
   const noWorkspace = buildSettingsNav({
     isSignedIn: true,
     hasWorkspace: false,
+    accountsEnabled: true,
     canManageSettings: false,
   });
 
@@ -169,7 +203,12 @@ test("a deep link without a workspace lands on the workspace group", async () =>
   assert.equal(
     resolveSettingsSection(
       "workspaceTeamspaces",
-      buildSettingsNav({ isSignedIn: false, hasWorkspace: false, canManageSettings: false })
+      buildSettingsNav({
+        isSignedIn: false,
+        hasWorkspace: false,
+        accountsEnabled: true,
+        canManageSettings: false,
+      })
     ),
     "account"
   );
@@ -196,4 +235,26 @@ test("a meeting's refusal opens Speech-to-Text on its Note Recording tab", async
   assert.equal(isProviderSettingsTarget("noteRecording"), true);
   assert.equal(nav.SECTION_ALIASES.noteRecording, "speechToText");
   assert.equal(nav.LEGACY_SUB_TAB.noteRecording, "noteRecording");
+});
+
+test("without OpenWhispr accounts there is no billing or workspace page", async () => {
+  const { buildSettingsNav } = await load();
+
+  const nav = buildSettingsNav({
+    isSignedIn: true,
+    hasWorkspace: true,
+    canManageSettings: true,
+    accountsEnabled: false,
+  });
+
+  assert.deepEqual(ids(nav), [
+    "account",
+    "general",
+    "toneStyle",
+    "hotkeys",
+    "speechToText",
+    "llms",
+    "privacyData",
+    "system",
+  ]);
 });

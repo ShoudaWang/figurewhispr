@@ -38,6 +38,7 @@ function runStartup({ lockAvailable, hidden }) {
     },
     "./src/helpers/hotkeyRepeatGate": { createHotkeyRepeatGate() {} },
     "./src/helpers/linuxGpuCompositing": { shouldDisableGpuCompositing: () => false },
+    "./src/helpers/legacyUserDataImport": { importLegacyUserData: () => "existing" },
     "./src/helpers/linuxUrlSchemeHandler": {
       registerLinuxUrlSchemeHandler: () => ({ registered: true }),
     },

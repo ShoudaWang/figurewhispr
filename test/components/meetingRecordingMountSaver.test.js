@@ -446,7 +446,7 @@ test("a model refused during a start ends it with main's reason", async (t) => {
 for (const [code, message] of [
   ["POLICY_MODEL_BLOCKED", "Choose a local model your organization has approved."],
   ["POLICY_LOCAL_MODE_BLOCKED", "Your organization has disabled local processing."],
-  ["POLICY_APP_VERSION_BLOCKED", "Update OpenWhispr to use your organization’s approved models."],
+  ["POLICY_APP_VERSION_BLOCKED", "Update FigureWhispr to use your organization’s approved models."],
 ]) {
   test(`${code} stops meeting capture and explains the local policy refusal`, async (t) => {
     const { start, store, streamError, toasts } = await setup(t);

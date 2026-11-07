@@ -43,7 +43,9 @@ import {
 } from "./icons";
 import { useAuth } from "../hooks/useAuth";
 import { resetForAccountChange as resetChatForAccountChange } from "../stores/chatTurnStore";
-import { AUTH_URL, signOut } from "../lib/auth";
+import { ACCOUNTS_ENABLED, AUTH_URL, signOut } from "../lib/auth";
+import GoogleAccountSection from "./settings/GoogleAccountSection";
+import GeminiUltrafastPanel from "./settings/GeminiUltrafastPanel";
 import { deleteAccount } from "../lib/accountDeletionRequest";
 import { executeAccountDeletion } from "../lib/accountDeletionFlow";
 import { getValidatedAuthGeneration } from "../lib/authRequestContext";
@@ -2202,6 +2204,7 @@ export default function SettingsPage({
   const renderSectionContent = () => {
     switch (activeSection) {
       case "account":
+        if (!ACCOUNTS_ENABLED) return <GoogleAccountSection />;
         return (
           <div className="space-y-5">
             {!AUTH_URL ? (
@@ -2308,28 +2311,6 @@ export default function SettingsPage({
                     </SettingsRow>
                   </SettingsPanelRow>
                 </SettingsPanel>
-
-                <div className="rounded-lg border border-primary/20 dark:border-primary/15 bg-primary/3 dark:bg-primary/6 p-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-md bg-primary/10 dark:bg-primary/15 flex items-center justify-center shrink-0 mt-0.5">
-                      <Sparkles className="w-4 h-4 text-primary" />
-                    </div>
-                    <div className="min-w-0 flex-1 space-y-2.5">
-                      <div>
-                        <p className="text-xs font-medium text-foreground">
-                          {t("settingsPage.account.trialCta.title")}
-                        </p>
-                        <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">
-                          {t("settingsPage.account.trialCta.description")}
-                        </p>
-                      </div>
-                      <Button onClick={requestSignIn} size="sm" className="w-full">
-                        <UserCircle className="me-1.5 h-3.5 w-3.5" />
-                        {t("settingsPage.account.trialCta.button")}
-                      </Button>
-                    </div>
-                  </div>
-                </div>
               </>
             ) : (
               <>
@@ -5038,6 +5019,7 @@ EOF`,
             }
             renderDictation={() => (
               <div className="space-y-6">
+                <GeminiUltrafastPanel />
                 <TranscriptionSection
                   isSignedIn={isSignedIn ?? false}
                   cloudTranscriptionMode={cloudTranscriptionMode}

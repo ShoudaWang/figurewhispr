@@ -667,6 +667,25 @@ contextBridge.exposeInMainWorld("electronAPI", {
   proxyXaiTranscription: (data) => ipcRenderer.invoke("proxy-xai-transcription", data),
   proxyMistralTranscription: (data) => ipcRenderer.invoke("proxy-mistral-transcription", data),
   proxyGeminiTranscription: (data) => ipcRenderer.invoke("proxy-gemini-transcription", data),
+  geminiUltrafastDictation: (data) => ipcRenderer.invoke("gemini-ultrafast-dictation", data),
+
+  // Google account (replaces the OpenWhispr account): sign-in + Drive settings sync
+  googleAccount: {
+    getStatus: () => ipcRenderer.invoke("google-account-status"),
+    getClientConfig: () => ipcRenderer.invoke("google-account-client-config"),
+    saveClientConfig: (config) => ipcRenderer.invoke("google-account-save-client-config", config),
+    signIn: () => ipcRenderer.invoke("google-account-sign-in"),
+    cancelSignIn: () => ipcRenderer.invoke("google-account-cancel-sign-in"),
+    signOut: () => ipcRenderer.invoke("google-account-sign-out"),
+    readSettings: () => ipcRenderer.invoke("google-account-read-settings"),
+    writeSettings: (document) => ipcRenderer.invoke("google-account-write-settings", document),
+    getDeviceId: () => ipcRenderer.invoke("google-account-device-id"),
+    onStatusChanged: (callback) => {
+      const listener = (_event, status) => callback?.(status);
+      ipcRenderer.on("google-account-status-changed", listener);
+      return () => ipcRenderer.removeListener("google-account-status-changed", listener);
+    },
+  },
 
   // Corti API
   getCortiClientId: () => ipcRenderer.invoke("get-corti-client-id"),

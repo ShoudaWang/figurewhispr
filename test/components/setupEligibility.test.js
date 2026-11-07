@@ -1,3 +1,7 @@
+// Exercises the OpenWhispr account/cloud mode, which this build ships disabled
+// (src/config/accounts.ts); test/config/accountsDisabled.test.js covers the default.
+process.env.VITE_ENABLE_OPENWHISPR_ACCOUNTS = "true";
+
 const assert = require("node:assert/strict");
 const path = require("node:path");
 const test = require("node:test");

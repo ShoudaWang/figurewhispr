@@ -4,7 +4,7 @@
       "sectionTitle": "語言",
       "sectionDescription": "分別設定介面語言和轉錄語言",
       "uiLabel": "介面語言",
-      "uiDescription": "選擇 OpenWhispr 介面使用的語言",
+      "uiDescription": "選擇 FigureWhispr 介面使用的語言",
       "transcriptionLabel": "轉錄語言",
       "transcriptionDescription": "選擇你說話的語言，以提高轉錄準確度",
       "chineseScriptLabel": "中文書寫（語音輸入）",
@@ -64,12 +64,12 @@
     },
     "openControlPanel": "開啟控制面板",
     "hideControlPanel": "隱藏控制面板",
-    "quit": "結束 OpenWhispr",
-    "tooltip": "OpenWhispr - 語音輸入"
+    "quit": "結束 FigureWhispr",
+    "tooltip": "FigureWhispr - 語音輸入"
   },
   "menu": {
-    "appLabel": "OpenWhispr",
-    "quit": "結束 OpenWhispr",
+    "appLabel": "FigureWhispr",
+    "quit": "結束 FigureWhispr",
     "speech": "語音",
     "settings": "設定...",
     "help": "說明",
@@ -87,8 +87,8 @@
       "message": "無法在瀏覽器中開啟連結：\n{{url}}\n\n錯誤：{{error}}"
     },
     "loadFailure": {
-      "title": "OpenWhispr 載入失敗",
-      "message": "OpenWhispr 無法載入介面。",
+      "title": "FigureWhispr 載入失敗",
+      "message": "FigureWhispr 無法載入介面。",
       "detail": {
         "window": "視窗：{{windowName}}",
         "error": "錯誤 {{errorCode}}：{{errorDescription}}",
@@ -99,17 +99,17 @@
   },
   "startup": {
     "error": {
-      "title": "OpenWhispr 啟動錯誤",
+      "title": "FigureWhispr 啟動錯誤",
       "message": "應用程式啟動失敗：\n\n{{error}}\n\n請回報此問題。"
     },
     "globeHotkey": {
       "title": "Globe 快捷鍵無法使用",
-      "message": "OpenWhispr 無法啟用 Globe 鍵快捷鍵。",
+      "message": "FigureWhispr 無法啟用 Globe 鍵快捷鍵。",
       "details": {
         "unknown": "啟動 Globe 監聽程式時發生未知錯誤。",
         "fallback": "Globe 鍵快捷鍵將維持停用狀態；現有的鍵盤快捷鍵仍可正常使用。",
         "devHint": "執行 `npm run compile:globe` 並重新建置應用程式以重新產生監聽程式。",
-        "reinstallHint": "請嘗試重新安裝 OpenWhispr，或聯絡客服。"
+        "reinstallHint": "請嘗試重新安裝 FigureWhispr，或聯絡客服。"
       }
     }
   },
@@ -164,7 +164,7 @@
     "close": "關閉"
   },
   "windows": {
-    "pttUnavailable": "OpenWhispr 按鍵監聽程式無法使用。"
+    "pttUnavailable": "FigureWhispr 按鍵監聽程式無法使用。"
   },
   "common": {
     "continue": "繼續",
@@ -221,7 +221,7 @@
   "onboarding": {
     "rehaul": {
       "permissions": {
-        "title": "3 分鐘完成 OpenWhispr 設定",
+        "title": "3 分鐘完成 FigureWhispr 設定",
         "microphoneDescription": "僅在錄音時收音。",
         "accessibilityDescription": "把文字貼到任何 App。",
         "systemAudioTitle": "系統音訊",
@@ -234,7 +234,7 @@
         "title": "你會說哪些語言？",
         "titleLineOne": "你會說",
         "titleLineTwo": "哪些語言？",
-        "description": "選擇所有適用的語言。這有助於 OpenWhispr 更準確地辨識語言切換。"
+        "description": "選擇所有適用的語言。這有助於 FigureWhispr 更準確地辨識語言切換。"
       },
       "dictationHotkey": {
         "title": "選擇你的聽寫快速鍵",
@@ -244,10 +244,10 @@
         "activation": "點按還是按住？"
       },
       "assistantHotkey": {
-        "title": "設定 OpenWhispr Assistant",
+        "title": "設定 FigureWhispr Assistant",
         "titleLineOne": "設定",
-        "titleLineTwo": "OpenWhispr Assistant",
-        "description": "說出你的請求，OpenWhispr Assistant 會為你寫好結果。"
+        "titleLineTwo": "FigureWhispr Assistant",
+        "description": "說出你的請求，FigureWhispr Assistant 會為你寫好結果。"
       },
       "hotkey": {
         "capture": "請按下你想使用的按鍵",
@@ -259,15 +259,15 @@
         "title": "試試第一次聽寫",
         "titleLineOne": "試試你的",
         "titleLineTwo": "第一次語音輸入",
-        "description": "按 {{hotkey}} 開始說話，OpenWhispr 會把你的語音轉成文字。",
-        "founder": "你好，我是創辦人 Gabe。感謝你試用 OpenWhispr！",
-        "prompt": "點一下下面的輸入框，按下快速鍵，然後告訴我：你希望 OpenWhispr 為你做些什麼？",
-        "placeholder": "點一下這裡，然後按下快速鍵。OpenWhispr 可以在任何文字框中輸入。"
+        "description": "按 {{hotkey}} 開始說話，FigureWhispr 會把你的語音轉成文字。",
+        "founder": "你好，我是創辦人 Gabe。感謝你試用 FigureWhispr！",
+        "prompt": "點一下下面的輸入框，按下快速鍵，然後告訴我：你希望 FigureWhispr 為你做些什麼？",
+        "placeholder": "點一下這裡，然後按下快速鍵。FigureWhispr 可以在任何文字框中輸入。"
       },
       "assistantDemo": {
-        "title": "認識 OpenWhispr Assistant",
+        "title": "認識 FigureWhispr Assistant",
         "titleLineOne": "來認識",
-        "titleLineTwo": "OpenWhispr Assistant",
+        "titleLineTwo": "FigureWhispr Assistant",
         "email": {
           "subject": "下週喝杯咖啡？",
           "senderName": "Maria Alvarez",
@@ -301,13 +301,13 @@
         "typing": "正在輸入…"
       },
       "notes": {
-        "title": "用 OpenWhispr Notes 錄製會議，無需機器人加入",
+        "title": "用 FigureWhispr Notes 錄製會議，無需機器人加入",
         "titleLineOne": "不需機器人也能錄製會議",
-        "titleLineTwoPrefix": "使用 OpenWhispr",
+        "titleLineTwoPrefix": "使用 FigureWhispr",
         "titleLineTwoBrand": "Notes",
-        "description": "OpenWhispr 把你的對話變成清楚的筆記。不會有會議機器人加入你的通話。",
+        "description": "FigureWhispr 把你的對話變成清楚的筆記。不會有會議機器人加入你的通話。",
         "hero": {
-          "description": "錄製你的會議，讓 OpenWhispr 把對話整理成清楚有條理的筆記。",
+          "description": "錄製你的會議，讓 FigureWhispr 把對話整理成清楚有條理的筆記。",
           "chat": "與會議筆記對話",
           "transcript": "檢視完整逐字稿",
           "speakers": "看看誰說了什麼"
@@ -323,9 +323,9 @@
         }
       },
       "setupChoice": {
-        "title": "選擇你的 OpenWhispr 設定",
+        "title": "選擇你的 FigureWhispr 設定",
         "titleLineOne": "選擇你的",
-        "titleLineTwo": "OpenWhispr 設定",
+        "titleLineTwo": "FigureWhispr 設定",
         "description": "選擇最符合你工作方式的方案。",
         "unavailable": {
           "title": "沒有可用的設定選項",
@@ -516,14 +516,14 @@
       "accessibilityTitle": "輔助使用",
       "accessibilityDescription": "將完成的文字直接輸入到你正在使用的應用程式 — 文件、郵件、聊天。",
       "testAndGrant": "測試並授權",
-      "requiredForApp": "OpenWhispr 運作所需",
+      "requiredForApp": "FigureWhispr 運作所需",
       "microphoneRequired": "需要麥克風存取權限",
       "openSystemSettings": "打開系統設定",
       "systemAudioTitle": "系統音訊",
       "systemAudioDescription": "讓會議錄音機聽到通話另一方的聲音 — 會議、講座、Podcast。你可以稍後在「設定」中開啟。",
       "optional": "可選",
       "recommended": "建議",
-      "accessibilityTroubleshooting": "在系統設定 → 輔助使用中，將 OpenWhispr 的開關關閉再重新開啟。如果清單中根本沒有 OpenWhispr，請點按 + 並從「應用程式」資料夾加入。還是不行？請寄信至 support@openwhispr.com。"
+      "accessibilityTroubleshooting": "在系統設定 → 輔助使用中，將 FigureWhispr 的開關關閉再重新開啟。如果清單中根本沒有 FigureWhispr，請點按 + 並從「應用程式」資料夾加入。還是不行？請寄信至 support@openwhispr.com。"
     },
     "transcription": {
       "title": "轉錄設定",
@@ -549,12 +549,12 @@
       "continue": "仍然繼續"
     },
     "useCase": {
-      "title": "你會如何使用 OpenWhispr？",
+      "title": "你會如何使用 FigureWhispr？",
       "titleLineOne": "你會如何使用",
-      "titleLineTwo": "OpenWhispr？",
+      "titleLineTwo": "FigureWhispr？",
       "description": "選擇所有適用項目，我們會據此為你量身設定。",
       "noteLabel": "還有什麼想告訴我們的嗎？",
-      "notePlaceholder": "告訴我們你打算如何使用 OpenWhispr（選填）",
+      "notePlaceholder": "告訴我們你打算如何使用 FigureWhispr（選填）",
       "proceedToSetup": "繼續設定",
       "options": {
         "dictation": {
@@ -587,7 +587,7 @@
     "meeting": {
       "title": "會議筆記",
       "description": "擷取並總結你的會議",
-      "autoDetect": "OpenWhispr 會自動偵測你是否正在開會，並提議開始記錄 — 未經你確認不會錄製任何內容。",
+      "autoDetect": "FigureWhispr 會自動偵測你是否正在開會，並提議開始記錄 — 未經你確認不會錄製任何內容。",
       "hotkeyLabel": "會議快捷鍵",
       "hotkeyHint": "選填 — 在任何會議中按下即可立即開始記錄。"
     },
@@ -629,14 +629,14 @@
       "return": "返回初始設定",
       "missingApp": "或透過 + 選取 App",
       "failed": "無法檢查存取權限。",
-      "microphone": "在「麥克風」中開啟 OpenWhispr。",
-      "accessibility": "將 OpenWhispr 拖入「輔助使用」，然後開啟開關。",
-      "systemAudio": "在「僅系統音訊錄製」中開啟 OpenWhispr。",
-      "screenContext": "將 OpenWhispr 拖入「螢幕與系統音訊錄製」，然後開啟開關。",
+      "microphone": "在「麥克風」中開啟 FigureWhispr。",
+      "accessibility": "將 FigureWhispr 拖入「輔助使用」，然後開啟開關。",
+      "systemAudio": "在「僅系統音訊錄製」中開啟 FigureWhispr。",
+      "screenContext": "將 FigureWhispr 拖入「螢幕與系統音訊錄製」，然後開啟開關。",
       "settings": "開啟設定",
       "check": "重新檢查",
       "restart": "重新啟動",
-      "restartRequired": "重新啟動 OpenWhispr 以套用螢幕存取權限。"
+      "restartRequired": "重新啟動 FigureWhispr 以套用螢幕存取權限。"
     }
   },
   "streaming": {
@@ -655,13 +655,13 @@
   "controlPanel": {
     "updateRequiredByOrg": {
       "title": "需要更新",
-      "description": "您的組織要求使用 OpenWhispr {{version}} 或更新版本。請更新應用程式。"
+      "description": "您的組織要求使用 FigureWhispr {{version}} 或更新版本。請更新應用程式。"
     },
     "update": {
       "readyTitle": "更新已準備就緒",
       "readyDescription": "點擊「安裝更新」以重新啟動並套用最新版本。",
       "installTitle": "安裝更新",
-      "installDescription": "OpenWhispr 將重新啟動以套用更新。進行中的工作會自動儲存。",
+      "installDescription": "FigureWhispr 將重新啟動以套用更新。進行中的工作會自動儲存。",
       "couldNotInstallTitle": "無法安裝更新",
       "couldNotInstallDescription": "發生錯誤，請再試一次。",
       "couldNotDownloadTitle": "無法下載更新",
@@ -676,7 +676,7 @@
     },
     "accessibilityMissing": {
       "title": "需要輔助使用權限",
-      "description": "我們偵測到 OpenWhispr 需要輔助使用權限才能正常運作。請在下方啟用。"
+      "description": "我們偵測到 FigureWhispr 需要輔助使用權限才能正常運作。請在下方啟用。"
     },
     "billing": {
       "pastDueTitle": "我們無法處理你的付款",
@@ -884,7 +884,7 @@
           "modelNotFound": "AWS Bedrock 在區域 {{region}} 中找不到所選模型。請檢查模型 ID，以及該模型是否在此區域提供。",
           "configurationRejected": "AWS Bedrock 拒絕了區域 {{region}} 的模型設定。請檢查模型 ID、推論設定檔和區域。",
           "notConfigured": "AWS Bedrock 設定不正確。請檢查區域和 AWS 憑證。",
-          "serviceUnavailable": "由於需求過高，AWS Bedrock 暫時無法使用。這是 AWS 服務問題，並非 OpenWhispr 中斷。請幾分鐘後再試。",
+          "serviceUnavailable": "由於需求過高，AWS Bedrock 暫時無法使用。這是 AWS 服務問題，並非 FigureWhispr 中斷。請幾分鐘後再試。",
           "throttled": "由於收到太多請求，AWS Bedrock 正在暫時限制請求。請稍候再試。如果問題持續，請讓 AWS 管理員檢查 Bedrock 使用量和配額。",
           "timeout": "AWS Bedrock 未及時回應。請重試。如果問題持續，請檢查網際網路連線和 AWS Bedrock 服務狀態。",
           "network": "無法連線到 AWS Bedrock。請檢查網際網路連線並重試。",
@@ -1016,7 +1016,7 @@
         "managedRouteInvalid": "由於設定不符，託管轉錄無法啟動。請重試或聯絡管理員。",
         "managedAuthRejected": "您組織的託管轉錄憑證遭拒。請聯絡管理員。",
         "managedRequestRejected": "您組織的轉錄服務拒絕了此音訊（HTTP {{status}}）。請重試或聯絡管理員。",
-        "managedResponseMalformed": "您組織的轉錄服務傳回了 OpenWhispr 無法讀取的回應。請重試或聯絡管理員。",
+        "managedResponseMalformed": "您組織的轉錄服務傳回了 FigureWhispr 無法讀取的回應。請重試或聯絡管理員。",
         "managedChunkTooLarge": "無法將此音訊分割得夠小以供您組織的轉錄服務使用。請聯絡管理員。",
         "streamingOnlyProvider": "此服務商僅支援即時轉錄。請為檔案上傳與重試選擇其他服務商。",
         "providerKeyMissing": "尚未為您的轉錄服務商設定 API 金鑰。請在「設定 → 語音轉文字」中新增。",
@@ -1044,22 +1044,22 @@
         "notAppliedTitle": "未套用選取文字編輯",
         "changed": "處理期間，選取的文字或目標應用程式已變更。未取代任何內容。",
         "expired": "選取文字編輯已逾時。請重新選取文字後再試。",
-        "pasteFailed": "OpenWhispr 已產生編輯結果，但無法取代選取的文字。",
-        "modifiersHeld": "OpenWhispr 已產生編輯結果，但修飾鍵（如 Ctrl 或 Shift）仍處於按住狀態，因此未套用。編輯結果已複製到剪貼簿。",
-        "modifiersHeldClipboardFailed": "OpenWhispr 已產生編輯結果，但修飾鍵（如 Ctrl 或 Shift）仍處於按住狀態，因此未套用，也無法複製到剪貼簿。",
-        "unavailable": "OpenWhispr 無法安全讀取選取的文字。請檢查輔助使用或輸入自動化權限。",
+        "pasteFailed": "FigureWhispr 已產生編輯結果，但無法取代選取的文字。",
+        "modifiersHeld": "FigureWhispr 已產生編輯結果，但修飾鍵（如 Ctrl 或 Shift）仍處於按住狀態，因此未套用。編輯結果已複製到剪貼簿。",
+        "modifiersHeldClipboardFailed": "FigureWhispr 已產生編輯結果，但修飾鍵（如 Ctrl 或 Shift）仍處於按住狀態，因此未套用，也無法複製到剪貼簿。",
+        "unavailable": "FigureWhispr 無法安全讀取選取的文字。請檢查輔助使用或輸入自動化權限。",
         "tooLarge": "選取內容過長。請選取不超過 6,000 個字元。",
         "reasoningFailed": "AI 無法完成選取文字編輯。原始文字未被變更。",
         "invalidResponse": "AI 傳回的編輯回應格式無效。未取代任何內容。請選取文字後重試。",
         "emptyResponse": "AI 傳回了空白的編輯結果。未取代任何內容。請嘗試更具體的指示。",
         "truncatedResponse": "AI 在完成編輯之前停止了。未取代任何內容。請嘗試選取較少的文字。",
-        "wlCopyMissing": "OpenWhispr 已產生編輯，但在此桌面上，Wayland 應用程式只能透過 wl-copy 讀取貼上的文字。請安裝 wl-clipboard 以套用編輯。",
-        "wlCopyFailed": "OpenWhispr 已產生編輯，但 wl-copy 無法為 Wayland 應用程式複製它，因此未套用。"
+        "wlCopyMissing": "FigureWhispr 已產生編輯，但在此桌面上，Wayland 應用程式只能透過 wl-copy 讀取貼上的文字。請安裝 wl-clipboard 以套用編輯。",
+        "wlCopyFailed": "FigureWhispr 已產生編輯，但 wl-copy 無法為 Wayland 應用程式複製它，因此未套用。"
       },
       "pastePermission": {
         "title": "允許自動貼上",
-        "description": "請在系統設定 → 隱私權與安全性 → 輔助使用中啟用 OpenWhispr。",
-        "settingsFailed": "無法開啟設定。請開啟系統設定 → 隱私權與安全性 → 輔助使用，並啟用 OpenWhispr。",
+        "description": "請在系統設定 → 隱私權與安全性 → 輔助使用中啟用 FigureWhispr。",
+        "settingsFailed": "無法開啟設定。請開啟系統設定 → 隱私權與安全性 → 輔助使用，並啟用 FigureWhispr。",
         "manualPaste": "點擊下方按鈕複製文字，然後按 {{shortcut}} 貼上。",
         "openSettings": "開啟設定",
         "copyToClipboard": "複製到剪貼板",
@@ -1071,7 +1071,7 @@
       "pasteFailed": {
         "title": "無法自動貼上"
       },
-      "interruptedRecordingRecovered": "OpenWhispr 在本次語音輸入完成前關閉，已復原此錄音。",
+      "interruptedRecordingRecovered": "FigureWhispr 在本次語音輸入完成前關閉，已復原此錄音。",
       "waylandClipboard": {
         "title": "轉錄內容未貼上",
         "wlCopyMissing": "在此桌面上，Wayland 應用程式只能透過 wl-copy 讀取貼上的文字。請安裝 wl-clipboard 以貼上聽寫內容。",
@@ -1149,7 +1149,7 @@
       "micErrors": {
         "accessFailed": "麥克風存取失敗。請再試一次。",
         "noMicrophones": "未偵測到麥克風。請在 {{settingsPath}} 中連接或選擇麥克風。",
-        "permissionDenied": "權限被拒絕。請開啟 {{privacyPath}} 並允許 OpenWhispr。",
+        "permissionDenied": "權限被拒絕。請開啟 {{privacyPath}} 並允許 FigureWhispr。",
         "couldNotStart": "無法啟動所選的麥克風。請在 {{settingsPath}} 中選擇輸入裝置後重新測試。",
         "noActiveInput": "找不到有效的音訊輸入。請在 {{settingsPath}} 中選擇麥克風。",
         "unknown": "麥克風存取失敗：{{error}}。請選擇其他輸入裝置後再試。",
@@ -1178,8 +1178,8 @@
         "accessibilityNeeded": "請在系統設定中授予輔助使用權限，以啟用自動貼上功能。",
         "windowsReady": "Windows 不需要特殊權限即可自動貼上。一切就緒！",
         "linuxReadyWithMethod": "已使用 {{method}} 啟用自動貼上。一切就緒！",
-        "waylandClipboardMode": "此 Wayland 工作階段不支援自動貼上。OpenWhispr 會將文字複製到剪貼簿，你可以使用 Ctrl+V 貼上。",
-        "optionalPasteTool": "如需自動貼上，請安裝 {{tool}}：\n\n{{installCmd}}{{waylandNote}}\n\n沒有安裝也可以使用 OpenWhispr，文字會複製到剪貼簿，你可以使用 Ctrl+V 貼上。"
+        "waylandClipboardMode": "此 Wayland 工作階段不支援自動貼上。FigureWhispr 會將文字複製到剪貼簿，你可以使用 Ctrl+V 貼上。",
+        "optionalPasteTool": "如需自動貼上，請安裝 {{tool}}：\n\n{{installCmd}}{{waylandNote}}\n\n沒有安裝也可以使用 FigureWhispr，文字會複製到剪貼簿，你可以使用 Ctrl+V 貼上。"
       },
       "alerts": {
         "accessibilityNeeded": "需要輔助使用權限！請在系統設定中授權。"
@@ -1192,7 +1192,7 @@
         "defaultPasteTool": "xdotool",
         "xdotoolXwayland": "xdotool（XWayland 應用程式）"
       },
-      "accessibilityTestText": "OpenWhispr 輔助使用測試",
+      "accessibilityTestText": "FigureWhispr 輔助使用測試",
       "warning": {
         "messages": {
           "macos": "請檢查聲音設定以選擇輸入裝置",
@@ -1269,7 +1269,7 @@
       "emailRequired": "輸入您的工作電子郵件以使用 SSO。",
       "failed": "單一登入失敗，請再試一次。",
       "companySignInTitle": "使用公司登入",
-      "requiredDescription": "{{domain}} 要求透過 SSO 登入 OpenWhispr。",
+      "requiredDescription": "{{domain}} 要求透過 SSO 登入 FigureWhispr。",
       "availableDescription": "您的 {{domain}} 帳戶已可使用公司 SSO。",
       "useEmailInstead": "改用電子郵件和密碼"
     },
@@ -1281,9 +1281,9 @@
       "protocolUnavailable": "無法透過瀏覽器登入 — 請在系統的「預設應用程式」設定中重新註冊 openwhispr:// 協定。"
     },
     "welcomeSubtitle": "你的聲音，由你掌控。",
-    "welcomeTitle": "歡迎使用 OpenWhispr",
+    "welcomeTitle": "歡迎使用 FigureWhispr",
     "sessionExpired": "工作階段已過期，請重新登入。",
-    "unconfirmedSession": "無法確認你的登入狀態，因此未做任何變更。請在 OpenWhispr 能連線到伺服器後重試。"
+    "unconfirmedSession": "無法確認你的登入狀態，因此未做任何變更。請在 FigureWhispr 能連線到伺服器後重試。"
   },
   "cleanupPrompt": "文字整理",
   "developerSection": {
@@ -1506,15 +1506,15 @@
     "recheckChecking": "檢查中...",
     "title": "自動貼上",
     "usingMethodPrefix": "使用",
-    "waylandClipboardDescription": "此 Wayland 工作階段不支援自動貼上。OpenWhispr 會將文字複製到剪貼簿，你可以使用 Ctrl+V 手動貼上。",
+    "waylandClipboardDescription": "此 Wayland 工作階段不支援自動貼上。FigureWhispr 會將文字複製到剪貼簿，你可以使用 Ctrl+V 手動貼上。",
     "waylandClipboardTitle": "Wayland 剪貼簿模式",
     "windowsReady": "Windows 內建支援自動貼上。不需要額外設定！",
-    "withoutToolPrefix": "若未安裝此工具，OpenWhispr 會將文字複製到剪貼簿。你可以使用 Ctrl+V 手動貼上。",
+    "withoutToolPrefix": "若未安裝此工具，FigureWhispr 會將文字複製到剪貼簿。你可以使用 Ctrl+V 手動貼上。",
     "wtypeCosmicTerminalsDescription": "在 COSMIC 上，Warp 等終端機只能透過 wtype 接收貼上的文字。其他應用程式不需要 wtype 即可貼上。",
     "wtypeFallbackDescription": "wtype 是此 wlroots 合成器上的首選自動貼上方式。有備用方案可用，但可能較不可靠。",
     "xwaylandAppsOnly": "自動貼上僅適用於 XWayland 應用程式",
     "wlClipboardTitle": "安裝 wl-clipboard 以貼上到 Wayland 應用程式",
-    "wlClipboardDescription": "在此桌面上，Wayland 應用程式只能透過 wl-copy 讀取 OpenWhispr 複製的文字。若要將聽寫內容貼上到這些應用程式，請安裝 wl-clipboard："
+    "wlClipboardDescription": "在此桌面上，Wayland 應用程式只能透過 wl-copy 讀取 FigureWhispr 複製的文字。若要將聽寫內容貼上到這些應用程式，請安裝 wl-clipboard："
   },
   "promptStudio": {
     "common": {
@@ -1705,7 +1705,7 @@
       "offline": "離線",
       "offlineAccount": {
         "title": "顯示上次登入時的資訊",
-        "description": "在 OpenWhispr 能連線到伺服器之前，同步和帳戶變更將暫停。"
+        "description": "在 FigureWhispr 能連線到伺服器之前，同步和帳戶變更將暫停。"
       },
       "pastDue": {
         "description": "你目前使用的是免費方案。更新付款方式即可恢復 Pro。",
@@ -1855,7 +1855,7 @@
         "button": "刪除我的帳戶",
         "deleting": "正在刪除...",
         "title": "刪除您的帳戶？",
-        "description": "這將永久刪除您的 OpenWhispr 帳戶和個人資料。工作區擁有的內容及其他本地使用者的資料會保留在此裝置上。",
+        "description": "這將永久刪除您的 FigureWhispr 帳戶和個人資料。工作區擁有的內容及其他本地使用者的資料會保留在此裝置上。",
         "confirmText": "刪除帳戶",
         "eraseDeviceLabel": "同時清除此裝置上的所有資料",
         "eraseDeviceDescription": "刪除所有本地使用者的筆記和工作區快取、已下載模型、設定、行事曆連線、憑證和錄音。",
@@ -1949,7 +1949,7 @@
       "title": "AI 文字增強",
       "toasts": {
         "switchedCloud": {
-          "description": "文字增強將使用 OpenWhispr 雲端服務。",
+          "description": "文字增強將使用 FigureWhispr 雲端服務。",
           "title": "已切換至 OpenWhispr Cloud"
         },
         "switchedCustom": {
@@ -2046,7 +2046,7 @@
       "appearance": {
         "auto": "自動",
         "dark": "深色",
-        "description": "控制 OpenWhispr 的外觀",
+        "description": "控制 FigureWhispr 的外觀",
         "light": "淺色",
         "theme": "主題",
         "themeDescription": "選擇淺色、深色或跟隨系統",
@@ -2074,8 +2074,8 @@
         "linuxPttSetupDescription": "您的使用者需要存取鍵盤輸入裝置的權限。",
         "linuxPttSetupNote": "執行指令後，請登出你的 Linux 使用者帳號，然後重新登入。",
         "hyprlandConfigWriteWarningTitle": "Hyprland 按鍵綁定不會保留",
-        "hyprlandConfigWriteWarningDescription": "OpenWhispr 無法寫入 {{path}}，因此重新載入 Hyprland 設定後按鍵綁定不會保留。請確認該檔案存在且可寫入。",
-        "hyprlandUnbindDescription": "在 Hyprland 上，OpenWhispr 會佔用所選快捷鍵。當 OpenWhispr 註冊該快捷鍵時，任何使用相同按鍵組合的既有 Hyprland 綁定都會被解除。"
+        "hyprlandConfigWriteWarningDescription": "FigureWhispr 無法寫入 {{path}}，因此重新載入 Hyprland 設定後按鍵綁定不會保留。請確認該檔案存在且可寫入。",
+        "hyprlandUnbindDescription": "在 Hyprland 上，FigureWhispr 會佔用所選快捷鍵。當 FigureWhispr 註冊該快捷鍵時，任何使用相同按鍵組合的既有 Hyprland 綁定都會被解除。"
       },
       "meetingHotkey": {
         "title": "會議模式快捷鍵",
@@ -2101,7 +2101,7 @@
       },
       "notifications": {
         "title": "通知",
-        "description": "設定 OpenWhispr 可以顯示哪些通知",
+        "description": "設定 FigureWhispr 可以顯示哪些通知",
         "disableAll": "停用所有通知",
         "disableAllDescription": "靜音除錯誤訊息外的所有內容",
         "meetingDetection": "會議偵測",
@@ -2118,14 +2118,14 @@
       },
       "startup": {
         "launchAtLogin": "登入時啟動",
-        "launchAtLoginDescription": "登入時在背景啟動 OpenWhispr",
+        "launchAtLoginDescription": "登入時在背景啟動 FigureWhispr",
         "title": "啟動",
-        "description": "控制 OpenWhispr 啟動時的行為",
+        "description": "控制 FigureWhispr 啟動時的行為",
         "startMinimized": "啟動時最小化",
         "startMinimizedDescription": "啟動時不顯示控制面板視窗",
         "needsApproval": {
           "title": "需要在系統設定中允許",
-          "description": "macOS 已將 OpenWhispr 註冊為登入項目，但仍在等待你在「登入項目」中允許它。",
+          "description": "macOS 已將 FigureWhispr 註冊為登入項目，但仍在等待你在「登入項目」中允許它。",
           "action": "開啟登入項目"
         }
       },
@@ -2177,7 +2177,7 @@
           "group": {
             "step1Title": "將你的使用者新增至 input 群組",
             "step2Title": "登出並重新登入",
-            "step2Desc": "群組變更僅在新工作階段後生效。從桌面登出，重新登入，然後重新開啟 OpenWhispr。"
+            "step2Desc": "群組變更僅在新工作階段後生效。從桌面登出，重新登入，然後重新開啟 FigureWhispr。"
           },
           "service": {
             "step1Title": "建立服務目錄",
@@ -2201,7 +2201,7 @@
           "manualTitle": "將以下內容加入你的設定",
           "manualDesc": "自行設定後重新建置。",
           "flakeTitle": "透過我們的 flake 安裝？",
-          "flakeDesc": "若你從 flake 安裝 OpenWhispr，programs.openwhispr.enable 會自動啟用 ydotool、uinput 模組及所需的群組成員資格。",
+          "flakeDesc": "若你從 flake 安裝 FigureWhispr，programs.openwhispr.enable 會自動啟用 ydotool、uinput 模組及所需的群組成員資格。",
           "rebuildNote": "執行 sudo nixos-rebuild switch，然後登出並重新登入，使群組變更與 /dev/uinput 規則生效。將 <you> 替換為你的使用者名稱。"
         },
         "wlCopyDesc": "此桌面上 Wayland 應用程式讀取貼上文字所用的剪貼簿工具"
@@ -2237,7 +2237,7 @@
           },
           "installUpdate": {
             "confirmText": "安裝並重新啟動",
-            "description": "OpenWhispr 將重新啟動以套用更新。",
+            "description": "FigureWhispr 將重新啟動以套用更新。",
             "title": "安裝更新"
           },
           "noUpdates": {
@@ -2269,13 +2269,13 @@
     "permissions": {
       "accessibilityDescription": "轉錄後自動貼上文字所需的權限",
       "accessibilityTitle": "輔助使用",
-      "description": "測試和管理 OpenWhispr 正常運作所需的系統權限",
+      "description": "測試和管理 FigureWhispr 正常運作所需的系統權限",
       "microphoneDescription": "錄製您的聲音用於聽寫和轉錄",
       "microphoneTitle": "麥克風",
       "resetAccessibility": {
-        "description": "這將從輔助使用權限中移除 OpenWhispr。你需要在「系統設定 > 隱私權與安全性 > 輔助使用」中重新授權。",
+        "description": "這將從輔助使用權限中移除 FigureWhispr。你需要在「系統設定 > 隱私權與安全性 > 輔助使用」中重新授權。",
         "label": "重設輔助使用權限",
-        "rowDescription": "重新安裝或重新建置應用程式後，透過在系統設定中移除並重新加入 OpenWhispr 來修復問題",
+        "rowDescription": "重新安裝或重新建置應用程式後，透過在系統設定中移除並重新加入 FigureWhispr 來修復問題",
         "title": "重設輔助使用權限"
       },
       "optional": "可選",
@@ -2304,9 +2304,9 @@
       "leaderboardRequiresAccount": "登入後即可管理排行榜參與狀態。",
       "leaderboardRequiresHistory": "加入排行榜前，請先開啟資料保留。",
       "usageAnalytics": "使用分析",
-      "usageAnalyticsDescription": "分享匿名的效能指標，協助我們改善 OpenWhispr。我們絕不會傳送轉錄內容——只有計時和錯誤資料。",
+      "usageAnalyticsDescription": "分享匿名的效能指標，協助我們改善 FigureWhispr。我們絕不會傳送轉錄內容——只有計時和錯誤資料。",
       "modelListUpdates": "模型清單更新",
-      "modelListUpdatesDescription": "每 15 分鐘檢查 GitHub 上 OpenWhispr 的公開模型清單，取得新增和已停用的模型。變更會在重新啟動後完全生效。",
+      "modelListUpdatesDescription": "每 15 分鐘檢查 GitHub 上 FigureWhispr 的公開模型清單，取得新增和已停用的模型。變更會在重新啟動後完全生效。",
       "dataRetention": "資料保留",
       "dataRetentionDescription": "將轉錄和音訊本地儲存至歷史記錄。停用後，轉錄內容會被貼上但不會被儲存。",
       "transcriptRetention": "轉錄保留",
@@ -2362,7 +2362,7 @@
     "transcription": {
       "customSetup": "自訂設定",
       "customSetupDescription": "使用你自己的供應商和 API Key。",
-      "description": "選擇 OpenWhispr 轉錄語音的方式",
+      "description": "選擇 FigureWhispr 轉錄語音的方式",
       "modes": {
         "openwhispr": "OpenWhispr Cloud",
         "providers": "雲端供應商",
@@ -2380,7 +2380,7 @@
       "title": "語音轉文字",
       "toasts": {
         "switchedCloud": {
-          "description": "轉錄將使用 OpenWhispr 雲端服務。",
+          "description": "轉錄將使用 FigureWhispr 雲端服務。",
           "title": "已切換至 OpenWhispr Cloud"
         },
         "switchedCustom": {
@@ -2493,7 +2493,7 @@
         "description": "請檢查網路連線後再試一次。",
         "retry": "重試"
       },
-      "staleList": "無法連線至 OpenWhispr。顯示的是你上次連線時的工作區。",
+      "staleList": "無法連線至 FigureWhispr。顯示的是你上次連線時的工作區。",
       "tab": {
         "general": "一般",
         "members": "成員",
@@ -3120,12 +3120,12 @@
     "policy": {
       "guidance": "組織已核准這些模型。請選擇適合你電腦的模型。",
       "notApproved": "未獲組織核准",
-      "noneSupported": "組織未核准此應用程式版本支援的任何本機模型。請更新 OpenWhispr 或聯絡管理員。",
+      "noneSupported": "組織未核准此應用程式版本支援的任何本機模型。請更新 FigureWhispr 或聯絡管理員。",
       "emptyIntersection": "你的工作區沒有共同核准的本機模型。請聯絡管理員。",
       "modelBlocked": "請選擇組織核准的本機模型。",
       "modeBlocked": "組織已停用本機處理。",
       "unresolved": "無法取得工作區原則。請連線後再試一次。",
-      "versionBlocked": "請更新 OpenWhispr 以使用組織核准的模型。",
+      "versionBlocked": "請更新 FigureWhispr 以使用組織核准的模型。",
       "updateRequired": "需要更新",
       "unavailable": "暫時無法使用",
       "installedTitle": "已安裝的本機模型",
@@ -3193,7 +3193,7 @@
     },
     "tryAgain": "重試",
     "card": {
-      "brand": "OpenWhispr",
+      "brand": "FigureWhispr",
       "signalId": "Signal ID",
       "audioSignature": "您的音訊簽名",
       "stop": "停止",
@@ -3307,7 +3307,7 @@
     },
     "structureIntro": {
       "title": "筆記存放在哪裡",
-      "description": "OpenWhispr 將個人想法與協作內容分開，讓合適的人看到合適的筆記。",
+      "description": "FigureWhispr 將個人想法與協作內容分開，讓合適的人看到合適的筆記。",
       "personal": {
         "title": "個人空間",
         "description": "只有你能看到這裡的資料夾和筆記。"
@@ -3548,7 +3548,7 @@
       },
       "systemAudioStopped": {
         "title": "會議音訊已停止",
-        "description": "OpenWhispr 已無法擷取其他與會者的聲音。請停止錄製後重新開始，或檢查您的音訊輸出裝置。"
+        "description": "FigureWhispr 已無法擷取其他與會者的聲音。請停止錄製後重新開始，或檢查您的音訊輸出裝置。"
       },
       "systemAudioQuiet": {
         "title": "會議音訊已靜默",
@@ -3874,7 +3874,7 @@
       "duplicate": "已存在使用此觸發詞的片段",
       "emptyTitle": "同樣的話，只說",
       "emptyTitleAccent": "一遍",
-      "emptyDescription": "說出觸發詞，OpenWhispr 會把它替換為你儲存的內容：連結、開場白、簽名、提示詞。",
+      "emptyDescription": "說出觸發詞，FigureWhispr 會把它替換為你儲存的內容：連結、開場白、簽名、提示詞。",
       "new": "建立片段",
       "examples": {
         "linkedinTrigger": "我的 LinkedIn",
@@ -4139,7 +4139,7 @@
       "emptyStrip_one": "還有 {{count}} 位隊友尚未加入排行榜。加入後即可開始排名。",
       "emptyStrip_other": "還有 {{count}} 位隊友尚未加入排行榜。加入後即可開始排名。",
       "copyNudge": "複製提醒",
-      "nudgeText": "請在 OpenWhispr → Insights 中加入排行榜，這樣我們就能查看團隊排行榜。",
+      "nudgeText": "請在 FigureWhispr → Insights 中加入排行榜，這樣我們就能查看團隊排行榜。",
       "nudgeCopied": "提醒已複製",
       "nudgeCopyError": "無法複製提醒",
       "joinTitle": "查看你在 {{scope}} 中的排名",
@@ -4175,7 +4175,7 @@
         "desktop_words": "桌面版字數",
         "mobile_words": "行動版字數"
       },
-      "shareText": "看看我在 OpenWhispr 上的排名。",
+      "shareText": "看看我在 FigureWhispr 上的排名。",
       "shareTitle": "分享排行榜",
       "shareDescription": "複製或下載此卡片，也可以在開啟社群貼文編輯器前先複製。",
       "copyImage": "複製圖片",
@@ -4268,7 +4268,7 @@
     "submitBug": "提交 Bug"
   },
   "postMigration": {
-    "title": "歡迎回到 OpenWhispr",
+    "title": "歡迎回到 FigureWhispr",
     "description": "您的筆記與設定已從先前版本保留下來。不過 macOS 會將此視為一款全新的應用程式，因此需要您重新授予部分權限。",
     "done": "完成",
     "remindLater": "稍後提醒我"
@@ -4297,11 +4297,11 @@
     "cudaDescription": "適用於支援的 NVIDIA GPU 的 CUDA 加速。需要目前相容的 NVIDIA 驅動程式。",
     "vulkanDescription": "適用於相容的 AMD、Intel 和 NVIDIA GPU 的 Vulkan 加速。",
     "activationFailed": "GPU 加速無法使用",
-    "activationFailedDescription": "OpenWhispr 已切換為 CPU 轉錄。",
-    "reasoningActivationFailedDescription": "OpenWhispr 已切換為 CPU 處理。",
+    "activationFailedDescription": "FigureWhispr 已切換為 CPU 轉錄。",
+    "reasoningActivationFailedDescription": "FigureWhispr 已切換為 CPU 處理。",
     "retryActivation": "重試 GPU 加速",
     "redownloadNeeded": "需要重新下載 GPU 加速包",
-    "redownloadNeededDescription": "此版本的 OpenWhispr 無法使用已安裝的 GPU 加速包。請重新下載以重新啟用 GPU 加速。",
+    "redownloadNeededDescription": "此版本的 FigureWhispr 無法使用已安裝的 GPU 加速包。請重新下載以重新啟用 GPU 加速。",
     "redownloadButton": "重新下載 GPU 加速包",
     "downloadFailed": "無法下載 GPU 加速包。",
     "remove": "移除",
@@ -4322,11 +4322,11 @@
       "undo": "復原",
       "accessibilityMissing": {
         "title": "需要輔助使用權限",
-        "description": "OpenWhispr 需要輔助使用權限來偵測快捷鍵和貼上文字。請在控制面板中啟用。"
+        "description": "FigureWhispr 需要輔助使用權限來偵測快捷鍵和貼上文字。請在控制面板中啟用。"
       },
       "gpuFallback": {
         "title": "GPU 加速無法使用",
-        "description": "OpenWhispr 已切換為 CPU 轉錄。",
+        "description": "FigureWhispr 已切換為 CPU 轉錄。",
         "retry": "重試 GPU"
       },
       "gpuPackMigration": {
@@ -4369,7 +4369,7 @@
       "visionModelDescription": "將附有截圖的指令改由另一個支援影像的模型處理。",
       "permissionTitle": "螢幕錄製",
       "permissionDescription": "macOS 需要螢幕錄製權限才能擷取螢幕。",
-      "relaunchHint": "螢幕錄製權限是在 OpenWhispr 執行期間授予的。請結束並重新開啟 OpenWhispr 以開始擷取螢幕截圖。"
+      "relaunchHint": "螢幕錄製權限是在 FigureWhispr 執行期間授予的。請結束並重新開啟 FigureWhispr 以開始擷取螢幕截圖。"
     },
     "prompt": {
       "title": "助理提示詞",
@@ -4447,15 +4447,15 @@
       "openNote": "開啟筆記",
       "unknownTool": "未知工具：{{name}}",
       "invalidArgs": "{{name}} 的工具參數無效",
-      "search_openwhispr_helpName": "搜尋 OpenWhispr 說明",
-      "read_openwhispr_helpName": "閱讀 OpenWhispr 說明",
-      "get_openwhispr_contextName": "讀取 OpenWhispr 設定",
+      "search_openwhispr_helpName": "搜尋 FigureWhispr 說明",
+      "read_openwhispr_helpName": "閱讀 FigureWhispr 說明",
+      "get_openwhispr_contextName": "讀取 FigureWhispr 設定",
       "load_skillName": "載入技能",
       "propose_skillName": "提議技能",
       "update_skillName": "更新技能",
-      "search_openwhispr_helpStatus": "正在搜尋 OpenWhispr 說明...",
-      "read_openwhispr_helpStatus": "正在閱讀 OpenWhispr 說明...",
-      "get_openwhispr_contextStatus": "正在讀取 OpenWhispr 設定...",
+      "search_openwhispr_helpStatus": "正在搜尋 FigureWhispr 說明...",
+      "read_openwhispr_helpStatus": "正在閱讀 FigureWhispr 說明...",
+      "get_openwhispr_contextStatus": "正在讀取 FigureWhispr 設定...",
       "ask_userName": "提問",
       "ask_userStatus": "正在詢問你...",
       "request_connectionName": "連結",
@@ -4620,7 +4620,7 @@
       "disconnectConfirm": "中斷 {{email}} 的連接？",
       "disconnectDescription": "將不再從此日曆記錄會議筆記。",
       "systemAudioRequired": "需要系統音訊權限",
-      "systemAudioDescription": "要轉錄會議，OpenWhispr 需要系統音訊權限來錄製其他參與者的音訊。我們絕不會錄製您的螢幕。您將被引導至系統設定以啟用此權限。",
+      "systemAudioDescription": "要轉錄會議，FigureWhispr 需要系統音訊權限來錄製其他參與者的音訊。我們絕不會錄製您的螢幕。您將被引導至系統設定以啟用此權限。",
       "openSettings": "打開系統設定",
       "connectFailed": "連線失敗",
       "connectFailedDescription": "連線 Google Calendar 時發生錯誤。請再試一次。"
@@ -4648,10 +4648,10 @@
       "disconnectConfirm": "中斷 Apple 日曆的連接？",
       "disconnectDescription": "將不再從 Apple 日曆記錄會議筆記。",
       "permissionDenied": "需要日曆存取權限",
-      "permissionDeniedDescription": "OpenWhispr 需要日曆存取權限來偵測會議。請在系統設定的「隱私權與安全性」→「日曆」中啟用 OpenWhispr。",
+      "permissionDeniedDescription": "FigureWhispr 需要日曆存取權限來偵測會議。請在系統設定的「隱私權與安全性」→「日曆」中啟用 FigureWhispr。",
       "openSettings": "打開系統設定",
       "connectFailed": "連線失敗",
-      "connectFailedDescription": "連線 Calendar.app 時發生錯誤。請重新啟動 OpenWhispr 後再試一次。"
+      "connectFailedDescription": "連線 Calendar.app 時發生錯誤。請重新啟動 FigureWhispr 後再試一次。"
     },
     "api": {
       "description": "管理用於程式存取的 API 金鑰",
@@ -4661,13 +4661,13 @@
     },
     "mcp": {
       "description": "在 Claude、ChatGPT 和 Cursor 中與你的筆記一起聊天、搜尋和工作。",
-      "step1": "在你的 AI 工具中，使用公開 URL 新增 OpenWhispr MCP",
-      "proRequired": "升級到付費方案，以將 OpenWhispr 連接到 Claude、ChatGPT 和 Cursor。",
+      "step1": "在你的 AI 工具中，使用公開 URL 新增 FigureWhispr MCP",
+      "proRequired": "升級到付費方案，以將 FigureWhispr 連接到 Claude、ChatGPT 和 Cursor。",
       "worksWith": "支援",
       "copyUrl": "複製 MCP URL",
       "copied": "已複製",
       "oauthTitle": "透過 OAuth 登入",
-      "oauthDescription": "在支援 OAuth 的用戶端中新增伺服器 URL，然後登入 OpenWhispr 並授權存取。不需要 API 金鑰。",
+      "oauthDescription": "在支援 OAuth 的用戶端中新增伺服器 URL，然後登入 FigureWhispr 並授權存取。不需要 API 金鑰。",
       "apiKeyTitle": "使用 API 金鑰",
       "apiKeyDescription": "對於支援請求標頭的用戶端，請建立具有所需權限的個人 API 金鑰，並使用以下標頭。"
     },
@@ -4678,7 +4678,7 @@
       "local": {
         "label": "本機",
         "freeBadge": "免費",
-        "description": "直接讀取你的本機筆記。無需登入或 API 金鑰 — OpenWhispr 執行時即可使用。"
+        "description": "直接讀取你的本機筆記。無需登入或 API 金鑰 — FigureWhispr 執行時即可使用。"
       },
       "cloud": {
         "label": "雲端",
@@ -4698,7 +4698,7 @@
       "upgrade": "升級"
     },
     "notABot": {
-      "description": "OpenWhispr 直接從您的系統擷取音訊 — 它不會以參與者身分加入您的會議。只需連接日曆，正常記錄筆記即可。"
+      "description": "FigureWhispr 直接從您的系統擷取音訊 — 它不會以參與者身分加入您的會議。只需連接日曆，正常記錄筆記即可。"
     },
     "nav": {
       "label": "整合分區",
@@ -4751,7 +4751,7 @@
         "reconnect_needed": "需要在設定中重新連接 Slack。",
         "connection_changed": "傳送前 Slack 連線發生了變化，因此未傳送任何內容。",
         "rate_limited": "Slack 忙碌中，請稍後再試。",
-        "missing_scope": "OpenWhispr 沒有權限在那裡發佈。請在設定中重新連接 Slack。",
+        "missing_scope": "FigureWhispr 沒有權限在那裡發佈。請在設定中重新連接 Slack。",
         "msg_too_long": "訊息對 Slack 來說太長了（格式化後最多 12,000 個字元）。",
         "no_text": "訊息是空的。",
         "network": "無法連線到 Slack，未傳送任何內容。",
@@ -4817,7 +4817,7 @@
           "wrong_workspace": "該議題位於另一個 Linear 工作區，未傳送任何內容。",
           "invalid_reference": "這不是 Linear 議題，未傳送任何內容。",
           "refused": "Linear 拒絕了請求，未傳送任何內容。",
-          "unknown_action": "OpenWhispr 無法在 Linear 中執行此操作，未傳送任何內容。",
+          "unknown_action": "FigureWhispr 無法在 Linear 中執行此操作，未傳送任何內容。",
           "generic": "發生問題，未向 Linear 傳送任何內容。"
         }
       },
@@ -4930,19 +4930,19 @@
         "oauth_denied": "由於未獲得授權，Slack 未連接。",
         "oauth_timeout": "連接耗時過長，請重試。",
         "oauth_state_mismatch": "該登入連結已過期，請重試。",
-        "ports_busy": "另一個應用程式正在使用 OpenWhispr 連接所需的連接埠。請關閉它後重試。",
+        "ports_busy": "另一個應用程式正在使用 FigureWhispr 連接所需的連接埠。請關閉它後重試。",
         "token_exchange_failed": "Slack 未完成連接，請重試。",
         "not_configured": "此版本中 Slack 不可用。",
         "connection_changed": "連接過程中您的帳戶或 Slack 連接發生了變化，請重試。",
-        "signed_out": "請登入 OpenWhispr 以連接 Slack。",
+        "signed_out": "請登入 FigureWhispr 以連接 Slack。",
         "policy_blocked": "您的組織已關閉連接器。",
         "policy_unavailable": "無法檢查您的組織設定，請重試。"
       },
       "browser": {
         "connectedTitle": "Slack 已連接",
-        "connectedBody": "您可以關閉此分頁並返回 OpenWhispr。",
+        "connectedBody": "您可以關閉此分頁並返回 FigureWhispr。",
         "failedTitle": "Slack 未連接",
-        "failedBody": "請返回 OpenWhispr 重試。"
+        "failedBody": "請返回 FigureWhispr 重試。"
       },
       "pickDestination": "你指的是哪個「{{destination}}」？"
     },
@@ -4992,32 +4992,32 @@
       "connect": "連接",
       "reconnect": "重新連接",
       "disconnect": "中斷連接",
-      "connecting": "請在瀏覽器中完成連接… 如果 Google 顯示存取已遭封鎖，需要您機構的 Google 管理員允許 OpenWhispr。",
+      "connecting": "請在瀏覽器中完成連接… 如果 Google 顯示存取已遭封鎖，需要您機構的 Google 管理員允許 FigureWhispr。",
       "connectedAs": "已以 {{account}} 身分連接",
       "needsReconnect": "需要重新連接 Gmail。",
-      "grantKept": "已中斷連線。Google 日曆使用相同的 Google 權限，因此在您也中斷 Google 日曆的連線之前，OpenWhispr 仍會顯示在您的 Google 帳戶中。",
+      "grantKept": "已中斷連線。Google 日曆使用相同的 Google 權限，因此在您也中斷 Google 日曆的連線之前，FigureWhispr 仍會顯示在您的 Google 帳戶中。",
       "errors": {
         "connect_failed": "無法連接 Gmail，請重試。",
         "disconnect_failed": "無法中斷 Gmail 連接，請重試。",
         "oauth_denied": "由於未獲得授權，Gmail 未連接。",
-        "oauth_timeout": "連接耗時過長。如果 Google 顯示存取已遭封鎖，請要求您機構的 Google 管理員允許 OpenWhispr；否則請重試。",
+        "oauth_timeout": "連接耗時過長。如果 Google 顯示存取已遭封鎖，請要求您機構的 Google 管理員允許 FigureWhispr；否則請重試。",
         "oauth_state_mismatch": "該登入連結已過期，請重試。",
-        "ports_busy": "另一個應用程式正在使用 OpenWhispr 連接所需的連接埠。請關閉它後重試。",
+        "ports_busy": "另一個應用程式正在使用 FigureWhispr 連接所需的連接埠。請關閉它後重試。",
         "token_exchange_failed": "Google 未完成連接，請重試。",
         "not_configured": "此版本中 Gmail 不可用。",
         "connection_changed": "連接過程中您的帳戶或 Gmail 連接發生了變化，請重試。",
-        "signed_out": "請登入 OpenWhispr 以連接 Gmail。",
+        "signed_out": "請登入 FigureWhispr 以連接 Gmail。",
         "policy_blocked": "您的組織已關閉連接器。",
         "policy_unavailable": "無法檢查您的組織設定，請重試。",
         "permission_not_granted": "由於未授予傳送郵件的權限，Gmail 未連接。請重新連接並保持勾選該權限。",
         "email_not_verified": "Google 尚未驗證此帳戶的電子郵件地址，因此 Gmail 未連接。",
-        "domain_policy": "您機構的 Google 管理員已封鎖此應用程式。請他們允許 OpenWhispr。"
+        "domain_policy": "您機構的 Google 管理員已封鎖此應用程式。請他們允許 FigureWhispr。"
       },
       "browser": {
         "connectedTitle": "Gmail 已連接",
-        "connectedBody": "您可以關閉此分頁並返回 OpenWhispr。",
+        "connectedBody": "您可以關閉此分頁並返回 FigureWhispr。",
         "failedTitle": "Gmail 未連接",
-        "failedBody": "請返回 OpenWhispr 重試。"
+        "failedBody": "請返回 FigureWhispr 重試。"
       }
     },
     "linear": {
@@ -5035,20 +5035,20 @@
         "oauth_denied": "由於未獲得授權，Linear 未連接。",
         "oauth_timeout": "連接耗時過長，請重試。",
         "oauth_state_mismatch": "該登入連結已過期，請重試。",
-        "ports_busy": "另一個應用程式正在使用 OpenWhispr 連接所需的連接埠。請關閉它後重試。",
+        "ports_busy": "另一個應用程式正在使用 FigureWhispr 連接所需的連接埠。請關閉它後重試。",
         "token_exchange_failed": "Linear 未完成連接，請重試。",
         "not_configured": "此版本中 Linear 不可用。",
         "connection_changed": "連接過程中您的帳戶或 Linear 連接發生了變化，請重試。",
-        "signed_out": "請登入 OpenWhispr 以連接 Linear。",
+        "signed_out": "請登入 FigureWhispr 以連接 Linear。",
         "policy_blocked": "您的組織已關閉連接器。",
         "policy_unavailable": "無法檢查您的組織設定，請重試。",
         "permission_not_granted": "由於未授予全部權限，Linear 未連接。請重新連接並允許所有權限。"
       },
       "browser": {
         "connectedTitle": "Linear 已連接",
-        "connectedBody": "您可以關閉此分頁並返回 OpenWhispr。",
+        "connectedBody": "您可以關閉此分頁並返回 FigureWhispr。",
         "failedTitle": "Linear 未連接",
-        "failedBody": "請返回 OpenWhispr 重試。"
+        "failedBody": "請返回 FigureWhispr 重試。"
       },
       "notes": {
         "priority": {
@@ -5236,7 +5236,7 @@
       "more": "{{name}} 的更多動作",
       "files": "檔案",
       "copyFile": "複製 {{path}}",
-      "neverRun": "OpenWhispr 從不執行指令碼",
+      "neverRun": "FigureWhispr 從不執行指令碼",
       "uninstall": "解除安裝",
       "uninstallConfirm": "要解除安裝 {{name}} 嗎？它會從這台電腦中移除。",
       "problem": "此技能修正後才能使用：{{reason}}",
@@ -5258,7 +5258,7 @@
       "revealFailed": "無法找到此技能的資料夾",
       "writeFailed": "無法儲存技能",
       "writeFailedNoSpace": "您的磁碟已滿。",
-      "writeFailedPermission": "OpenWhispr 無法寫入其技能資料夾。",
+      "writeFailedPermission": "FigureWhispr 無法寫入其技能資料夾。",
       "loadFailed": "無法讀取您的技能"
     },
     "manage": {
@@ -5344,7 +5344,7 @@
       "reservedWord": "包含「claude」或「anthropic」的名稱無法上傳到 Claude",
       "longBody": "指示超過 500 行，可能會拖慢助理",
       "longDescription": "描述超過 300 個字元；較短的描述更容易被準確選中",
-      "unknownKeys": "開頭有額外的資訊，OpenWhispr 會保留但不會使用"
+      "unknownKeys": "開頭有額外的資訊，FigureWhispr 會保留但不會使用"
     },
     "recommended": {
       "action-items-to-linear": {
@@ -5455,7 +5455,7 @@
     "systemAudioRequired": "需要系統音訊權限來錄製其他參與者的音訊。",
     "openSettings": "打開系統設定",
     "connectCalendar": "連接您的日曆",
-    "connectCalendarDescription": "無需離開 OpenWhispr 即可查看並加入您的會議。",
+    "connectCalendarDescription": "無需離開 FigureWhispr 即可查看並加入您的會議。",
     "connectCalendarButton": "連接日曆"
   },
   "notesView": {
@@ -5510,7 +5510,7 @@
         "invitationActions": "邀請操作",
         "resendSent": "邀請已傳送",
         "resendThrottled": "邀請剛剛已傳送，請一分鐘後再試。",
-        "syncPrompt": "分享後，這則筆記會在你的 OpenWhispr 雲端保留一份副本。在你選擇分享對象之前，只有你能看到它。",
+        "syncPrompt": "分享後，這則筆記會在你的 FigureWhispr 雲端保留一份副本。在你選擇分享對象之前，只有你能看到它。",
         "syncAndShare": "同步筆記",
         "visibility": {
           "label": "可見性",
@@ -5572,12 +5572,12 @@
   },
   "permissionsGate": {
     "title": "需要權限",
-    "description": "OpenWhispr 需要一些權限才能在此電腦上正常運作。",
+    "description": "FigureWhispr 需要一些權限才能在此電腦上正常運作。",
     "continue": "繼續"
   },
   "apiKeysSection": {
     "title": "API 金鑰",
-    "description": "建立金鑰以程式化方式存取 OpenWhispr API。",
+    "description": "建立金鑰以程式化方式存取 FigureWhispr API。",
     "empty": "尚無 API 金鑰",
     "createButton": "建立 API 金鑰",
     "create": {
@@ -5751,7 +5751,7 @@
     },
     "join": {
       "title": "加入你的團隊",
-      "domainTitle": "你的團隊已在 OpenWhispr",
+      "domainTitle": "你的團隊已在 FigureWhispr",
       "description": "這些工作區中有與你相同電子郵件網域的成員。",
       "invitedDescription": "有人邀請你加入一個工作區。",
       "invitedBy": "{{inviter}} 邀請你擔任{{role}}",
@@ -6081,20 +6081,20 @@
       }
     },
     "setup": {
-      "introTitle": "讓 OpenWhispr\n照你說話的方式寫",
+      "introTitle": "讓 FigureWhispr\n照你說話的方式寫",
       "introDescription": "為不同的應用程式設定你的語氣和風格。",
       "personalize": "開始個人化",
-      "cleanupOffTitle": "讓 OpenWhispr\n學會你的風格",
+      "cleanupOffTitle": "讓 FigureWhispr\n學會你的風格",
       "cleanupOffDescription": "開啟文字整理，再為不同的應用程式設定你的語氣和風格。",
       "stepDescription": "選出最像你的範例。",
       "progress": "第 {{current}} 步，共 {{total}} 步",
       "finish": "完成"
     },
     "banner": {
-      "title": "教 OpenWhispr 學會你的寫法",
+      "title": "教 FigureWhispr 學會你的寫法",
       "description": "為工作、朋友以及兩者之間的一切設定你偏好的語氣。",
       "start": "立即開始",
-      "cleanupOffTitle": "讓 OpenWhispr 學會你的風格",
+      "cleanupOffTitle": "讓 FigureWhispr 學會你的風格",
       "cleanupOffDescription": "開啟文字整理，為訊息、郵件和其他地方選一種語氣。",
       "notNow": "暫時不要",
       "decoration": "你的文字應該聽起來就像你。無論你寫什麼，寫給誰。"
@@ -6187,7 +6187,7 @@
         "timeout": "音訊服務商未及時回應。請檢查您的網路或 VPN。",
         "credentialMissing": "此裝置尚未佈建此連線所需的憑證。",
         "configChanged": "您的組織已變更此音訊設定。請重新開啟設定後再試一次。",
-        "protocolFailed": "音訊服務商回傳了 OpenWhispr 不支援的格式。請檢查部署與通訊協定。",
+        "protocolFailed": "音訊服務商回傳了 FigureWhispr 不支援的格式。請檢查部署與通訊協定。",
         "networkFailed": "無法連線至音訊服務商。請檢查您的網路、VPN 與 DNS。",
         "secureStorageUnavailable": "此裝置沒有安全的憑證儲存區。在 Linux 上，請安裝並解鎖金鑰圈（例如 GNOME Keyring 或 KWallet）後再試一次。"
       },
@@ -6199,9 +6199,65 @@
         "rateLimited": "測試要求過多。請稍候幾分鐘再試一次。"
       },
       "bootstrapNotProtected": "引導檔案必須歸您所有，且只有您能讀取。請 IT 部門重新派送。",
-      "bootstrapUnreadable": "OpenWhispr 無法讀取引導檔案。請 IT 部門讓您的帳號可以讀取。",
+      "bootstrapUnreadable": "FigureWhispr 無法讀取引導檔案。請 IT 部門讓您的帳號可以讀取。",
       "bootstrapMismatch": "引導檔案與您的帳號、此工作區或其設定的憑證不符。",
       "testLinkOtherWorkspace": "此測試連結對應的是其他工作區。請切換到該工作區，然後重新開啟連結。"
     }
+  },
+  "googleAccount": {
+    "title": "Google account",
+    "description": "Sign in with Google to keep your FigureWhispr settings in sync across your computers. Settings are stored privately in your Google Drive's app data folder.",
+    "unavailable": "Google sign-in is not available in this window.",
+    "errorTitle": "Google account error",
+    "signInLabel": "Sign in with Google",
+    "signInDescription": "No FigureWhispr account needed. Your browser opens to finish signing in.",
+    "signIn": "Sign in with Google",
+    "signOut": "Sign out",
+    "connected": "Connected",
+    "signedInTitle": "Signed in to Google",
+    "signedInDescription": "Settings now sync with {{email}}.",
+    "uploadedTitle": "Settings saved to your Google account",
+    "restoredTitle": "Settings restored from your Google account",
+    "upToDateTitle": "Settings are up to date",
+    "nothingStoredTitle": "No settings are stored in this Google account yet",
+    "client": {
+      "title": "Google OAuth client",
+      "description": "Create an OAuth client of type \"Desktop app\" in your Google Cloud project (enable the Google Drive API), then paste its client ID and secret here.",
+      "openConsole": "Open Google Cloud Console",
+      "clientId": "Client ID",
+      "clientSecret": "Client secret",
+      "clientSecretPlaceholder": "Client secret (from the Desktop app client)",
+      "save": "Save",
+      "change": "Change"
+    },
+    "sync": {
+      "title": "Settings sync",
+      "lastSynced": "Last synced {{time}}",
+      "neverSynced": "Not synced yet",
+      "auto": "Sync automatically",
+      "autoDescription": "Upload changes as you make them and pick up changes made on your other computers.",
+      "apiKeys": "Include API keys",
+      "apiKeysDescription": "Also sync your provider API keys (Gemini, OpenAI, …). They are stored in your own Google Drive app data.",
+      "restore": "Restore from Google",
+      "upload": "Upload this device",
+      "now": "Sync now"
+    },
+    "onboarding": {
+      "signIn": "Sign in with Google to sync settings",
+      "hint": "Optional. Brings your settings from your other computers.",
+      "signedInAs": "Signed in to Google as {{email}}",
+      "later": "You can sign in with Google later in Settings → Account to sync your settings."
+    }
+  },
+  "geminiUltrafast": {
+    "title": "Gemini Ultrafast",
+    "description": "Send the recording and the cleanup instructions to Gemini in one request, so dictation takes a single round trip instead of transcribing first and cleaning up second.",
+    "enable": "Ultrafast mode",
+    "enableDescription": "Uses your Gemini API key. Your cleanup prompt, dictionary and tone settings are applied in the same request. Falls back to your regular setup if the request fails.",
+    "verbatimNote": "Text cleanup is off, so Gemini returns a verbatim transcript in one request.",
+    "missingKey": "Add a Gemini API key",
+    "model": "Gemini model",
+    "modelDescription": "Flash Lite models are the fastest.",
+    "localNote": "Local transcription is selected, so dictation stays on this device and Ultrafast is not used."
   }
 }

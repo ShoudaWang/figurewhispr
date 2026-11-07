@@ -11,6 +11,7 @@ const {
 test("the upgrade CTA survives sign-out and is withheld while entitlement is unknown", () => {
   const decide = (overrides) =>
     decideUpsell({
+      accountsEnabled: true,
       authLoaded: true,
       isSignedIn: true,
       hasPaidAccess: false,
@@ -255,5 +256,19 @@ test("each store links to its own subscriptions page", () => {
   assert.equal(
     storeSubscriptionsUrl("play_store"),
     "https://play.google.com/store/account/subscriptions"
+  );
+});
+
+test("never upsells Pro when OpenWhispr accounts are disabled", async () => {
+  const { decideUpsell } = await import("../../src/lib/upsell.ts");
+  assert.equal(
+    decideUpsell({
+      accountsEnabled: false,
+      authLoaded: true,
+      isSignedIn: false,
+      hasPaidAccess: null,
+      isPastDue: false,
+    }),
+    "hide"
   );
 });

@@ -77,6 +77,40 @@ export interface MainWindowInputRegion {
 
 export type ChineseScriptPreference = "simplified" | "traditional" | "as-transcribed";
 
+export interface GoogleAccountStatus {
+  configured: boolean;
+  clientSource: "settings" | "environment" | "none";
+  signedIn: boolean;
+  email: string | null;
+  name: string | null;
+  picture: string | null;
+}
+
+export interface GoogleAccountResult<T> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  code?: string | null;
+}
+
+export interface GoogleAccountBridge {
+  getStatus: () => Promise<GoogleAccountResult<GoogleAccountStatus>>;
+  getClientConfig: () => Promise<
+    GoogleAccountResult<{ clientId: string; hasClientSecret: boolean; source: string }>
+  >;
+  saveClientConfig: (config: {
+    clientId: string;
+    clientSecret?: string;
+  }) => Promise<GoogleAccountResult<GoogleAccountStatus>>;
+  signIn: () => Promise<GoogleAccountResult<GoogleAccountStatus>>;
+  cancelSignIn: () => Promise<GoogleAccountResult<void>>;
+  signOut: () => Promise<GoogleAccountResult<GoogleAccountStatus>>;
+  readSettings: () => Promise<GoogleAccountResult<unknown>>;
+  writeSettings: (document: unknown) => Promise<GoogleAccountResult<{ success: boolean }>>;
+  getDeviceId: () => Promise<GoogleAccountResult<string>>;
+  onStatusChanged: (callback: (status: GoogleAccountStatus) => void) => () => void;
+}
+
 export type InferenceMode = "openwhispr" | "providers" | "local" | "self-hosted" | "enterprise";
 
 /** Each LLM scope's resolved mode and model, from which the main process decides the shared llama-server. */
@@ -2661,6 +2695,19 @@ declare global {
       // Gemini API key management
       getGeminiKey: () => Promise<string | null>;
       saveGeminiKey: (key: string) => Promise<void>;
+      geminiUltrafastDictation?: (data: {
+        audioBuffer: ArrayBuffer;
+        mimeType: string;
+        model: string;
+        systemPrompt: string | null;
+        instruction: string;
+        thinkingConfig?: Record<string, unknown>;
+        durationSeconds?: number | null;
+      }) => Promise<
+        | { text: string; model: string; finishReason: string | null; truncated: boolean }
+        | { error: string; code?: string }
+      >;
+      googleAccount?: GoogleAccountBridge;
       proxyGeminiTranscription?: (data: {
         audioBuffer: ArrayBuffer;
         model?: string;

@@ -34,6 +34,9 @@ export interface TranscriptionSettings {
   allowOpenAIFallback: boolean;
   allowLocalFallback: boolean;
   fallbackWhisperModel: string;
+  /** Gemini Ultrafast: one multimodal request transcribes and cleans up together. */
+  geminiUltrafastEnabled: boolean;
+  geminiUltrafastModel: string;
   preferredLanguage: string;
   /** When transcription language is Auto, force Chinese output script. See #975. */
   chineseScriptPreference: ChineseScriptPreference;
@@ -302,6 +305,8 @@ function useSettingsInternal() {
     allowOpenAIFallback: store.allowOpenAIFallback,
     allowLocalFallback: store.allowLocalFallback,
     fallbackWhisperModel: store.fallbackWhisperModel,
+    geminiUltrafastEnabled: store.geminiUltrafastEnabled,
+    geminiUltrafastModel: store.geminiUltrafastModel,
     preferredLanguage: store.preferredLanguage,
     chineseScriptPreference: store.chineseScriptPreference,
     cloudTranscriptionProvider: store.cloudTranscriptionProvider,
@@ -353,6 +358,8 @@ function useSettingsInternal() {
     setAllowOpenAIFallback: store.setAllowOpenAIFallback,
     setAllowLocalFallback: store.setAllowLocalFallback,
     setFallbackWhisperModel: store.setFallbackWhisperModel,
+    setGeminiUltrafastEnabled: store.setGeminiUltrafastEnabled,
+    setGeminiUltrafastModel: store.setGeminiUltrafastModel,
     setPreferredLanguage: store.setPreferredLanguage,
     setChineseScriptPreference: store.setChineseScriptPreference,
     setCloudTranscriptionProvider: store.setCloudTranscriptionProvider,

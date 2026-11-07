@@ -1,4 +1,5 @@
 import type { ProviderStore, StoreBilling } from "./usageStore.ts";
+import { ACCOUNTS_ENABLED } from "../config/accounts.ts";
 
 export type UpsellDecision = "show" | "hide" | "unknown";
 
@@ -8,6 +9,8 @@ export interface UpsellInput {
   /** `null` while the entitlement is unresolved. */
   hasPaidAccess: boolean | null;
   isPastDue: boolean;
+  /** OpenWhispr accounts (and so Pro plans); defaults to the build switch. */
+  accountsEnabled?: boolean;
 }
 
 export function decideUpsell({
@@ -15,7 +18,10 @@ export function decideUpsell({
   isSignedIn,
   hasPaidAccess,
   isPastDue,
+  accountsEnabled = ACCOUNTS_ENABLED,
 }: UpsellInput): UpsellDecision {
+  // No OpenWhispr account means no Pro plan to sell (config/accounts.ts).
+  if (!accountsEnabled) return "hide";
   if (!authLoaded) return "unknown";
   // Signed out there is no usage response to await; the upsell is the point.
   if (!isSignedIn) return "show";

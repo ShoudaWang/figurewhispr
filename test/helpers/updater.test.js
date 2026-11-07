@@ -4,6 +4,9 @@ const assert = require("node:assert/strict");
 const Module = require("node:module");
 
 process.env.NODE_ENV = "test";
+// FigureWhispr ships with the upstream OpenWhispr feed off (src/updater.js);
+// these tests cover the feed, and the last one the default.
+process.env.OPENWHISPR_UPSTREAM_UPDATES = "true";
 
 const updaterModulePath = require.resolve("../../src/updater.js");
 const originalLoad = Module._load;
@@ -236,4 +239,22 @@ test("a Linux AppImage is supported, but deb/rpm/tar.gz installs never touch the
   assert.match(result.message, /package manager/);
 
   packaged.cleanup();
+});
+
+test("by default this build never checks the upstream feed", async (t) => {
+  t.mock.timers.enable({ apis: ["setTimeout", "setInterval"] });
+  delete process.env.OPENWHISPR_UPSTREAM_UPDATES;
+  t.after(() => {
+    process.env.OPENWHISPR_UPSTREAM_UPDATES = "true";
+  });
+  setPlatform("win32");
+  const autoUpdater = makeAutoUpdater();
+  const manager = createUpdateManager(autoUpdater);
+  manager.setAutoUpdatesEnabled(true);
+  assert.equal((await manager.getUpdateStatus()).isSupported, false);
+
+  manager.checkForUpdatesOnStartup();
+  t.mock.timers.tick(STARTUP_DELAY_MS + PERIODIC_INTERVAL_MS);
+  assert.equal(autoUpdater.calls, 0);
+  manager.cleanup();
 });

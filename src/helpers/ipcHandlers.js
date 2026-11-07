@@ -154,6 +154,8 @@ const { TINFOIL_REALTIME_MODEL } = require("./tinfoilRealtimeStreaming");
 const { getTinfoilChatModels } = require("./tinfoilCatalog");
 const { transcribeWithTinfoil } = require("./tinfoilTranscription");
 const { transcribeWithGemini } = require("./geminiTranscription");
+const { runGeminiUltrafastDictation } = require("./geminiUltrafast");
+const { registerGoogleAccountIpc } = require("./googleAccount");
 const AudioStorageManager = require("./audioStorage");
 const { SkillLibrary } = require("./skills/skillLibrary");
 const { registerSkillsIpc } = require("./skills/skillsIpc");
@@ -1767,6 +1769,7 @@ class IPCHandlers {
   }
 
   setupHandlers() {
+    registerGoogleAccountIpc();
     // Each handler takes at most one renderer argument, so the job's signal
     // always lands after it and can't be supplied by the renderer.
     const handleAudioFeature = (channel, purpose, handler) =>
@@ -5604,6 +5607,19 @@ class IPCHandlers {
           contentType: "audio/webm",
           language,
           keyterms,
+          apiKey: this.environmentManager.getGeminiKey(),
+        });
+      })
+    );
+
+    // Ultrafast mode: one generateContent request carries the audio and the
+    // cleanup prompt, so the transcript comes back already cleaned up.
+    ipcMain.handle(
+      "gemini-ultrafast-dictation",
+      serializeIpcError(async (event, payload) => {
+        return await runGeminiUltrafastDictation({
+          ...payload,
+          audioBuffer: Buffer.from(payload.audioBuffer),
           apiKey: this.environmentManager.getGeminiKey(),
         });
       })

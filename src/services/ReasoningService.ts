@@ -14,7 +14,12 @@ import { resolveRetiredCloudModel } from "../config/retiredCloudModelPolicy.js";
 import logger from "../utils/logger";
 import { assertValidCleanupOutput } from "../utils/cleanupOutput";
 import { getSettings, isCloudCleanupMode } from "../stores/settingsStore";
-import { CLAIM_CHECK_NOTE, STEP_LIMIT_NOTE, wrapCleanupTranscript } from "../config/prompts";
+import {
+  CLAIM_CHECK_NOTE,
+  STEP_LIMIT_NOTE,
+  wrapCleanupTranscript,
+  type getCleanupSystemPrompt,
+} from "../config/prompts";
 import { stripThinkingTags } from "../helpers/stripThinking.js";
 import {
   getLlmRequestTimeoutSeconds,
@@ -581,6 +586,18 @@ class ReasoningService extends BaseReasoningService {
     });
 
     return responseText;
+  }
+
+  /**
+   * The dictation cleanup system prompt (dictionary, language and tone
+   * included), for callers that send it with the audio themselves: Gemini
+   * Ultrafast transcribes and cleans up in one request.
+   */
+  getDictationCleanupPrompt(
+    agentName: string | null,
+    toneStyle?: Parameters<typeof getCleanupSystemPrompt>[4]
+  ): string {
+    return this.getSystemPrompt(agentName, toneStyle);
   }
 
   async processText(

@@ -4,7 +4,7 @@
       "sectionTitle": "Idioma",
       "sectionDescription": "Defina separadamente os idiomas da interface e da transcrição",
       "uiLabel": "Idioma da interface",
-      "uiDescription": "Escolha o idioma usado na interface do OpenWhispr",
+      "uiDescription": "Escolha o idioma usado na interface do FigureWhispr",
       "transcriptionLabel": "Idioma de transcrição",
       "transcriptionDescription": "Escolha o idioma que você fala para maior precisão",
       "chineseScriptLabel": "Escrita chinesa (ditado)",
@@ -64,12 +64,12 @@
     },
     "openControlPanel": "Abrir painel de controle",
     "hideControlPanel": "Ocultar painel de controle",
-    "quit": "Sair do OpenWhispr",
-    "tooltip": "OpenWhispr - Ditado por voz"
+    "quit": "Sair do FigureWhispr",
+    "tooltip": "FigureWhispr - Ditado por voz"
   },
   "menu": {
-    "appLabel": "OpenWhispr",
-    "quit": "Sair do OpenWhispr",
+    "appLabel": "FigureWhispr",
+    "quit": "Sair do FigureWhispr",
     "speech": "Fala",
     "settings": "Configurações...",
     "help": "Ajuda",
@@ -87,8 +87,8 @@
       "message": "Falha ao abrir o link no navegador:\n{{url}}\n\nErro: {{error}}"
     },
     "loadFailure": {
-      "title": "OpenWhispr falhou ao carregar",
-      "message": "OpenWhispr não conseguiu carregar a interface.",
+      "title": "FigureWhispr falhou ao carregar",
+      "message": "FigureWhispr não conseguiu carregar a interface.",
       "detail": {
         "window": "Janela: {{windowName}}",
         "error": "Erro {{errorCode}}: {{errorDescription}}",
@@ -99,17 +99,17 @@
   },
   "startup": {
     "error": {
-      "title": "Erro de inicialização do OpenWhispr",
+      "title": "Erro de inicialização do FigureWhispr",
       "message": "Falha ao iniciar o aplicativo:\n\n{{error}}\n\nPor favor, reporte este problema."
     },
     "globeHotkey": {
       "title": "Atalho Globe indisponível",
-      "message": "OpenWhispr não conseguiu ativar o atalho da tecla Globe.",
+      "message": "FigureWhispr não conseguiu ativar o atalho da tecla Globe.",
       "details": {
         "unknown": "Erro desconhecido ao iniciar o listener da tecla Globe.",
         "fallback": "O atalho Globe permanecerá desativado; os atalhos existentes continuarão funcionando.",
         "devHint": "Execute `npm run compile:globe` e reconstrua o app para regenerar o binário.",
-        "reinstallHint": "Reinstale o OpenWhispr ou contate o suporte se o problema persistir."
+        "reinstallHint": "Reinstale o FigureWhispr ou contate o suporte se o problema persistir."
       }
     }
   },
@@ -143,7 +143,7 @@
     "loginItems": "As configurações de itens de início não estão disponíveis nesta plataforma."
   },
   "windows": {
-    "pttUnavailable": "O listener de teclas do OpenWhispr não está disponível."
+    "pttUnavailable": "O listener de teclas do FigureWhispr não está disponível."
   },
   "common": {
     "continue": "Continuar",
@@ -200,7 +200,7 @@
   "onboarding": {
     "rehaul": {
       "permissions": {
-        "title": "Configure o OpenWhispr em 3 minutos",
+        "title": "Configure o FigureWhispr em 3 minutos",
         "microphoneDescription": "Só ouve enquanto você grava.",
         "accessibilityDescription": "Cola o texto em qualquer app.",
         "systemAudioTitle": "Áudio do Sistema",
@@ -213,7 +213,7 @@
         "title": "Quais idiomas você fala?",
         "titleLineOne": "Quais idiomas",
         "titleLineTwo": "você fala?",
-        "description": "Selecione todas as opções aplicáveis. Isso ajuda o OpenWhispr a reconhecer trocas de idioma com mais precisão."
+        "description": "Selecione todas as opções aplicáveis. Isso ajuda o FigureWhispr a reconhecer trocas de idioma com mais precisão."
       },
       "dictationHotkey": {
         "title": "Escolha seu atalho de ditado",
@@ -223,10 +223,10 @@
         "activation": "Tocar ou segurar?"
       },
       "assistantHotkey": {
-        "title": "Configure o OpenWhispr Assistant",
+        "title": "Configure o FigureWhispr Assistant",
         "titleLineOne": "Configure o",
-        "titleLineTwo": "OpenWhispr Assistant",
-        "description": "Fale um pedido. O OpenWhispr Assistant escreve o resultado para você."
+        "titleLineTwo": "FigureWhispr Assistant",
+        "description": "Fale um pedido. O FigureWhispr Assistant escreve o resultado para você."
       },
       "hotkey": {
         "capture": "Pressione a tecla que você quer usar",
@@ -238,15 +238,15 @@
         "title": "Experimente seu primeiro ditado",
         "titleLineOne": "Experimente seu",
         "titleLineTwo": "primeiro ditado",
-        "description": "Pressione {{hotkey}} e comece a falar. O OpenWhispr vai transformar sua voz em texto.",
-        "founder": "Oi, eu sou o Gabe, o fundador. Obrigado por experimentar o OpenWhispr!",
-        "prompt": "Clique na caixa abaixo, pressione seu atalho e me conte: o que você adoraria que o OpenWhispr fizesse por você?",
-        "placeholder": "Clique aqui e depois pressione seu atalho. O OpenWhispr digita em qualquer caixa de texto."
+        "description": "Pressione {{hotkey}} e comece a falar. O FigureWhispr vai transformar sua voz em texto.",
+        "founder": "Oi, eu sou o Gabe, o fundador. Obrigado por experimentar o FigureWhispr!",
+        "prompt": "Clique na caixa abaixo, pressione seu atalho e me conte: o que você adoraria que o FigureWhispr fizesse por você?",
+        "placeholder": "Clique aqui e depois pressione seu atalho. O FigureWhispr digita em qualquer caixa de texto."
       },
       "assistantDemo": {
-        "title": "Conheça o OpenWhispr Assistant",
+        "title": "Conheça o FigureWhispr Assistant",
         "titleLineOne": "Conheça o",
-        "titleLineTwo": "OpenWhispr Assistant",
+        "titleLineTwo": "FigureWhispr Assistant",
         "email": {
           "subject": "Café na semana que vem?",
           "senderName": "Maria Alvarez",
@@ -280,13 +280,13 @@
         "typing": "Digitando…"
       },
       "notes": {
-        "title": "Grave reuniões sem bot com o OpenWhispr Notes",
+        "title": "Grave reuniões sem bot com o FigureWhispr Notes",
         "titleLineOne": "Grave reuniões sem um bot",
-        "titleLineTwoPrefix": "com o OpenWhispr",
+        "titleLineTwoPrefix": "com o FigureWhispr",
         "titleLineTwoBrand": "Notes",
-        "description": "O OpenWhispr transforma sua conversa em notas claras. Nenhum bot de reunião entra na sua chamada.",
+        "description": "O FigureWhispr transforma sua conversa em notas claras. Nenhum bot de reunião entra na sua chamada.",
         "hero": {
-          "description": "Grave sua reunião e deixe o OpenWhispr transformar a conversa em notas claras e organizadas.",
+          "description": "Grave sua reunião e deixe o FigureWhispr transformar a conversa em notas claras e organizadas.",
           "chat": "Converse com as notas da reunião",
           "transcript": "Revise a transcrição completa",
           "speakers": "Veja quem disse o quê"
@@ -302,9 +302,9 @@
         }
       },
       "setupChoice": {
-        "title": "Escolha sua configuração do OpenWhispr",
+        "title": "Escolha sua configuração do FigureWhispr",
         "titleLineOne": "Escolha sua configuração",
-        "titleLineTwo": "do OpenWhispr",
+        "titleLineTwo": "do FigureWhispr",
         "description": "Escolha a opção que combina com o seu jeito de trabalhar.",
         "unavailable": {
           "title": "Nenhuma opção de configuração disponível",
@@ -495,14 +495,14 @@
       "accessibilityTitle": "Acessibilidade",
       "accessibilityDescription": "Digita o texto final diretamente no aplicativo em que você estiver — documentos, e-mail, chat.",
       "testAndGrant": "Testar e conceder",
-      "requiredForApp": "Necessário para o OpenWhispr funcionar",
+      "requiredForApp": "Necessário para o FigureWhispr funcionar",
       "microphoneRequired": "Acesso ao microfone necessário",
       "openSystemSettings": "Abrir Configurações do Sistema",
       "systemAudioTitle": "Áudio do Sistema",
       "systemAudioDescription": "Permite que o gravador de reuniões ouça o outro lado das suas chamadas — reuniões, aulas, podcasts. Você pode ativar depois nas Configurações.",
       "optional": "Opcional",
       "recommended": "Recomendado",
-      "accessibilityTroubleshooting": "Em Configurações do Sistema → Acessibilidade, desative o interruptor do OpenWhispr e ative-o novamente. Se o OpenWhispr não aparecer na lista, clique em + e adicione-o a partir da pasta Aplicativos. Ainda com problemas? Envie um e-mail para support@openwhispr.com."
+      "accessibilityTroubleshooting": "Em Configurações do Sistema → Acessibilidade, desative o interruptor do FigureWhispr e ative-o novamente. Se o FigureWhispr não aparecer na lista, clique em + e adicione-o a partir da pasta Aplicativos. Ainda com problemas? Envie um e-mail para support@openwhispr.com."
     },
     "transcription": {
       "title": "Configuração de transcrição",
@@ -528,12 +528,12 @@
       "continue": "Continuar mesmo assim"
     },
     "useCase": {
-      "title": "Como você vai usar o OpenWhispr?",
+      "title": "Como você vai usar o FigureWhispr?",
       "titleLineOne": "Como você usará",
-      "titleLineTwo": "o OpenWhispr?",
+      "titleLineTwo": "o FigureWhispr?",
       "description": "Escolha todas as opções que se aplicam. Vamos adaptar sua configuração.",
       "noteLabel": "Algo mais que gostaria de nos contar?",
-      "notePlaceholder": "Conte como você pretende usar o OpenWhispr (opcional)",
+      "notePlaceholder": "Conte como você pretende usar o FigureWhispr (opcional)",
       "proceedToSetup": "Continuar a configuração",
       "options": {
         "dictation": {
@@ -566,7 +566,7 @@
     "meeting": {
       "title": "Notas de reunião",
       "description": "Capture e resuma suas reuniões",
-      "autoDetect": "O OpenWhispr detecta automaticamente quando você está em uma reunião e oferece iniciar notas — nada é gravado sem você.",
+      "autoDetect": "O FigureWhispr detecta automaticamente quando você está em uma reunião e oferece iniciar notas — nada é gravado sem você.",
       "hotkeyLabel": "Atalho de reunião",
       "hotkeyHint": "Opcional — pressione-o em qualquer reunião para iniciar uma nota na hora."
     },
@@ -608,14 +608,14 @@
       "return": "Voltar à configuração",
       "missingApp": "Ou selecione o app com +",
       "failed": "Não foi possível verificar o acesso.",
-      "microphone": "Ative o OpenWhispr em Microfone.",
-      "accessibility": "Arraste o OpenWhispr para Acessibilidade e ative-o.",
-      "systemAudio": "Ative o OpenWhispr em Apenas gravação de áudio do sistema.",
-      "screenContext": "Arraste o OpenWhispr para Gravação de tela e áudio do sistema e ative-o.",
+      "microphone": "Ative o FigureWhispr em Microfone.",
+      "accessibility": "Arraste o FigureWhispr para Acessibilidade e ative-o.",
+      "systemAudio": "Ative o FigureWhispr em Apenas gravação de áudio do sistema.",
+      "screenContext": "Arraste o FigureWhispr para Gravação de tela e áudio do sistema e ative-o.",
       "settings": "Abrir Ajustes",
       "check": "Verificar novamente",
       "restart": "Reiniciar app",
-      "restartRequired": "Reinicie o OpenWhispr para aplicar o acesso à tela."
+      "restartRequired": "Reinicie o FigureWhispr para aplicar o acesso à tela."
     }
   },
   "streaming": {
@@ -634,13 +634,13 @@
   "controlPanel": {
     "updateRequiredByOrg": {
       "title": "Atualização obrigatória",
-      "description": "Sua organização exige o OpenWhispr {{version}} ou mais recente. Atualize o aplicativo."
+      "description": "Sua organização exige o FigureWhispr {{version}} ou mais recente. Atualize o aplicativo."
     },
     "update": {
       "readyTitle": "Atualização pronta para instalar",
       "readyDescription": "Clique em 'Instalar atualização' para reiniciar com a versão mais recente.",
       "installTitle": "Instalar atualização",
-      "installDescription": "O OpenWhispr será reiniciado para aplicar a atualização. O trabalho em andamento será salvo.",
+      "installDescription": "O FigureWhispr será reiniciado para aplicar a atualização. O trabalho em andamento será salvo.",
       "couldNotInstallTitle": "Não foi possível instalar a atualização",
       "couldNotInstallDescription": "Algo deu errado. Tente novamente.",
       "couldNotDownloadTitle": "Não foi possível baixar a atualização",
@@ -655,7 +655,7 @@
     },
     "accessibilityMissing": {
       "title": "Permissões de acessibilidade necessárias",
-      "description": "Detectamos que o OpenWhispr precisa de permissões de acessibilidade para funcionar corretamente. Ative-as abaixo."
+      "description": "Detectamos que o FigureWhispr precisa de permissões de acessibilidade para funcionar corretamente. Ative-as abaixo."
     },
     "billing": {
       "pastDueTitle": "Não foi possível processar seu pagamento",
@@ -863,7 +863,7 @@
           "modelNotFound": "O AWS Bedrock não encontrou o modelo selecionado na região {{region}}. Verifique o ID do modelo e se ele está disponível nessa região.",
           "configurationRejected": "O AWS Bedrock rejeitou a configuração do modelo para a região {{region}}. Verifique o ID do modelo, o perfil de inferência e a região.",
           "notConfigured": "O AWS Bedrock não está configurado corretamente. Verifique a região e as credenciais da AWS.",
-          "serviceUnavailable": "O AWS Bedrock está temporariamente indisponível devido à alta demanda. Este é um problema do serviço da AWS, não uma indisponibilidade do OpenWhispr. Tente novamente em alguns minutos.",
+          "serviceUnavailable": "O AWS Bedrock está temporariamente indisponível devido à alta demanda. Este é um problema do serviço da AWS, não uma indisponibilidade do FigureWhispr. Tente novamente em alguns minutos.",
           "throttled": "O AWS Bedrock está limitando temporariamente as solicitações porque está recebendo muitas. Aguarde um momento e tente novamente. Se continuar, peça ao administrador da AWS para verificar o uso e as cotas do Bedrock.",
           "timeout": "O AWS Bedrock não respondeu a tempo. Tente novamente. Se continuar, verifique sua conexão com a internet e o status do serviço AWS Bedrock.",
           "network": "Não foi possível acessar o AWS Bedrock. Verifique sua conexão com a internet e tente novamente.",
@@ -995,7 +995,7 @@
         "managedRouteInvalid": "A transcrição gerenciada não pôde ser iniciada devido a uma incompatibilidade de configuração. Tente novamente ou entre em contato com o administrador.",
         "managedAuthRejected": "As credenciais de transcrição gerenciada da sua organização foram rejeitadas. Entre em contato com o administrador.",
         "managedRequestRejected": "O serviço de transcrição da sua organização recusou este áudio (HTTP {{status}}). Tente novamente ou entre em contato com o administrador.",
-        "managedResponseMalformed": "O serviço de transcrição da sua organização enviou uma resposta que o OpenWhispr não conseguiu ler. Tente novamente ou entre em contato com o administrador.",
+        "managedResponseMalformed": "O serviço de transcrição da sua organização enviou uma resposta que o FigureWhispr não conseguiu ler. Tente novamente ou entre em contato com o administrador.",
         "managedChunkTooLarge": "Não foi possível dividir este áudio em partes pequenas o suficiente para o serviço de transcrição da sua organização. Entre em contato com o administrador.",
         "streamingOnlyProvider": "Este provedor só suporta transcrição ao vivo. Escolha outro provedor para uploads de arquivos e novas tentativas.",
         "providerKeyMissing": "Nenhuma chave de API definida para seu provedor de transcrição. Adicione-a em Configurações → Voz para texto.",
@@ -1023,22 +1023,22 @@
         "notAppliedTitle": "Edição da seleção não aplicada",
         "changed": "O texto selecionado ou o aplicativo de destino mudou durante o processamento. Nada foi substituído.",
         "expired": "A edição expirou. Selecione o texto novamente e tente de novo.",
-        "pasteFailed": "O OpenWhispr gerou a edição, mas não conseguiu substituir o texto selecionado.",
-        "modifiersHeld": "O OpenWhispr gerou a edição, mas uma tecla modificadora (como Ctrl ou Shift) ainda estava pressionada, por isso ela não foi aplicada. A edição está na área de transferência.",
-        "modifiersHeldClipboardFailed": "O OpenWhispr gerou a edição, mas uma tecla modificadora (como Ctrl ou Shift) ainda estava pressionada, por isso ela não foi aplicada e também não foi possível copiá-la para a área de transferência.",
-        "unavailable": "O OpenWhispr não conseguiu ler o texto selecionado com segurança. Verifique as permissões de acessibilidade ou automação.",
+        "pasteFailed": "O FigureWhispr gerou a edição, mas não conseguiu substituir o texto selecionado.",
+        "modifiersHeld": "O FigureWhispr gerou a edição, mas uma tecla modificadora (como Ctrl ou Shift) ainda estava pressionada, por isso ela não foi aplicada. A edição está na área de transferência.",
+        "modifiersHeldClipboardFailed": "O FigureWhispr gerou a edição, mas uma tecla modificadora (como Ctrl ou Shift) ainda estava pressionada, por isso ela não foi aplicada e também não foi possível copiá-la para a área de transferência.",
+        "unavailable": "O FigureWhispr não conseguiu ler o texto selecionado com segurança. Verifique as permissões de acessibilidade ou automação.",
         "tooLarge": "A seleção é muito grande. Selecione no máximo 6.000 caracteres.",
         "reasoningFailed": "A IA não conseguiu concluir a edição. O texto original não foi alterado.",
         "invalidResponse": "A IA retornou uma resposta de edição inválida. Nada foi substituído. Selecione o texto e tente novamente.",
         "emptyResponse": "A IA retornou uma edição vazia. Nada foi substituído. Tente uma instrução mais específica.",
         "truncatedResponse": "A IA parou antes de concluir a edição. Nada foi substituído. Tente selecionar menos texto.",
-        "wlCopyMissing": "O OpenWhispr gerou a edição, mas nesta área de trabalho os apps Wayland só conseguem ler o texto colado através do wl-copy. Instale o wl-clipboard para aplicar edições.",
-        "wlCopyFailed": "O OpenWhispr gerou a edição, mas o wl-copy não conseguiu copiá-la para os apps Wayland, por isso ela não foi aplicada."
+        "wlCopyMissing": "O FigureWhispr gerou a edição, mas nesta área de trabalho os apps Wayland só conseguem ler o texto colado através do wl-copy. Instale o wl-clipboard para aplicar edições.",
+        "wlCopyFailed": "O FigureWhispr gerou a edição, mas o wl-copy não conseguiu copiá-la para os apps Wayland, por isso ela não foi aplicada."
       },
       "pastePermission": {
         "title": "Permitir colagem automática",
-        "description": "Ative o OpenWhispr em Ajustes do Sistema → Privacidade e Segurança → Acessibilidade.",
-        "settingsFailed": "Não foi possível abrir os ajustes. Abra Ajustes do Sistema → Privacidade e Segurança → Acessibilidade e ative o OpenWhispr.",
+        "description": "Ative o FigureWhispr em Ajustes do Sistema → Privacidade e Segurança → Acessibilidade.",
+        "settingsFailed": "Não foi possível abrir os ajustes. Abra Ajustes do Sistema → Privacidade e Segurança → Acessibilidade e ative o FigureWhispr.",
         "manualPaste": "Copie o texto abaixo e pressione {{shortcut}} para colá-lo.",
         "openSettings": "Abrir ajustes",
         "copyToClipboard": "Copiar texto",
@@ -1050,7 +1050,7 @@
       "pasteFailed": {
         "title": "Não foi possível colar automaticamente"
       },
-      "interruptedRecordingRecovered": "Recuperado após o OpenWhispr fechar antes de terminar este ditado.",
+      "interruptedRecordingRecovered": "Recuperado após o FigureWhispr fechar antes de terminar este ditado.",
       "waylandClipboard": {
         "title": "Transcrição não colada",
         "wlCopyMissing": "Nesta área de trabalho, os apps Wayland só conseguem ler o texto colado através do wl-copy. Instale o wl-clipboard para colar seus ditados.",
@@ -1128,7 +1128,7 @@
       "micErrors": {
         "accessFailed": "Falha no acesso ao microfone. Tente novamente.",
         "noMicrophones": "Nenhum microfone detectado. Conecte ou selecione um microfone em {{settingsPath}}.",
-        "permissionDenied": "Permissão negada. Abra {{privacyPath}} e permita o OpenWhispr.",
+        "permissionDenied": "Permissão negada. Abra {{privacyPath}} e permita o FigureWhispr.",
         "couldNotStart": "Não foi possível iniciar o microfone selecionado. Escolha um dispositivo em {{settingsPath}} e teste novamente.",
         "noActiveInput": "Nenhuma entrada de áudio ativa encontrada. Escolha um microfone em {{settingsPath}}.",
         "unknown": "Falha no acesso ao microfone: {{error}}. Selecione outro dispositivo e tente novamente.",
@@ -1157,8 +1157,8 @@
         "accessibilityNeeded": "Conceda permissões de acessibilidade nas configurações do sistema para habilitar colagem automática.",
         "windowsReady": "O Windows não exige permissões especiais para colagem automática. Tudo pronto!",
         "linuxReadyWithMethod": "A colagem automática está disponível usando {{method}}. Tudo pronto!",
-        "waylandClipboardMode": "A colagem automática não está disponível nesta sessão Wayland. O OpenWhispr copiará o texto para a área de transferência e você poderá colar com Ctrl+V.",
-        "optionalPasteTool": "Para colagem automática, instale {{tool}}:\n\n{{installCmd}}{{waylandNote}}\n\nSem isso, você ainda pode usar o OpenWhispr — o texto será copiado para a área de transferência e você poderá colar com Ctrl+V."
+        "waylandClipboardMode": "A colagem automática não está disponível nesta sessão Wayland. O FigureWhispr copiará o texto para a área de transferência e você poderá colar com Ctrl+V.",
+        "optionalPasteTool": "Para colagem automática, instale {{tool}}:\n\n{{installCmd}}{{waylandNote}}\n\nSem isso, você ainda pode usar o FigureWhispr — o texto será copiado para a área de transferência e você poderá colar com Ctrl+V."
       },
       "alerts": {
         "accessibilityNeeded": "Permissões de acessibilidade necessárias! Conceda nas configurações do sistema."
@@ -1171,7 +1171,7 @@
         "defaultPasteTool": "xdotool",
         "xdotoolXwayland": "xdotool (apps XWayland)"
       },
-      "accessibilityTestText": "teste de acessibilidade do OpenWhispr",
+      "accessibilityTestText": "teste de acessibilidade do FigureWhispr",
       "warning": {
         "messages": {
           "macos": "Verifique as configurações de Som para selecionar o dispositivo de entrada",
@@ -1185,7 +1185,7 @@
   },
   "auth": {
     "sessionExpired": "Sessão expirada",
-    "unconfirmedSession": "Não foi possível confirmar seu login, então nada foi alterado. Tente novamente quando o OpenWhispr conseguir acessar seus servidores.",
+    "unconfirmedSession": "Não foi possível confirmar seu login, então nada foi alterado. Tente novamente quando o FigureWhispr conseguir acessar seus servidores.",
     "cloudNotConfigured": "Nuvem não configurada",
     "common": {
       "back": "Voltar",
@@ -1250,7 +1250,7 @@
       "emailRequired": "Insira seu e-mail corporativo para usar o SSO.",
       "failed": "Falha no logon único. Tente novamente.",
       "companySignInTitle": "Usar o login da sua empresa",
-      "requiredDescription": "{{domain}} exige SSO para o OpenWhispr.",
+      "requiredDescription": "{{domain}} exige SSO para o FigureWhispr.",
       "availableDescription": "A sua conta {{domain}} está pronta para o SSO da empresa.",
       "useEmailInstead": "Usar e-mail e senha em vez disso"
     },
@@ -1262,7 +1262,7 @@
       "protocolUnavailable": "Login pelo navegador indisponível — registre novamente o protocolo openwhispr:// nas configurações de Aplicativos Padrão do sistema."
     },
     "welcomeSubtitle": "O poder da sua voz. Nos seus termos.",
-    "welcomeTitle": "Boas-vindas ao OpenWhispr"
+    "welcomeTitle": "Boas-vindas ao FigureWhispr"
   },
   "cleanupPrompt": "Limpeza",
   "developerSection": {
@@ -1485,15 +1485,15 @@
     "recheckChecking": "Verificando...",
     "title": "Colagem automática",
     "usingMethodPrefix": "Usando",
-    "waylandClipboardDescription": "A colagem automática não está disponível nesta sessão Wayland. O OpenWhispr copiará o texto para a área de transferência para que você cole manualmente com Ctrl+V.",
+    "waylandClipboardDescription": "A colagem automática não está disponível nesta sessão Wayland. O FigureWhispr copiará o texto para a área de transferência para que você cole manualmente com Ctrl+V.",
     "waylandClipboardTitle": "Modo área de transferência no Wayland",
     "windowsReady": "O Windows suporta colagem automática nativamente. Nenhuma configuração necessária!",
-    "withoutToolPrefix": "Sem essa ferramenta, o OpenWhispr copiará o texto para a área de transferência. Você poderá colar manualmente com Ctrl+V.",
+    "withoutToolPrefix": "Sem essa ferramenta, o FigureWhispr copiará o texto para a área de transferência. Você poderá colar manualmente com Ctrl+V.",
     "wtypeCosmicTerminalsDescription": "No COSMIC, terminais como o Warp só recebem texto colado pelo wtype. Nos outros apps, a colagem já funciona sem ele.",
     "wtypeFallbackDescription": "O wtype é o método de colagem automática preferido para este compositor wlroots. Há uma alternativa disponível, mas ela pode ser menos confiável.",
     "xwaylandAppsOnly": "a colagem automática funciona apenas para apps XWayland",
     "wlClipboardTitle": "Instale o wl-clipboard para colar em apps Wayland",
-    "wlClipboardDescription": "Nesta área de trabalho, os apps Wayland só conseguem ler o texto que o OpenWhispr copia através do wl-copy. Para colar o ditado neles, instale o wl-clipboard:"
+    "wlClipboardDescription": "Nesta área de trabalho, os apps Wayland só conseguem ler o texto que o FigureWhispr copia através do wl-copy. Para colar o ditado neles, instale o wl-clipboard:"
   },
   "promptStudio": {
     "common": {
@@ -1684,7 +1684,7 @@
       "offline": "Offline",
       "offlineAccount": {
         "title": "Mostrando seu último login",
-        "description": "A sincronização e as alterações da conta ficam pausadas até que o OpenWhispr consiga acessar seus servidores."
+        "description": "A sincronização e as alterações da conta ficam pausadas até que o FigureWhispr consiga acessar seus servidores."
       },
       "pastDue": {
         "description": "Você está no plano gratuito por enquanto. Atualize sua forma de pagamento para voltar ao Pro.",
@@ -1834,7 +1834,7 @@
         "button": "Excluir minha conta",
         "deleting": "Excluindo...",
         "title": "Excluir sua conta?",
-        "description": "Isso exclui permanentemente sua conta OpenWhispr e seus dados pessoais. Conteúdos dos espaços de trabalho e dados de outros usuários locais permanecem neste dispositivo.",
+        "description": "Isso exclui permanentemente sua conta FigureWhispr e seus dados pessoais. Conteúdos dos espaços de trabalho e dados de outros usuários locais permanecem neste dispositivo.",
         "confirmText": "Excluir conta",
         "eraseDeviceLabel": "Também apagar todos os dados deste dispositivo",
         "eraseDeviceDescription": "Exclui notas e caches de espaços de todos os usuários locais, modelos baixados, configurações, calendários, credenciais e gravações.",
@@ -1928,7 +1928,7 @@
       "title": "Melhoria de texto com IA",
       "toasts": {
         "switchedCloud": {
-          "description": "A melhoria de texto usará o serviço de nuvem do OpenWhispr.",
+          "description": "A melhoria de texto usará o serviço de nuvem do FigureWhispr.",
           "title": "Mudou para OpenWhispr Cloud"
         },
         "switchedCustom": {
@@ -2025,7 +2025,7 @@
       "appearance": {
         "auto": "Auto",
         "dark": "Escuro",
-        "description": "Controle a aparência do OpenWhispr",
+        "description": "Controle a aparência do FigureWhispr",
         "light": "Claro",
         "theme": "Tema",
         "themeDescription": "Escolha claro, escuro ou acompanhe o sistema",
@@ -2053,8 +2053,8 @@
         "linuxPttSetupDescription": "O seu utilizador precisa de acesso aos dispositivos de entrada do teclado.",
         "linuxPttSetupNote": "Depois de executar o comando, termine a sessão da sua conta de utilizador Linux e volte a iniciá-la.",
         "hyprlandConfigWriteWarningTitle": "Os atalhos do Hyprland não serão mantidos",
-        "hyprlandConfigWriteWarningDescription": "O OpenWhispr não consegue escrever em {{path}}, por isso os atalhos não serão mantidos após recarregar a configuração do Hyprland. Verifique se o ficheiro existe e permite escrita.",
-        "hyprlandUnbindDescription": "No Hyprland, o OpenWhispr reserva o atalho selecionado. Qualquer atalho existente do Hyprland que use a mesma combinação de teclas será desvinculado quando o OpenWhispr registar o atalho."
+        "hyprlandConfigWriteWarningDescription": "O FigureWhispr não consegue escrever em {{path}}, por isso os atalhos não serão mantidos após recarregar a configuração do Hyprland. Verifique se o ficheiro existe e permite escrita.",
+        "hyprlandUnbindDescription": "No Hyprland, o FigureWhispr reserva o atalho selecionado. Qualquer atalho existente do Hyprland que use a mesma combinação de teclas será desvinculado quando o FigureWhispr registar o atalho."
       },
       "meetingHotkey": {
         "title": "Atalho modo reunião",
@@ -2080,7 +2080,7 @@
       },
       "notifications": {
         "title": "Notificações",
-        "description": "Controle quais notificações o OpenWhispr pode mostrar",
+        "description": "Controle quais notificações o FigureWhispr pode mostrar",
         "disableAll": "Desativar todas as notificações",
         "disableAllDescription": "Silenciar tudo exceto mensagens de erro",
         "meetingDetection": "Detecção de reuniões",
@@ -2097,14 +2097,14 @@
       },
       "startup": {
         "launchAtLogin": "Iniciar ao fazer login",
-        "launchAtLoginDescription": "Iniciar o OpenWhispr em segundo plano ao fazer login",
+        "launchAtLoginDescription": "Iniciar o FigureWhispr em segundo plano ao fazer login",
         "title": "Inicialização",
-        "description": "Controle o comportamento do OpenWhispr ao iniciar",
+        "description": "Controle o comportamento do FigureWhispr ao iniciar",
         "startMinimized": "Iniciar minimizado",
         "startMinimizedDescription": "Iniciar sem mostrar a janela do painel de controle",
         "needsApproval": {
           "title": "Aprovação necessária nas Configurações do Sistema",
-          "description": "O macOS registrou o OpenWhispr como item de início, mas está aguardando que você o permita em Itens de Início.",
+          "description": "O macOS registrou o FigureWhispr como item de início, mas está aguardando que você o permita em Itens de Início.",
           "action": "Abrir Itens de Início"
         }
       },
@@ -2156,7 +2156,7 @@
           "group": {
             "step1Title": "Adicionar o seu utilizador ao grupo input",
             "step2Title": "Terminar sessão e voltar a entrar",
-            "step2Desc": "As alterações de grupo só têm efeito após uma nova sessão. Termine sessão no ambiente de trabalho, inicie sessão novamente e reabra o OpenWhispr."
+            "step2Desc": "As alterações de grupo só têm efeito após uma nova sessão. Termine sessão no ambiente de trabalho, inicie sessão novamente e reabra o FigureWhispr."
           },
           "service": {
             "step1Title": "Criar o diretório do serviço",
@@ -2180,7 +2180,7 @@
           "manualTitle": "Adicione isto à sua configuração",
           "manualDesc": "Configure manualmente e depois reconstrua.",
           "flakeTitle": "A instalar pelo nosso flake?",
-          "flakeDesc": "Se instalar o OpenWhispr pelo flake, programs.openwhispr.enable ativa o ydotool, o módulo uinput e as associações de grupo por si.",
+          "flakeDesc": "Se instalar o FigureWhispr pelo flake, programs.openwhispr.enable ativa o ydotool, o módulo uinput e as associações de grupo por si.",
           "rebuildNote": "Execute sudo nixos-rebuild switch, depois termine a sessão e volte a entrar para que a alteração de grupo e a regra /dev/uinput entrem em vigor. Substitua <you> pelo seu nome de utilizador."
         },
         "wlCopyDesc": "Ferramenta de área de transferência da qual os apps Wayland leem o texto colado nesta área de trabalho"
@@ -2216,7 +2216,7 @@
           },
           "installUpdate": {
             "confirmText": "Instalar e reiniciar",
-            "description": "O OpenWhispr será reiniciado para aplicar a atualização.",
+            "description": "O FigureWhispr será reiniciado para aplicar a atualização.",
             "title": "Instalar atualização"
           },
           "noUpdates": {
@@ -2248,13 +2248,13 @@
     "permissions": {
       "accessibilityDescription": "Necessário para colagem automática após a transcrição",
       "accessibilityTitle": "Acessibilidade",
-      "description": "Teste e gerencie as permissões do sistema necessárias para o OpenWhispr funcionar corretamente",
+      "description": "Teste e gerencie as permissões do sistema necessárias para o FigureWhispr funcionar corretamente",
       "microphoneDescription": "Captura a sua voz para ditado e transcrição",
       "microphoneTitle": "Microfone",
       "resetAccessibility": {
-        "description": "Isso removerá o OpenWhispr das permissões de acessibilidade. Você precisará conceder novamente em Configurações do Sistema > Privacidade e Segurança > Acessibilidade.",
+        "description": "Isso removerá o FigureWhispr das permissões de acessibilidade. Você precisará conceder novamente em Configurações do Sistema > Privacidade e Segurança > Acessibilidade.",
         "label": "Redefinir permissões de acessibilidade",
-        "rowDescription": "Corrija problemas após reinstalar ou recompilar o app removendo e readicionando o OpenWhispr nas Configurações do Sistema",
+        "rowDescription": "Corrija problemas após reinstalar ou recompilar o app removendo e readicionando o FigureWhispr nas Configurações do Sistema",
         "title": "Redefinir permissões de acessibilidade"
       },
       "optional": "Opcional",
@@ -2283,9 +2283,9 @@
       "leaderboardRequiresAccount": "Entre na sua conta para gerenciar sua participação nas classificações.",
       "leaderboardRequiresHistory": "Ative a retenção de dados antes de participar das classificações.",
       "usageAnalytics": "Análise de uso",
-      "usageAnalyticsDescription": "Ajude-nos a melhorar o OpenWhispr compartilhando métricas anônimas de desempenho. Nunca enviamos conteúdo de transcrição — apenas dados de tempo e erros.",
+      "usageAnalyticsDescription": "Ajude-nos a melhorar o FigureWhispr compartilhando métricas anônimas de desempenho. Nunca enviamos conteúdo de transcrição — apenas dados de tempo e erros.",
       "modelListUpdates": "Atualizações da lista de modelos",
-      "modelListUpdatesDescription": "Verifica a cada 15 minutos a lista pública de modelos do OpenWhispr no GitHub para encontrar modelos novos e descontinuados. As alterações entram totalmente em vigor após reiniciar.",
+      "modelListUpdatesDescription": "Verifica a cada 15 minutos a lista pública de modelos do FigureWhispr no GitHub para encontrar modelos novos e descontinuados. As alterações entram totalmente em vigor após reiniciar.",
       "dataRetention": "Retenção de dados",
       "dataRetentionDescription": "Armazenar transcrições e áudio localmente no seu histórico. Quando desativado, as transcrições são coladas mas não salvas.",
       "transcriptRetention": "Retenção de transcrições",
@@ -2341,7 +2341,7 @@
     "transcription": {
       "customSetup": "Configuração personalizada",
       "customSetupDescription": "Use seu próprio provedor e chave API.",
-      "description": "Escolha como o OpenWhispr transcreve sua voz",
+      "description": "Escolha como o FigureWhispr transcreve sua voz",
       "modes": {
         "openwhispr": "OpenWhispr Cloud",
         "providers": "Provedores na nuvem",
@@ -2359,7 +2359,7 @@
       "title": "Fala para texto",
       "toasts": {
         "switchedCloud": {
-          "description": "A transcrição usará o serviço de nuvem do OpenWhispr.",
+          "description": "A transcrição usará o serviço de nuvem do FigureWhispr.",
           "title": "Mudou para OpenWhispr Cloud"
         },
         "switchedCustom": {
@@ -2472,7 +2472,7 @@
         "description": "Verifique sua conexão e tente novamente.",
         "retry": "Tentar novamente"
       },
-      "staleList": "Não foi possível acessar o OpenWhispr. Mostrando seus espaços de trabalho da última vez que você se conectou.",
+      "staleList": "Não foi possível acessar o FigureWhispr. Mostrando seus espaços de trabalho da última vez que você se conectou.",
       "tab": {
         "general": "Geral",
         "members": "Membros",
@@ -3099,12 +3099,12 @@
     "policy": {
       "guidance": "Sua organização aprovou estes modelos. Escolha o que for mais adequado ao seu computador.",
       "notApproved": "Não aprovado pela sua organização",
-      "noneSupported": "Sua organização não aprovou nenhum modelo local compatível com esta versão do aplicativo. Atualize o OpenWhispr ou entre em contato com o administrador.",
+      "noneSupported": "Sua organização não aprovou nenhum modelo local compatível com esta versão do aplicativo. Atualize o FigureWhispr ou entre em contato com o administrador.",
       "emptyIntersection": "Seus espaços de trabalho não têm nenhum modelo local aprovado em comum. Entre em contato com o administrador.",
       "modelBlocked": "Escolha um modelo local aprovado pela sua organização.",
       "modeBlocked": "Sua organização desativou o processamento local.",
       "unresolved": "Não foi possível obter a política do espaço de trabalho. Conecte-se e tente novamente.",
-      "versionBlocked": "Atualize o OpenWhispr para usar os modelos aprovados pela sua organização.",
+      "versionBlocked": "Atualize o FigureWhispr para usar os modelos aprovados pela sua organização.",
       "updateRequired": "Atualização necessária",
       "unavailable": "Indisponível no momento",
       "installedTitle": "Modelos locais instalados",
@@ -3193,7 +3193,7 @@
     },
     "tryAgain": "Tentar novamente",
     "card": {
-      "brand": "OpenWhispr",
+      "brand": "FigureWhispr",
       "signalId": "Signal ID",
       "audioSignature": "Sua assinatura de áudio",
       "stop": "Parar",
@@ -3307,7 +3307,7 @@
     },
     "structureIntro": {
       "title": "Onde ficam suas notas",
-      "description": "O OpenWhispr separa pensamentos privados do trabalho compartilhado para que as pessoas certas vejam as notas certas.",
+      "description": "O FigureWhispr separa pensamentos privados do trabalho compartilhado para que as pessoas certas vejam as notas certas.",
       "personal": {
         "title": "Espaço pessoal",
         "description": "Somente você pode ver as pastas e notas deste espaço."
@@ -3548,7 +3548,7 @@
       },
       "systemAudioStopped": {
         "title": "O áudio da reunião parou",
-        "description": "O OpenWhispr não está mais captando os outros participantes. Pare a gravação e inicie novamente, ou verifique seu dispositivo de saída de som."
+        "description": "O FigureWhispr não está mais captando os outros participantes. Pare a gravação e inicie novamente, ou verifique seu dispositivo de saída de som."
       },
       "systemAudioQuiet": {
         "title": "O áudio da reunião ficou silencioso",
@@ -3875,7 +3875,7 @@
       "duplicate": "Já existe um snippet com esse gatilho",
       "emptyTitle": "O que você não deveria ter que dizer",
       "emptyTitleAccent": "duas vezes",
-      "emptyDescription": "Fale um gatilho e o OpenWhispr o substitui pelo que você salvou: URLs, introduções, assinaturas, prompts.",
+      "emptyDescription": "Fale um gatilho e o FigureWhispr o substitui pelo que você salvou: URLs, introduções, assinaturas, prompts.",
       "new": "Novo snippet",
       "examples": {
         "linkedinTrigger": "Meu LinkedIn",
@@ -4160,7 +4160,7 @@
       "emptyStrip_one": "{{count}} colega ainda não participa da classificação. A classificação começa quando entrar.",
       "emptyStrip_other": "{{count}} colegas ainda não participam da classificação. A classificação começa quando entrarem.",
       "copyNudge": "Copiar lembrete",
-      "nudgeText": "Participe da classificação em OpenWhispr → Insights para podermos ver a classificação da equipa.",
+      "nudgeText": "Participe da classificação em FigureWhispr → Insights para podermos ver a classificação da equipa.",
       "nudgeCopied": "Lembrete copiado",
       "nudgeCopyError": "Não foi possível copiar o lembrete",
       "joinTitle": "Veja sua posição em {{scope}}",
@@ -4196,7 +4196,7 @@
         "desktop_words": "Palavras no computador",
         "mobile_words": "Palavras no celular"
       },
-      "shareText": "Veja minha posição no OpenWhispr.",
+      "shareText": "Veja minha posição no FigureWhispr.",
       "shareTitle": "Compartilhar classificação",
       "shareDescription": "Copie ou baixe este cartão, ou copie-o antes de abrir o editor de uma rede social.",
       "copyImage": "Copiar imagem",
@@ -4289,7 +4289,7 @@
     "submitBug": "Reportar um bug"
   },
   "postMigration": {
-    "title": "Bem-vindo de volta ao OpenWhispr",
+    "title": "Bem-vindo de volta ao FigureWhispr",
     "description": "Suas notas e configurações foram mantidas da versão anterior. No entanto, o macOS trata isto como um novo app, então algumas permissões precisam ser concedidas novamente.",
     "done": "Concluído",
     "remindLater": "Lembrar-me mais tarde"
@@ -4318,11 +4318,11 @@
     "cudaDescription": "Aceleração CUDA para GPUs NVIDIA compatíveis. Requer um driver NVIDIA atual e compatível.",
     "vulkanDescription": "Aceleração Vulkan para GPUs AMD, Intel e NVIDIA compatíveis.",
     "activationFailed": "Aceleração GPU indisponível",
-    "activationFailedDescription": "OpenWhispr mudou para a transcrição por CPU.",
-    "reasoningActivationFailedDescription": "OpenWhispr mudou para o processamento por CPU.",
+    "activationFailedDescription": "FigureWhispr mudou para a transcrição por CPU.",
+    "reasoningActivationFailedDescription": "FigureWhispr mudou para o processamento por CPU.",
     "retryActivation": "Tentar aceleração por GPU novamente",
     "redownloadNeeded": "O pacote GPU precisa ser baixado novamente",
-    "redownloadNeededDescription": "Esta versão do OpenWhispr não consegue usar o pacote GPU instalado. Baixe-o novamente para reativar a aceleração GPU.",
+    "redownloadNeededDescription": "Esta versão do FigureWhispr não consegue usar o pacote GPU instalado. Baixe-o novamente para reativar a aceleração GPU.",
     "redownloadButton": "Baixar o pacote GPU novamente",
     "downloadFailed": "Não foi possível baixar o pacote GPU.",
     "remove": "Remover",
@@ -4343,11 +4343,11 @@
       "undo": "Desfazer",
       "accessibilityMissing": {
         "title": "Permissões de acessibilidade necessárias",
-        "description": "O OpenWhispr precisa de permissões de acessibilidade para detectar seu atalho e colar texto. Ative-as no Painel de Controle."
+        "description": "O FigureWhispr precisa de permissões de acessibilidade para detectar seu atalho e colar texto. Ative-as no Painel de Controle."
       },
       "gpuFallback": {
         "title": "Aceleração GPU indisponível",
-        "description": "OpenWhispr mudou para a transcrição por CPU.",
+        "description": "FigureWhispr mudou para a transcrição por CPU.",
         "retry": "Tentar GPU novamente"
       },
       "gpuPackMigration": {
@@ -4390,7 +4390,7 @@
       "visionModelDescription": "Encaminha comandos que incluem captura de tela para outro modelo com visão.",
       "permissionTitle": "Gravação de tela",
       "permissionDescription": "O macOS exige permissão de gravação de tela para capturar sua tela.",
-      "relaunchHint": "A permissão de gravação de tela foi concedida enquanto o OpenWhispr estava em execução. Feche e reabra o OpenWhispr para começar a capturar a tela."
+      "relaunchHint": "A permissão de gravação de tela foi concedida enquanto o FigureWhispr estava em execução. Feche e reabra o FigureWhispr para começar a capturar a tela."
     },
     "prompt": {
       "title": "Prompt do assistente",
@@ -4468,15 +4468,15 @@
       "openNote": "Abrir nota",
       "unknownTool": "Ferramenta desconhecida: {{name}}",
       "invalidArgs": "Argumentos de ferramenta inválidos para {{name}}",
-      "search_openwhispr_helpName": "Buscar ajuda do OpenWhispr",
-      "read_openwhispr_helpName": "Ler ajuda do OpenWhispr",
-      "get_openwhispr_contextName": "Ler configurações do OpenWhispr",
+      "search_openwhispr_helpName": "Buscar ajuda do FigureWhispr",
+      "read_openwhispr_helpName": "Ler ajuda do FigureWhispr",
+      "get_openwhispr_contextName": "Ler configurações do FigureWhispr",
       "load_skillName": "Carregar habilidade",
       "propose_skillName": "Propor habilidade",
       "update_skillName": "Atualizar habilidade",
-      "search_openwhispr_helpStatus": "Pesquisando na ajuda do OpenWhispr...",
-      "read_openwhispr_helpStatus": "Lendo a ajuda do OpenWhispr...",
-      "get_openwhispr_contextStatus": "Lendo as configurações do OpenWhispr...",
+      "search_openwhispr_helpStatus": "Pesquisando na ajuda do FigureWhispr...",
+      "read_openwhispr_helpStatus": "Lendo a ajuda do FigureWhispr...",
+      "get_openwhispr_contextStatus": "Lendo as configurações do FigureWhispr...",
       "ask_userName": "Pergunta",
       "ask_userStatus": "Perguntando a você...",
       "request_connectionName": "Conexão",
@@ -4641,7 +4641,7 @@
       "disconnectConfirm": "Desconectar {{email}}?",
       "disconnectDescription": "As notas de reunião não serão mais gravadas deste calendário.",
       "systemAudioRequired": "Permissão de Áudio do Sistema Necessária",
-      "systemAudioDescription": "Para transcrever reuniões, o OpenWhispr precisa da permissão de Áudio do Sistema para capturar o áudio dos outros participantes. Nunca gravamos a sua tela. Você será levado às Configurações do Sistema para ativá-la.",
+      "systemAudioDescription": "Para transcrever reuniões, o FigureWhispr precisa da permissão de Áudio do Sistema para capturar o áudio dos outros participantes. Nunca gravamos a sua tela. Você será levado às Configurações do Sistema para ativá-la.",
       "openSettings": "Abrir Configurações do Sistema",
       "connectFailed": "Falha na conexão",
       "connectFailedDescription": "Ocorreu um erro ao conectar ao Google Calendar. Tente novamente."
@@ -4669,10 +4669,10 @@
       "disconnectConfirm": "Desconectar o Calendário da Apple?",
       "disconnectDescription": "As notas de reunião não serão mais gravadas do seu Calendário da Apple.",
       "permissionDenied": "Acesso ao calendário necessário",
-      "permissionDeniedDescription": "O OpenWhispr precisa de acesso ao calendário para detectar reuniões. Ative o OpenWhispr em Configurações do Sistema, em Privacidade e Segurança → Calendários.",
+      "permissionDeniedDescription": "O FigureWhispr precisa de acesso ao calendário para detectar reuniões. Ative o FigureWhispr em Configurações do Sistema, em Privacidade e Segurança → Calendários.",
       "openSettings": "Abrir Configurações do Sistema",
       "connectFailed": "Falha na conexão",
-      "connectFailedDescription": "Ocorreu um erro ao conectar ao Calendar.app. Reinicie o OpenWhispr e tente novamente."
+      "connectFailedDescription": "Ocorreu um erro ao conectar ao Calendar.app. Reinicie o FigureWhispr e tente novamente."
     },
     "api": {
       "description": "Gerencie chaves de API para acesso programático",
@@ -4682,13 +4682,13 @@
     },
     "mcp": {
       "description": "Converse, pesquise e trabalhe com suas notas no Claude, ChatGPT e Cursor.",
-      "step1": "Na sua ferramenta de IA, adicione OpenWhispr MCP usando a URL pública",
-      "proRequired": "Atualize para um plano pago para conectar o OpenWhispr ao Claude, ChatGPT e Cursor.",
+      "step1": "Na sua ferramenta de IA, adicione FigureWhispr MCP usando a URL pública",
+      "proRequired": "Atualize para um plano pago para conectar o FigureWhispr ao Claude, ChatGPT e Cursor.",
       "worksWith": "Funciona com",
       "copyUrl": "Copiar URL do MCP",
       "copied": "Copiado",
       "oauthTitle": "Entrar com OAuth",
-      "oauthDescription": "Em um cliente compatível com OAuth, adicione a URL do servidor, entre no OpenWhispr e autorize o acesso. Não é necessária uma chave de API.",
+      "oauthDescription": "Em um cliente compatível com OAuth, adicione a URL do servidor, entre no FigureWhispr e autorize o acesso. Não é necessária uma chave de API.",
       "apiKeyTitle": "Usar uma chave de API",
       "apiKeyDescription": "Para clientes que aceitam cabeçalhos de solicitação, crie uma chave de API pessoal com as permissões necessárias e use o cabeçalho abaixo."
     },
@@ -4699,7 +4699,7 @@
       "local": {
         "label": "Local",
         "freeBadge": "Grátis",
-        "description": "Leia suas notas locais diretamente. Sem login ou chave de API — funciona enquanto o OpenWhispr estiver aberto."
+        "description": "Leia suas notas locais diretamente. Sem login ou chave de API — funciona enquanto o FigureWhispr estiver aberto."
       },
       "cloud": {
         "label": "Nuvem",
@@ -4719,7 +4719,7 @@
       "upgrade": "Atualizar"
     },
     "notABot": {
-      "description": "O OpenWhispr captura áudio diretamente do seu sistema — ele nunca entra nas suas reuniões como participante. Basta conectar seu calendário e fazer anotações normalmente."
+      "description": "O FigureWhispr captura áudio diretamente do seu sistema — ele nunca entra nas suas reuniões como participante. Basta conectar seu calendário e fazer anotações normalmente."
     },
     "nav": {
       "label": "Seções de integrações",
@@ -4772,7 +4772,7 @@
         "reconnect_needed": "O Slack precisa ser reconectado nas Configurações.",
         "connection_changed": "A conexão do Slack mudou antes do envio, então nada foi enviado.",
         "rate_limited": "O Slack está ocupado. Tente novamente em breve.",
-        "missing_scope": "O OpenWhispr não tem permissão para publicar ali. Reconecte o Slack nas Configurações.",
+        "missing_scope": "O FigureWhispr não tem permissão para publicar ali. Reconecte o Slack nas Configurações.",
         "msg_too_long": "A mensagem é longa demais para o Slack (no máximo 12.000 caracteres, já formatada).",
         "no_text": "A mensagem está vazia.",
         "network": "Não foi possível acessar o Slack. Nada foi enviado.",
@@ -4838,7 +4838,7 @@
           "wrong_workspace": "Essa issue está em outro workspace do Linear. Nada foi enviado.",
           "invalid_reference": "Isso não é uma issue do Linear. Nada foi enviado.",
           "refused": "O Linear recusou a solicitação. Nada foi enviado.",
-          "unknown_action": "O OpenWhispr não pode fazer isso no Linear. Nada foi enviado.",
+          "unknown_action": "O FigureWhispr não pode fazer isso no Linear. Nada foi enviado.",
           "generic": "Algo deu errado. Nada foi enviado ao Linear."
         }
       },
@@ -4951,19 +4951,19 @@
         "oauth_denied": "O Slack não foi conectado porque o acesso não foi permitido.",
         "oauth_timeout": "A conexão demorou demais. Tente novamente.",
         "oauth_state_mismatch": "Esse link de login estava desatualizado. Tente novamente.",
-        "ports_busy": "Outro aplicativo está usando as portas que o OpenWhispr precisa para conectar. Feche-o e tente novamente.",
+        "ports_busy": "Outro aplicativo está usando as portas que o FigureWhispr precisa para conectar. Feche-o e tente novamente.",
         "token_exchange_failed": "O Slack não concluiu a conexão. Tente novamente.",
         "not_configured": "O Slack não está disponível nesta versão.",
         "connection_changed": "Sua conta ou a conexão do Slack mudou durante a conexão. Tente novamente.",
-        "signed_out": "Entre no OpenWhispr para conectar o Slack.",
+        "signed_out": "Entre no FigureWhispr para conectar o Slack.",
         "policy_blocked": "Sua organização desativou os conectores.",
         "policy_unavailable": "Não foi possível verificar as configurações da sua organização. Tente novamente."
       },
       "browser": {
         "connectedTitle": "O Slack está conectado",
-        "connectedBody": "Você pode fechar esta aba e voltar para o OpenWhispr.",
+        "connectedBody": "Você pode fechar esta aba e voltar para o FigureWhispr.",
         "failedTitle": "O Slack não foi conectado",
-        "failedBody": "Volte para o OpenWhispr para tentar novamente."
+        "failedBody": "Volte para o FigureWhispr para tentar novamente."
       },
       "pickDestination": "Qual “{{destination}}” você quis dizer?"
     },
@@ -5013,32 +5013,32 @@
       "connect": "Conectar",
       "reconnect": "Reconectar",
       "disconnect": "Desconectar",
-      "connecting": "Termine de conectar no seu navegador… Se o Google informar que o acesso está bloqueado, o administrador do Google da sua organização precisa permitir o OpenWhispr.",
+      "connecting": "Termine de conectar no seu navegador… Se o Google informar que o acesso está bloqueado, o administrador do Google da sua organização precisa permitir o FigureWhispr.",
       "connectedAs": "Conectado como {{account}}",
       "needsReconnect": "O Gmail precisa ser reconectado.",
-      "grantKept": "Desconectado. O Google Agenda usa a mesma permissão do Google, então o OpenWhispr continua listado na sua Conta do Google até você desconectar o Google Agenda também.",
+      "grantKept": "Desconectado. O Google Agenda usa a mesma permissão do Google, então o FigureWhispr continua listado na sua Conta do Google até você desconectar o Google Agenda também.",
       "errors": {
         "connect_failed": "Não foi possível conectar o Gmail. Tente novamente.",
         "disconnect_failed": "Não foi possível desconectar o Gmail. Tente novamente.",
         "oauth_denied": "O Gmail não foi conectado porque o acesso não foi permitido.",
-        "oauth_timeout": "A conexão demorou demais. Se o Google informou que o acesso está bloqueado, peça ao administrador do Google da sua organização para permitir o OpenWhispr. Caso contrário, tente novamente.",
+        "oauth_timeout": "A conexão demorou demais. Se o Google informou que o acesso está bloqueado, peça ao administrador do Google da sua organização para permitir o FigureWhispr. Caso contrário, tente novamente.",
         "oauth_state_mismatch": "Esse link de login estava desatualizado. Tente novamente.",
-        "ports_busy": "Outro aplicativo está usando as portas que o OpenWhispr precisa para conectar. Feche-o e tente novamente.",
+        "ports_busy": "Outro aplicativo está usando as portas que o FigureWhispr precisa para conectar. Feche-o e tente novamente.",
         "token_exchange_failed": "O Google não concluiu a conexão. Tente novamente.",
         "not_configured": "O Gmail não está disponível nesta versão.",
         "connection_changed": "Sua conta ou a conexão do Gmail mudou durante a conexão. Tente novamente.",
-        "signed_out": "Entre no OpenWhispr para conectar o Gmail.",
+        "signed_out": "Entre no FigureWhispr para conectar o Gmail.",
         "policy_blocked": "Sua organização desativou os conectores.",
         "policy_unavailable": "Não foi possível verificar as configurações da sua organização. Tente novamente.",
         "permission_not_granted": "O Gmail não foi conectado porque a permissão para enviar e-mails não foi concedida. Conecte novamente e deixe essa permissão marcada.",
         "email_not_verified": "O Google não verificou o endereço de e-mail desta conta, então o Gmail não foi conectado.",
-        "domain_policy": "O administrador do Google da sua organização bloqueou este app. Peça a ele para permitir o OpenWhispr."
+        "domain_policy": "O administrador do Google da sua organização bloqueou este app. Peça a ele para permitir o FigureWhispr."
       },
       "browser": {
         "connectedTitle": "O Gmail está conectado",
-        "connectedBody": "Você pode fechar esta aba e voltar para o OpenWhispr.",
+        "connectedBody": "Você pode fechar esta aba e voltar para o FigureWhispr.",
         "failedTitle": "O Gmail não foi conectado",
-        "failedBody": "Volte para o OpenWhispr para tentar novamente."
+        "failedBody": "Volte para o FigureWhispr para tentar novamente."
       }
     },
     "linear": {
@@ -5056,20 +5056,20 @@
         "oauth_denied": "O Linear não foi conectado porque o acesso não foi permitido.",
         "oauth_timeout": "A conexão demorou demais. Tente novamente.",
         "oauth_state_mismatch": "Esse link de login estava desatualizado. Tente novamente.",
-        "ports_busy": "Outro aplicativo está usando as portas que o OpenWhispr precisa para conectar. Feche-o e tente novamente.",
+        "ports_busy": "Outro aplicativo está usando as portas que o FigureWhispr precisa para conectar. Feche-o e tente novamente.",
         "token_exchange_failed": "O Linear não concluiu a conexão. Tente novamente.",
         "not_configured": "O Linear não está disponível nesta versão.",
         "connection_changed": "Sua conta ou a conexão do Linear mudou durante a conexão. Tente novamente.",
-        "signed_out": "Entre no OpenWhispr para conectar o Linear.",
+        "signed_out": "Entre no FigureWhispr para conectar o Linear.",
         "policy_blocked": "Sua organização desativou os conectores.",
         "policy_unavailable": "Não foi possível verificar as configurações da sua organização. Tente novamente.",
         "permission_not_granted": "O Linear não foi conectado porque nem todas as permissões foram concedidas. Conecte novamente e permita todas."
       },
       "browser": {
         "connectedTitle": "O Linear está conectado",
-        "connectedBody": "Você pode fechar esta aba e voltar para o OpenWhispr.",
+        "connectedBody": "Você pode fechar esta aba e voltar para o FigureWhispr.",
         "failedTitle": "O Linear não foi conectado",
-        "failedBody": "Volte para o OpenWhispr para tentar novamente."
+        "failedBody": "Volte para o FigureWhispr para tentar novamente."
       },
       "notes": {
         "priority": {
@@ -5257,7 +5257,7 @@
       "more": "Mais opções para {{name}}",
       "files": "Arquivos",
       "copyFile": "Copiar {{path}}",
-      "neverRun": "O OpenWhispr nunca executa scripts",
+      "neverRun": "O FigureWhispr nunca executa scripts",
       "uninstall": "Desinstalar",
       "uninstallConfirm": "Desinstalar {{name}}? Ela será removida deste computador.",
       "problem": "Esta habilidade não pode ser usada até ser corrigida: {{reason}}",
@@ -5279,7 +5279,7 @@
       "revealFailed": "Não foi possível encontrar a pasta da habilidade",
       "writeFailed": "Não foi possível salvar a habilidade",
       "writeFailedNoSpace": "Seu disco está cheio.",
-      "writeFailedPermission": "O OpenWhispr não consegue gravar na pasta de habilidades.",
+      "writeFailedPermission": "O FigureWhispr não consegue gravar na pasta de habilidades.",
       "loadFailed": "Não foi possível ler suas habilidades"
     },
     "manage": {
@@ -5365,7 +5365,7 @@
       "reservedWord": "Nomes com \"claude\" ou \"anthropic\" não podem ser enviados ao Claude",
       "longBody": "As instruções têm mais de 500 linhas, o que pode deixar o assistente mais lento",
       "longDescription": "A descrição tem mais de 300 caracteres; as mais curtas são escolhidas com mais confiabilidade",
-      "unknownKeys": "Há detalhes extras no topo que o OpenWhispr mantém, mas não usa"
+      "unknownKeys": "Há detalhes extras no topo que o FigureWhispr mantém, mas não usa"
     },
     "recommended": {
       "action-items-to-linear": {
@@ -5476,7 +5476,7 @@
     "systemAudioRequired": "A permissão de Áudio do Sistema é necessária para capturar o áudio dos outros participantes.",
     "openSettings": "Abrir Configurações do Sistema",
     "connectCalendar": "Conecte seu calendário",
-    "connectCalendarDescription": "Veja suas reuniões e entre nelas sem sair do OpenWhispr.",
+    "connectCalendarDescription": "Veja suas reuniões e entre nelas sem sair do FigureWhispr.",
     "connectCalendarButton": "Conectar calendário"
   },
   "notesView": {
@@ -5531,7 +5531,7 @@
         "invitationActions": "Ações do convite",
         "resendSent": "Convite enviado",
         "resendThrottled": "Convite enviado há pouco. Tente novamente em um minuto.",
-        "syncPrompt": "O compartilhamento mantém uma cópia desta nota na sua nuvem OpenWhispr. Só você pode vê-la até escolher com quem compartilhá-la.",
+        "syncPrompt": "O compartilhamento mantém uma cópia desta nota na sua nuvem FigureWhispr. Só você pode vê-la até escolher com quem compartilhá-la.",
         "syncAndShare": "Sincronizar nota",
         "visibility": {
           "label": "Visibilidade",
@@ -5593,12 +5593,12 @@
   },
   "permissionsGate": {
     "title": "Permissões necessárias",
-    "description": "O OpenWhispr precisa de algumas permissões para funcionar neste computador.",
+    "description": "O FigureWhispr precisa de algumas permissões para funcionar neste computador.",
     "continue": "Continuar"
   },
   "apiKeysSection": {
     "title": "Chaves API",
-    "description": "Crie chaves para acessar a API do OpenWhispr programaticamente.",
+    "description": "Crie chaves para acessar a API do FigureWhispr programaticamente.",
     "empty": "Nenhuma chave API ainda",
     "createButton": "Criar chave API",
     "create": {
@@ -5772,7 +5772,7 @@
     },
     "join": {
       "title": "Entre na sua equipe",
-      "domainTitle": "Sua equipe já está no OpenWhispr",
+      "domainTitle": "Sua equipe já está no FigureWhispr",
       "description": "Estes workspaces têm alguém do domínio do seu e-mail.",
       "invitedDescription": "Você foi convidado para um workspace.",
       "invitedBy": "Convidado por {{inviter}} como {{role}}",
@@ -6102,20 +6102,20 @@
       }
     },
     "setup": {
-      "introTitle": "Faça o OpenWhispr\nescrever como você fala",
+      "introTitle": "Faça o FigureWhispr\nescrever como você fala",
       "introDescription": "Defina seu tom e estilo em diferentes apps.",
       "personalize": "Personalizar",
-      "cleanupOffTitle": "Ensine ao OpenWhispr\no seu estilo",
+      "cleanupOffTitle": "Ensine ao FigureWhispr\no seu estilo",
       "cleanupOffDescription": "Ative a limpeza de texto e defina seu tom e estilo em diferentes apps.",
       "stepDescription": "Escolha o exemplo que mais se parece com você.",
       "progress": "Etapa {{current}} de {{total}}",
       "finish": "Concluir"
     },
     "banner": {
-      "title": "Ensine ao OpenWhispr como você escreve",
+      "title": "Ensine ao FigureWhispr como você escreve",
       "description": "Defina seu tom preferido para o trabalho, os amigos e tudo o que fica no meio.",
       "start": "Começar",
-      "cleanupOffTitle": "Ensine ao OpenWhispr o seu estilo",
+      "cleanupOffTitle": "Ensine ao FigureWhispr o seu estilo",
       "cleanupOffDescription": "Ative a limpeza de texto e escolha um tom para mensagens, e-mails e mais.",
       "notNow": "Agora não",
       "decoration": "Suas palavras devem soar como você. Não importa o que você escreva, nem para quem."
@@ -6208,7 +6208,7 @@
         "timeout": "O provedor de áudio não respondeu a tempo. Verifique sua rede ou VPN.",
         "credentialMissing": "Uma credencial necessária para esta conexão não está provisionada neste dispositivo.",
         "configChanged": "Sua organização alterou esta configuração de áudio. Abra a configuração novamente e tente outra vez.",
-        "protocolFailed": "O provedor de áudio respondeu em um formato que o OpenWhispr não suporta. Verifique a implantação e o protocolo.",
+        "protocolFailed": "O provedor de áudio respondeu em um formato que o FigureWhispr não suporta. Verifique a implantação e o protocolo.",
         "networkFailed": "Não foi possível acessar o provedor de áudio. Verifique sua rede, VPN e DNS.",
         "secureStorageUnavailable": "Este dispositivo não tem armazenamento seguro de credenciais. No Linux, instale e desbloqueie um chaveiro (como GNOME Keyring ou KWallet) e tente novamente."
       },
@@ -6220,9 +6220,65 @@
         "rateLimited": "Muitas solicitações de teste. Aguarde alguns minutos e tente novamente."
       },
       "bootstrapNotProtected": "O arquivo de inicialização deve pertencer a você e só você deve poder lê-lo. Peça à TI para enviá-lo novamente.",
-      "bootstrapUnreadable": "O OpenWhispr não consegue ler o arquivo de inicialização. Peça à TI para torná-lo legível pela sua conta.",
+      "bootstrapUnreadable": "O FigureWhispr não consegue ler o arquivo de inicialização. Peça à TI para torná-lo legível pela sua conta.",
       "bootstrapMismatch": "O arquivo de inicialização não corresponde à sua conta, a este espaço de trabalho ou às credenciais configuradas.",
       "testLinkOtherWorkspace": "Este link de teste é de outro espaço de trabalho. Mude para esse espaço de trabalho e abra o link novamente."
     }
+  },
+  "googleAccount": {
+    "title": "Google account",
+    "description": "Sign in with Google to keep your FigureWhispr settings in sync across your computers. Settings are stored privately in your Google Drive's app data folder.",
+    "unavailable": "Google sign-in is not available in this window.",
+    "errorTitle": "Google account error",
+    "signInLabel": "Sign in with Google",
+    "signInDescription": "No FigureWhispr account needed. Your browser opens to finish signing in.",
+    "signIn": "Sign in with Google",
+    "signOut": "Sign out",
+    "connected": "Connected",
+    "signedInTitle": "Signed in to Google",
+    "signedInDescription": "Settings now sync with {{email}}.",
+    "uploadedTitle": "Settings saved to your Google account",
+    "restoredTitle": "Settings restored from your Google account",
+    "upToDateTitle": "Settings are up to date",
+    "nothingStoredTitle": "No settings are stored in this Google account yet",
+    "client": {
+      "title": "Google OAuth client",
+      "description": "Create an OAuth client of type \"Desktop app\" in your Google Cloud project (enable the Google Drive API), then paste its client ID and secret here.",
+      "openConsole": "Open Google Cloud Console",
+      "clientId": "Client ID",
+      "clientSecret": "Client secret",
+      "clientSecretPlaceholder": "Client secret (from the Desktop app client)",
+      "save": "Save",
+      "change": "Change"
+    },
+    "sync": {
+      "title": "Settings sync",
+      "lastSynced": "Last synced {{time}}",
+      "neverSynced": "Not synced yet",
+      "auto": "Sync automatically",
+      "autoDescription": "Upload changes as you make them and pick up changes made on your other computers.",
+      "apiKeys": "Include API keys",
+      "apiKeysDescription": "Also sync your provider API keys (Gemini, OpenAI, …). They are stored in your own Google Drive app data.",
+      "restore": "Restore from Google",
+      "upload": "Upload this device",
+      "now": "Sync now"
+    },
+    "onboarding": {
+      "signIn": "Sign in with Google to sync settings",
+      "hint": "Optional. Brings your settings from your other computers.",
+      "signedInAs": "Signed in to Google as {{email}}",
+      "later": "You can sign in with Google later in Settings → Account to sync your settings."
+    }
+  },
+  "geminiUltrafast": {
+    "title": "Gemini Ultrafast",
+    "description": "Send the recording and the cleanup instructions to Gemini in one request, so dictation takes a single round trip instead of transcribing first and cleaning up second.",
+    "enable": "Ultrafast mode",
+    "enableDescription": "Uses your Gemini API key. Your cleanup prompt, dictionary and tone settings are applied in the same request. Falls back to your regular setup if the request fails.",
+    "verbatimNote": "Text cleanup is off, so Gemini returns a verbatim transcript in one request.",
+    "missingKey": "Add a Gemini API key",
+    "model": "Gemini model",
+    "modelDescription": "Flash Lite models are the fastest.",
+    "localNote": "Local transcription is selected, so dictation stays on this device and Ultrafast is not used."
   }
 }

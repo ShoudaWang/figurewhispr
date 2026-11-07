@@ -39,7 +39,7 @@ import { useRegistryVersion } from "../hooks/useRegistryVersion";
 import { usePolicySnapshot } from "../hooks/usePolicy";
 import { usePolicyStore } from "../stores/policyStore";
 import { isAgentAllowed, isScreenContextAllowed } from "../stores/policyRules";
-import { useSettingsStore } from "../stores/settingsStore";
+import { finishOpenWhisprCloudMigration, useSettingsStore } from "../stores/settingsStore";
 import { localSetupMinimumSpaceGb, type LocalSetupPlan } from "../config/localSetup";
 import type { LocalSetupHandOff } from "./onboarding/useLocalSetupDownloads";
 import { getDefaultHotkey, parseHotkeyList, serializeHotkeyList } from "../utils/hotkeys";
@@ -717,6 +717,7 @@ export default function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
         localStorage.setItem("skipAuth", String(skippedAuth));
         clearSession();
         localStorage.setItem("onboardingCompleted", "true");
+        finishOpenWhisprCloudMigration();
         onComplete();
       } catch (error) {
         logger.error("Failed to finish onboarding", { error }, "onboarding");

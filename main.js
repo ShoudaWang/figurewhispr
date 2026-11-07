@@ -47,9 +47,9 @@ const VALID_CHANNELS = new Set(["development", "staging", "production"]);
 const DEFAULT_OAUTH_PROTOCOL_BY_CHANNEL = {
   development: "openwhispr-dev",
   staging: "openwhispr-staging",
-  production: "openwhispr",
+  production: "figurewhispr",
 };
-const BASE_WINDOWS_APP_ID = "com.gizmolabs.openwhispr";
+const BASE_WINDOWS_APP_ID = "ai.figure.figurewhispr";
 const DEFAULT_AUTH_BRIDGE_PORT = 5199;
 
 function isElectronBinaryExec() {
@@ -85,6 +85,12 @@ process.env.OPENWHISPR_CHANNEL = APP_CHANNEL;
 
 function configureChannelUserDataPath() {
   if (APP_CHANNEL === "production") {
+    // FigureWhispr keeps its own profile, so it can sit beside a stock
+    // OpenWhispr install; the first launch brings that install's settings over.
+    const appData = app.getPath("appData");
+    const userDataPath = path.join(appData, "FigureWhispr");
+    importLegacyUserData(path.join(appData, "open-whispr"), userDataPath);
+    app.setPath("userData", userDataPath);
     return;
   }
 
@@ -92,6 +98,7 @@ function configureChannelUserDataPath() {
   app.setPath("userData", isolatedPath);
 }
 
+const { importLegacyUserData } = require("./src/helpers/legacyUserDataImport");
 configureChannelUserDataPath();
 
 // Load userData .env (contains DICTATION_KEY, API keys, etc.) early — before
@@ -270,8 +277,8 @@ if (!gotSingleInstanceLock) {
 const isLiveWindow = (window) => window && !window.isDestroyed();
 
 // Ensure macOS menus use the proper casing for the app name
-if (process.platform === "darwin" && app.getName() !== "OpenWhispr") {
-  app.setName("OpenWhispr");
+if (process.platform === "darwin" && app.getName() !== "FigureWhispr") {
+  app.setName("FigureWhispr");
 }
 
 // Add global error handling for uncaught exceptions

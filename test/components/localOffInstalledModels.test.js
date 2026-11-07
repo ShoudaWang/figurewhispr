@@ -185,7 +185,7 @@ test("below the version floor the section gives that reason, not Local off", asy
   const list = await renderList(t, { policy });
 
   assert.match(list.html(), /Base/);
-  assert.match(list.html(), /Update OpenWhispr/);
+  assert.match(list.html(), /Update FigureWhispr/);
   assert.doesNotMatch(list.html(), /disabled local processing/);
 });
 

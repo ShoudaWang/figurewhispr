@@ -1,3 +1,5 @@
+import { ACCOUNTS_ENABLED } from "../config/accounts.ts";
+
 export type SettingsSectionType =
   | "account"
   | "general"
@@ -24,6 +26,8 @@ export interface SettingsNavInput {
   isSignedIn: boolean;
   hasWorkspace: boolean;
   canManageSettings: boolean;
+  /** OpenWhispr accounts (billing, workspaces); defaults to the build switch. */
+  accountsEnabled?: boolean;
 }
 
 // The old AI Models sidebar had four items (transcription, meetings,
@@ -76,6 +80,7 @@ export function buildSettingsNav({
   isSignedIn,
   hasWorkspace,
   canManageSettings,
+  accountsEnabled = ACCOUNTS_ENABLED,
 }: SettingsNavInput): SettingsNavEntry[] {
   const workspace: SettingsNavEntry[] = !isSignedIn
     ? []
@@ -97,8 +102,9 @@ export function buildSettingsNav({
     { id: "general", group: "account" },
     { id: "toneStyle", group: "account" },
     { id: "hotkeys", group: "account" },
-    { id: "plansBilling", group: "account" },
-    ...workspace,
+    // Billing and workspaces belong to OpenWhispr accounts (config/accounts.ts).
+    ...(accountsEnabled ? ([{ id: "plansBilling", group: "account" }] as const) : []),
+    ...(accountsEnabled ? workspace : []),
     { id: "speechToText", group: "aiModels" },
     { id: "llms", group: "aiModels" },
     { id: "privacyData", group: "system" },

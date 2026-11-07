@@ -2,7 +2,12 @@ const { autoUpdater } = require("electron-updater");
 
 // electron-updater can only replace an AppImage on Linux; deb, rpm and tar.gz
 // installs are updated by the package manager instead.
-const isUpdaterSupported = process.platform !== "linux" || Boolean(process.env.APPIMAGE);
+// This build is a customized fork (Google account, Gemini Ultrafast). The feed
+// below is upstream OpenWhispr's, and installing from it would replace the fork
+// with stock OpenWhispr, so updates stay off unless explicitly re-enabled.
+const UPSTREAM_UPDATES_ENABLED = process.env.OPENWHISPR_UPSTREAM_UPDATES === "true";
+const isUpdaterSupported =
+  UPSTREAM_UPDATES_ENABLED && (process.platform !== "linux" || Boolean(process.env.APPIMAGE));
 
 class UpdateManager {
   constructor() {
@@ -168,7 +173,9 @@ class UpdateManager {
       if (!isUpdaterSupported) {
         return {
           updateAvailable: false,
-          message: "Updates are installed through the system package manager",
+          message: UPSTREAM_UPDATES_ENABLED
+            ? "Updates are installed through the system package manager"
+            : "Automatic updates are disabled in this custom build",
         };
       }
 
