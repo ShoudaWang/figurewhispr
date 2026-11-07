@@ -1,0 +1,27 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#161B2E"/>
+      <stop offset="1" stop-color="#241C4D"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="248" y1="266" x2="786" y2="758" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5EEAD4"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="228" fill="url(#bg)"/>
+  <rect x="6" y="6" width="1012" height="1012" rx="222" stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="12"/>
+  <g transform="translate(22 0)">
+  <g stroke="url(#mark)" stroke-width="104" stroke-linecap="round">
+    <path d="M300 318V706"/>
+    <path d="M300 318H560"/>
+    <path d="M300 512H480"/>
+  </g>
+  <g fill="url(#mark)">
+    <circle cx="662" cy="318" r="44" fill-opacity="0.85"/>
+    <circle cx="760" cy="318" r="30" fill-opacity="0.55"/>
+    <circle cx="582" cy="512" r="40" fill-opacity="0.85"/>
+    <circle cx="672" cy="512" r="27" fill-opacity="0.55"/>
+  </g>
+  </g>
+</svg>
