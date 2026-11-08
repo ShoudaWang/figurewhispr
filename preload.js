@@ -668,6 +668,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
   proxyMistralTranscription: (data) => ipcRenderer.invoke("proxy-mistral-transcription", data),
   proxyGeminiTranscription: (data) => ipcRenderer.invoke("proxy-gemini-transcription", data),
   geminiUltrafastDictation: (data) => ipcRenderer.invoke("gemini-ultrafast-dictation", data),
+  geminiUltrafastPrewarm: (data) => ipcRenderer.invoke("gemini-ultrafast-prewarm", data),
 
   // Google account (replaces the OpenWhispr account): sign-in + Drive settings sync
   googleAccount: {

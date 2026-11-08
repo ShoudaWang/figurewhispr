@@ -97,6 +97,54 @@ export function downmixToMono(channels: Float32Array[]): Float32Array {
   return mono;
 }
 
+const TRIM_FRAME_SECONDS = 0.02;
+const TRIM_LEAD_PAD_SECONDS = 0.25;
+const TRIM_TAIL_PAD_SECONDS = 0.35;
+const TRIM_MIN_SAVING_SECONDS = 0.3;
+
+/**
+ * Drops the silence before the first and after the last speech in a mono
+ * recording, keeping a margin around it. Gemini's time grows with audio length
+ * and silence is where it invents words, so less of it is faster and safer.
+ * Conservative: speech is anything well above the recording's own noise floor,
+ * nothing in between is touched, and a recording with no clear speech (or
+ * little to gain) comes back unchanged.
+ */
+export function trimSilence(samples: Float32Array, sampleRate: number): Float32Array {
+  const frameLength = Math.max(1, Math.round(sampleRate * TRIM_FRAME_SECONDS));
+  const frameCount = Math.floor(samples.length / frameLength);
+  if (frameCount < 10) return samples;
+
+  const rms = new Float32Array(frameCount);
+  for (let f = 0; f < frameCount; f++) {
+    let sum = 0;
+    const start = f * frameLength;
+    for (let i = start; i < start + frameLength; i++) sum += samples[i] * samples[i];
+    rms[f] = Math.sqrt(sum / frameLength);
+  }
+  const sorted = Float32Array.from(rms).sort();
+  const peak = sorted[frameCount - 1];
+  if (peak < 1e-4) return samples;
+  const noiseFloor = sorted[Math.floor(frameCount * 0.1)];
+  const threshold = Math.max(Math.min(noiseFloor * 4, peak * 0.25), peak * 0.03, 0.001);
+
+  // Two loud frames in a row, so a click or pop does not count as speech.
+  const loud = (f: number) => rms[f] > threshold && rms[f + 1] > threshold;
+  let first = 0;
+  while (first < frameCount - 1 && !loud(first)) first++;
+  let last = frameCount - 2;
+  while (last > first && !loud(last)) last--;
+  if (first >= frameCount - 1) return samples;
+
+  const start = Math.max(0, first * frameLength - Math.round(TRIM_LEAD_PAD_SECONDS * sampleRate));
+  const end = Math.min(
+    samples.length,
+    (last + 2) * frameLength + Math.round(TRIM_TAIL_PAD_SECONDS * sampleRate)
+  );
+  if (samples.length - (end - start) < TRIM_MIN_SAVING_SECONDS * sampleRate) return samples;
+  return samples.subarray(start, end);
+}
+
 // Renderer-side conversion, using Web Audio because ffmpeg is only reachable
 // from the main process. Retries re-upload stored audio from there and cannot
 // use this, so they go through ffmpegUtils.convertBufferToWav instead -- both

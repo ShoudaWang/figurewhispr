@@ -138,9 +138,21 @@ async function runGeminiUltrafastDictation(
   const blockReason = data?.promptFeedback?.blockReason || null;
   const text = extractText(data);
 
+  // Token counts show how much of the prompt Gemini served from its cache.
+  const usage = data?.usageMetadata || {};
   debugLogger.info(
     "Gemini ultrafast dictation finished",
-    { model: resolvedModel, ms: Date.now() - started, finishReason, chars: text.length },
+    {
+      model: resolvedModel,
+      ms: Date.now() - started,
+      finishReason,
+      chars: text.length,
+      promptTokens: usage.promptTokenCount ?? null,
+      cachedTokens: usage.cachedContentTokenCount ?? 0,
+      outputTokens: usage.candidatesTokenCount ?? null,
+      audioTokens:
+        usage.promptTokensDetails?.find?.((d) => d?.modality === "AUDIO")?.tokenCount ?? null,
+    },
     "transcription"
   );
 
@@ -157,4 +169,46 @@ async function runGeminiUltrafastDictation(
   };
 }
 
-module.exports = { runGeminiUltrafastDictation, DEFAULT_ULTRAFAST_MODEL, outputTokenBudget };
+// Opening the connection while the user speaks (GeminiWhisperLite's
+// prewarm_connection): a free models.get leaves a pooled TLS connection for
+// the dictation request, so it skips the handshake. At most one per interval.
+const PREWARM_INTERVAL_MS = 30_000;
+const PREWARM_TIMEOUT_MS = 15_000;
+let lastPrewarmAt = 0;
+
+async function prewarmGeminiUltrafast({ model, apiKey, now = Date.now() }, fetchImpl) {
+  if (!apiKey?.trim()) return { warmed: false, reason: "no-key" };
+  if (now - lastPrewarmAt < PREWARM_INTERVAL_MS) return { warmed: false, reason: "recent" };
+  lastPrewarmAt = now;
+  const resolvedModel = (model || DEFAULT_ULTRAFAST_MODEL).replace(/^models\//, "");
+  const doFetch = fetchImpl || ((url, init) => net.fetch(url, init));
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), PREWARM_TIMEOUT_MS);
+  try {
+    const response = await doFetch(`${GEMINI_API_BASE}/${encodeURIComponent(resolvedModel)}`, {
+      method: "GET",
+      headers: { "x-goog-api-key": apiKey },
+      signal: controller.signal,
+    });
+    // The body is drained so the connection goes back to the pool.
+    await response.text().catch(() => "");
+    return { warmed: response.ok, status: response.status };
+  } catch (error) {
+    debugLogger.debug("Gemini ultrafast prewarm failed (non-fatal)", { error: error?.message });
+    return { warmed: false, reason: "error" };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function resetPrewarmForTests() {
+  lastPrewarmAt = 0;
+}
+
+module.exports = {
+  runGeminiUltrafastDictation,
+  prewarmGeminiUltrafast,
+  resetPrewarmForTests,
+  DEFAULT_ULTRAFAST_MODEL,
+  outputTokenBudget,
+};

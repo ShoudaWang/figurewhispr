@@ -2707,6 +2707,9 @@ declare global {
         | { text: string; model: string; finishReason: string | null; truncated: boolean }
         | { error: string; code?: string }
       >;
+      geminiUltrafastPrewarm?: (data: {
+        model?: string;
+      }) => Promise<{ warmed: boolean; status?: number; reason?: string }>;
       googleAccount?: GoogleAccountBridge;
       proxyGeminiTranscription?: (data: {
         audioBuffer: ArrayBuffer;

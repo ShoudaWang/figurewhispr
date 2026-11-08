@@ -2,6 +2,8 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const {
   runGeminiUltrafastDictation,
+  prewarmGeminiUltrafast,
+  resetPrewarmForTests,
   outputTokenBudget,
 } = require("../../src/helpers/geminiUltrafast");
 
@@ -110,4 +112,47 @@ test("output budget scales with the recording and stays bounded", () => {
   assert.equal(outputTokenBudget(100), 1200);
   assert.equal(outputTokenBudget(100000), 16384);
   assert.equal(outputTokenBudget(null), 1440);
+});
+
+test("prewarm opens the connection with a free models.get for the dictation model", async () => {
+  resetPrewarmForTests();
+  const { fetchImpl, calls } = makeFetch({ name: "models/gemini-3.5-flash-lite" });
+
+  const result = await prewarmGeminiUltrafast(
+    { model: "models/gemini-3.5-flash-lite", apiKey: "k1", now: 1_000_000 },
+    fetchImpl
+  );
+
+  assert.deepEqual(result, { warmed: true, status: 200 });
+  assert.equal(calls.length, 1);
+  assert.equal(
+    calls[0].url,
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite"
+  );
+  assert.equal(calls[0].init.method, "GET");
+  assert.equal(calls[0].init.headers["x-goog-api-key"], "k1");
+});
+
+test("prewarm runs at most once per 30 seconds and never without a key", async () => {
+  resetPrewarmForTests();
+  const { fetchImpl, calls } = makeFetch({});
+
+  await prewarmGeminiUltrafast({ model: "m", apiKey: "", now: 1_000_000 }, fetchImpl);
+  await prewarmGeminiUltrafast({ model: "m", apiKey: "k1", now: 1_000_000 }, fetchImpl);
+  const again = await prewarmGeminiUltrafast(
+    { model: "m", apiKey: "k1", now: 1_020_000 },
+    fetchImpl
+  );
+  await prewarmGeminiUltrafast({ model: "m", apiKey: "k1", now: 1_031_000 }, fetchImpl);
+
+  assert.equal(again.reason, "recent");
+  assert.equal(calls.length, 2);
+});
+
+test("a failed prewarm is quiet", async () => {
+  resetPrewarmForTests();
+  const result = await prewarmGeminiUltrafast({ model: "m", apiKey: "k1" }, async () => {
+    throw new Error("offline");
+  });
+  assert.deepEqual(result, { warmed: false, reason: "error" });
 });

@@ -154,7 +154,7 @@ const { TINFOIL_REALTIME_MODEL } = require("./tinfoilRealtimeStreaming");
 const { getTinfoilChatModels } = require("./tinfoilCatalog");
 const { transcribeWithTinfoil } = require("./tinfoilTranscription");
 const { transcribeWithGemini } = require("./geminiTranscription");
-const { runGeminiUltrafastDictation } = require("./geminiUltrafast");
+const { runGeminiUltrafastDictation, prewarmGeminiUltrafast } = require("./geminiUltrafast");
 const { registerGoogleAccountIpc } = require("./googleAccount");
 const AudioStorageManager = require("./audioStorage");
 const { SkillLibrary } = require("./skills/skillLibrary");
@@ -5624,6 +5624,12 @@ class IPCHandlers {
         });
       })
     );
+
+    // Sent when an Ultrafast dictation starts recording, so the connection is
+    // open by the time the audio is ready.
+    ipcMain.handle("gemini-ultrafast-prewarm", async (event, { model } = {}) => {
+      return prewarmGeminiUltrafast({ model, apiKey: this.environmentManager.getGeminiKey() });
+    });
 
     ipcMain.handle("get-custom-transcription-key", async () => {
       return this.environmentManager.getCustomTranscriptionKey();
