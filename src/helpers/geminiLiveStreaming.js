@@ -126,7 +126,7 @@ class GeminiLiveStreaming {
     return buildGeminiLiveUrl(options);
   }
 
-  buildSetupMessage({ model, mode, language, keyterms } = {}) {
+  buildSetupMessage({ model, mode, language, languages, keyterms } = {}) {
     const customVocabulary = (keyterms || [])
       .map((term) => String(term).trim())
       .filter(Boolean)
@@ -135,7 +135,11 @@ class GeminiLiveStreaming {
     // `languageCodes` on its own costs punctuation and sentence casing, and an
     // invalid locale is accepted silently — only ever send a language the user
     // picked explicitly ("auto" is stripped upstream).
-    if (language) inputAudioTranscription.languageCodes = [language];
+    // `languages` carries the several languages a user said they speak (Ultrafast's
+    // language hint); with English and Chinese it keeps Chinese in Simplified.
+    const languageCodes = Array.isArray(languages) && languages.length ? languages : [];
+    if (!languageCodes.length && language) languageCodes.push(language);
+    if (languageCodes.length) inputAudioTranscription.languageCodes = languageCodes;
     if (customVocabulary.length) inputAudioTranscription.customVocabulary = customVocabulary;
 
     return {

@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import AudioManager from "../helpers/audioManager";
 import logger from "../utils/logger";
 import { playStartCue, playStopCue } from "../utils/dictationCues";
-import { getSettings } from "../stores/settingsStore";
+import { getSettings as getStoreSettings } from "../stores/settingsStore";
+import { withUltrafastTranscription } from "../helpers/ultrafastTranscription.js";
 import { expandSnippets } from "../utils/snippets";
 import { getRecordingErrorTitle, getRecordingErrorDescription } from "../utils/recordingErrors";
 import { providerErrorActions } from "../utils/describeProviderError";
@@ -31,6 +32,9 @@ import {
 import { canStartDictation } from "../utils/dictationReadiness";
 import { waitForVisualFrames } from "../utils/visualFrame";
 import { recordCleanupFailure } from "../stores/cleanupFailureStore";
+
+// Dictation sees the Ultrafast live preview model as its transcription selection.
+const getSettings = () => withUltrafastTranscription(getStoreSettings());
 
 // Maps a failed selection-replacement code to its `selectionEditing.*` toast
 // detail key; unlisted codes fall back to the generic "unavailable" message.

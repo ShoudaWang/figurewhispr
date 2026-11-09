@@ -123,6 +123,19 @@ test("without cleanup Ultrafast asks for a verbatim transcript", async (t) => {
   assert.match(calls[0].instruction, /^Transcribe the spoken audio verbatim\./);
 });
 
+test("the languages you speak reach the Ultrafast request", async (t) => {
+  const { window, createManager } = await load(t, {
+    useCleanupModel: false,
+    geminiUltrafastLanguages: "en-US,zh-CN",
+  });
+  const calls = stubUltrafastIpc(window, { text: "hello 你好", model: "m", truncated: false });
+
+  await ultrafastManager(createManager).processWithGeminiUltrafast(wav(), { durationSeconds: 3 });
+
+  assert.match(calls[0].instruction, /English \(US\) and Chinese \(Simplified\)/);
+  assert.match(calls[0].instruction, /Chinese in Simplified characters/);
+});
+
 test("the WebM recording goes to Gemini as small Ogg Opus", async (t) => {
   const { window, createManager } = await load(t, {}, ENCODER_MOCKS);
   const calls = stubUltrafastIpc(window, { text: "Hi.", model: "m", truncated: false });
@@ -206,7 +219,7 @@ test("a dictionary recital after the speech is dropped", async (t) => {
   assert.equal(result.text, "Deploy it today.");
 });
 
-test("starting an Ultrafast recording opens the Gemini connection, and only then", async (t) => {
+test("starting an Ultrafast recording opens the Gemini connection, and only in Ultrafast mode", async (t) => {
   const { window, createManager, setSettings } = await load(t);
   const prewarms = [];
   window.electronAPI = {
@@ -223,10 +236,39 @@ test("starting an Ultrafast recording opens the Gemini connection, and only then
   manager._prewarmGeminiUltrafast();
   setSettings({ ...ULTRAFAST_SETTINGS, geminiUltrafastEnabled: false });
   manager._prewarmGeminiUltrafast();
+  // Ultrafast is its own dictation mode, so a Standard setup left on local
+  // transcription does not turn it off.
   setSettings({ ...ULTRAFAST_SETTINGS, useLocalWhisper: true });
   manager._prewarmGeminiUltrafast();
 
-  assert.deepEqual(prewarms, [{ model: "gemini-3.5-flash-lite" }, { model: "gemini-3.5-flash" }]);
+  assert.deepEqual(prewarms, [
+    { model: "gemini-3.5-flash-lite" },
+    { model: "gemini-3.5-flash" },
+    { model: "gemini-3.5-flash-lite" },
+  ]);
+});
+
+test("Ultrafast streams its own live preview model, whatever the Standard setup is", async (t) => {
+  const { createManager, setSettings } = await load(t);
+  const manager = createManager({ sttConfig: null });
+  // A Standard setup on local Whisper never streams.
+  const standardLocal = {
+    ...ULTRAFAST_SETTINGS,
+    useLocalWhisper: true,
+    transcriptionMode: "local",
+    cloudTranscriptionProvider: "groq",
+    cloudTranscriptionModel: "whisper-large-v3",
+  };
+
+  setSettings({ ...standardLocal, geminiUltrafastEnabled: false });
+  assert.equal(manager.shouldUseStreaming(), false);
+
+  setSettings(standardLocal);
+  assert.equal(manager.shouldUseStreaming(), true);
+  assert.equal(manager.getStreamingProviderName?.() ?? "gemini", "gemini");
+
+  setSettings({ ...standardLocal, geminiUltrafastPreview: "off" });
+  assert.equal(manager.shouldUseStreaming(), false);
 });
 
 test("a failed Ultrafast attempt leaves the app's tone style for the fallback cleanup", async (t) => {

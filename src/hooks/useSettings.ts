@@ -37,6 +37,10 @@ export interface TranscriptionSettings {
   /** Gemini Ultrafast: one multimodal request transcribes and cleans up together. */
   geminiUltrafastEnabled: boolean;
   geminiUltrafastModel: string;
+  /** Ultrafast live preview model as "provider/model", or "off". */
+  geminiUltrafastPreview: string;
+  /** Languages the user speaks in Ultrafast mode, comma-separated codes ("en-US,zh-CN"). */
+  geminiUltrafastLanguages: string;
   preferredLanguage: string;
   /** When transcription language is Auto, force Chinese output script. See #975. */
   chineseScriptPreference: ChineseScriptPreference;
@@ -307,6 +311,8 @@ function useSettingsInternal() {
     fallbackWhisperModel: store.fallbackWhisperModel,
     geminiUltrafastEnabled: store.geminiUltrafastEnabled,
     geminiUltrafastModel: store.geminiUltrafastModel,
+    geminiUltrafastPreview: store.geminiUltrafastPreview,
+    geminiUltrafastLanguages: store.geminiUltrafastLanguages,
     preferredLanguage: store.preferredLanguage,
     chineseScriptPreference: store.chineseScriptPreference,
     cloudTranscriptionProvider: store.cloudTranscriptionProvider,

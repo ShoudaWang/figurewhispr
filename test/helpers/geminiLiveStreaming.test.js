@@ -114,6 +114,19 @@ test("setup: the custom dictionary always ships; a language only when chosen", (
   assert.equal(many.setup.inputAudioTranscription.customVocabulary.length, 100);
 });
 
+test("setup: several hinted languages ship together and outrank the single language", () => {
+  const streaming = new GeminiLiveStreaming();
+  const { inputAudioTranscription } = streaming.buildSetupMessage({
+    language: "en-US",
+    languages: ["en-US", "zh-CN"],
+  }).setup;
+  assert.deepEqual(inputAudioTranscription.languageCodes, ["en-US", "zh-CN"]);
+  assert.deepEqual(
+    streaming.buildSetupMessage({ languages: [] }).setup.inputAudioTranscription,
+    {}
+  );
+});
+
 test("connect resolves on setupComplete, not on socket open", async () => {
   await withServer(
     async ({ streaming, received }) => {

@@ -49,7 +49,7 @@ import {
   resolveAnalyticsMode,
 } from "./analytics";
 import {
-  getSettings,
+  getSettings as getStoreSettings,
   useSettingsStore,
   getEffectiveCleanupModel,
   isCloudCleanupMode,
@@ -57,6 +57,14 @@ import {
   isCloudTranslationMode,
   selectResolvedLLMConfig,
 } from "../stores/settingsStore";
+import {
+  buildUltrafastLanguageClause,
+  withUltrafastTranscription,
+} from "./ultrafastTranscription.js";
+
+// Dictation reads its transcription selection through the Ultrafast overlay, so
+// Ultrafast mode's own live preview model drives streaming and the fallback.
+const getSettings = () => withUltrafastTranscription(getStoreSettings());
 
 import {
   effectiveAudioRetentionDays,
@@ -2611,11 +2619,16 @@ registerProcessor("pcm-streaming-processor", PCMStreamingProcessor);
     const systemPrompt = cleanupEnabled
       ? ReasoningService.getDictationCleanupPrompt(agentName, toneStyle)
       : null;
-    const language = getBaseLanguageCode(this.getEffectiveSttLanguage(settings));
-    const languageClause =
-      language && language !== "auto"
-        ? ` The primary spoken language is ${getLanguageLabel(language) || language}.`
-        : "";
+    // The Ultrafast language hint, or else the app's transcription language.
+    const spokenLanguage = this.getEffectiveSttLanguage(settings);
+    const languageClause = buildUltrafastLanguageClause(
+      settings.ultrafastLanguageHints?.length
+        ? settings.ultrafastLanguageHints
+        : spokenLanguage && spokenLanguage !== "auto"
+          ? [spokenLanguage]
+          : [],
+      getLanguageLabel
+    );
     const vocabulary = cleanupEnabled ? null : this.getPersonalDictionaryPrompt(settings);
     // GeminiWhisperLite's single-pass instructions, word for word.
     const literalClause =

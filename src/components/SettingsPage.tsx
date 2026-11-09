@@ -40,12 +40,17 @@ import {
   Wand2,
   Upload,
   Languages,
+  ChevronDown,
+  ChevronRight,
 } from "./icons";
 import { useAuth } from "../hooks/useAuth";
 import { resetForAccountChange as resetChatForAccountChange } from "../stores/chatTurnStore";
 import { ACCOUNTS_ENABLED, AUTH_URL, signOut } from "../lib/auth";
 import GoogleAccountSection from "./settings/GoogleAccountSection";
-import GeminiUltrafastPanel from "./settings/GeminiUltrafastPanel";
+import GeminiUltrafastPanel, {
+  DictationModeChooser,
+  UltrafastCleanupNotice,
+} from "./settings/GeminiUltrafastPanel";
 import { deleteAccount } from "../lib/accountDeletionRequest";
 import { executeAccountDeletion } from "../lib/accountDeletionFlow";
 import { getValidatedAuthGeneration } from "../lib/authRequestContext";
@@ -817,6 +822,9 @@ function TranscriptionSection({
 }
 
 interface AiModelsSectionProps {
+  /** Ultrafast mode cleans up inside its own request; the model here is only its backup. */
+  ultrafast?: boolean;
+  onOpenUltrafastSettings?: () => void;
   useCleanupModel: boolean;
   setUseCleanupModel: (value: boolean) => void;
   toast: (opts: {
@@ -857,8 +865,15 @@ function NoteFormattingSettings() {
   );
 }
 
-function AiModelsSection({ useCleanupModel, setUseCleanupModel, toast }: AiModelsSectionProps) {
+function AiModelsSection({
+  ultrafast = false,
+  onOpenUltrafastSettings,
+  useCleanupModel,
+  setUseCleanupModel,
+  toast,
+}: AiModelsSectionProps) {
   const { t } = useTranslation();
+  const [showBackupModel, setShowBackupModel] = useState(false);
 
   const handleCleanupModeChange = (mode: InferenceMode) => {
     const toastKey = CLEANUP_MODE_TOAST_KEY[mode];
@@ -870,8 +885,16 @@ function AiModelsSection({ useCleanupModel, setUseCleanupModel, toast }: AiModel
     });
   };
 
+  const cleanupEditor = (
+    <>
+      <InferenceConfigEditor scope="dictationCleanup" onModeChange={handleCleanupModeChange} />
+      <GpuDeviceSelector purpose="intelligence" />
+    </>
+  );
+
   return (
     <div className="space-y-4">
+      {ultrafast && <UltrafastCleanupNotice onOpenUltrafastSettings={onOpenUltrafastSettings} />}
       <SettingsPanel>
         <SettingsPanelRow>
           <SettingsRow
@@ -881,14 +904,35 @@ function AiModelsSection({ useCleanupModel, setUseCleanupModel, toast }: AiModel
             <Toggle checked={useCleanupModel} onChange={setUseCleanupModel} />
           </SettingsRow>
         </SettingsPanelRow>
+        {ultrafast && useCleanupModel && (
+          <SettingsPanelRow>
+            <button
+              type="button"
+              onClick={() => setShowBackupModel((open) => !open)}
+              aria-expanded={showBackupModel}
+              className="flex w-full items-center gap-2 text-start"
+            >
+              {showBackupModel ? (
+                <ChevronDown className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+              ) : (
+                <ChevronRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+              )}
+              <span className="min-w-0 flex-1">
+                <span className="block text-xs font-medium text-foreground">
+                  {t("geminiUltrafast.backupModelTitle")}
+                </span>
+                <span className="block text-xs text-muted-foreground/80">
+                  {t("geminiUltrafast.backupModelDescription")}
+                </span>
+              </span>
+            </button>
+          </SettingsPanelRow>
+        )}
       </SettingsPanel>
 
-      {useCleanupModel && (
-        <>
-          <InferenceConfigEditor scope="dictationCleanup" onModeChange={handleCleanupModeChange} />
-          <GpuDeviceSelector purpose="intelligence" />
-        </>
-      )}
+      {ultrafast && useCleanupModel && showBackupModel && cleanupEditor}
+
+      {!ultrafast && useCleanupModel && cleanupEditor}
     </div>
   );
 }
@@ -1164,6 +1208,7 @@ export default function SettingsPage({
 }: SettingsPageProps) {
   const registryVersion = useRegistryVersion();
   const { isCompact } = useSettingsLayout();
+  const geminiUltrafastEnabled = useSettingsStore((s) => s.geminiUltrafastEnabled);
   const {
     confirmDialog,
     alertDialog,
@@ -5019,7 +5064,13 @@ EOF`,
             }
             renderDictation={() => (
               <div className="space-y-6">
-                <GeminiUltrafastPanel />
+                <DictationModeChooser />
+                {geminiUltrafastEnabled && (
+                  <GeminiUltrafastPanel
+                    onOpenCleanupSettings={() => onNavigateToSection?.("llms", "dictationCleanup")}
+                  />
+                )}
+                {!geminiUltrafastEnabled && (
                 <TranscriptionSection
                   isSignedIn={isSignedIn ?? false}
                   cloudTranscriptionMode={cloudTranscriptionMode}
@@ -5051,7 +5102,9 @@ EOF`,
                   setShowTranscriptionPreview={setShowTranscriptionPreview}
                   toast={toast}
                 />
-                {transcriptionMode === "local" &&
+                )}
+                {!geminiUltrafastEnabled &&
+                  transcriptionMode === "local" &&
                   localTranscriptionProvider === "whisper" &&
                   renderWhisperVadSettings()}
               </div>
@@ -5082,6 +5135,8 @@ EOF`,
             renderDictationCleanup={() => (
               <div className="space-y-6">
                 <AiModelsSection
+                  ultrafast={geminiUltrafastEnabled}
+                  onOpenUltrafastSettings={() => onNavigateToSection?.("speechToText", "dictation")}
                   useCleanupModel={useCleanupModel}
                   setUseCleanupModel={(value) => {
                     updateCleanupSettings({ useCleanupModel: value });

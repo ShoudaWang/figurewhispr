@@ -13129,11 +13129,15 @@ class IPCHandlers {
     // Managed tokens are constrained to the server's existing model. BYOK can
     // select newly published compatible models, each requiring its own socket.
     const geminiConnectionModel = resolveGeminiLiveModel;
-    // A warm socket cannot cross credentials, modes, or selected models.
+    // A warm socket cannot cross credentials, modes, selected models, or the
+    // languages its setup message pinned.
     const geminiConnectionKey = (options) =>
       JSON.stringify([
         options.mode === "byok" ? `byok:${credentialGeneration}` : "managed",
         geminiConnectionModel(options),
+        Array.isArray(options.languages) && options.languages.length
+          ? options.languages.join(",")
+          : options.language || "",
       ]);
 
     const connectGeminiStreaming = (event, options) => {

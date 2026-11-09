@@ -103,6 +103,7 @@ import {
 import type { EnterpriseSetupMode } from "../types/enterpriseIdentity";
 import { getManagedScopeResolution } from "./enterpriseIdentityStore";
 import { OPENWHISPR_CLOUD_ENABLED } from "../config/accounts";
+import { ULTRAFAST_PREVIEW_DEFAULT } from "../helpers/ultrafastTranscription.js";
 
 let _ReasoningService: typeof import("../services/ReasoningService").default | null = null;
 
@@ -1294,6 +1295,8 @@ export interface SettingsState
   setFallbackWhisperModel: (value: string) => void;
   setGeminiUltrafastEnabled: (value: boolean) => void;
   setGeminiUltrafastModel: (value: string) => void;
+  setGeminiUltrafastPreview: (value: string) => void;
+  setGeminiUltrafastLanguages: (value: string) => void;
   setPreferredLanguage: (value: string) => void;
   setChineseScriptPreference: (value: ChineseScriptPreference) => void;
   setCloudTranscriptionProvider: (value: string) => void;
@@ -1767,6 +1770,8 @@ export const useSettingsStore = create<SettingsState>()((set, get) => ({
   fallbackWhisperModel: readString("fallbackWhisperModel", "base"),
   geminiUltrafastEnabled: readBoolean("geminiUltrafastEnabled", false),
   geminiUltrafastModel: readString("geminiUltrafastModel", "gemini-3.5-flash-lite"),
+  geminiUltrafastPreview: readString("geminiUltrafastPreview", ULTRAFAST_PREVIEW_DEFAULT),
+  geminiUltrafastLanguages: readString("geminiUltrafastLanguages", ""),
   preferredLanguage: readString("preferredLanguage", "auto"),
   chineseScriptPreference: normalizeChineseScriptPreference(
     readString("chineseScriptPreference", "as-transcribed")
@@ -2287,6 +2292,8 @@ export const useSettingsStore = create<SettingsState>()((set, get) => ({
   setFallbackWhisperModel: createStringSetter("fallbackWhisperModel"),
   setGeminiUltrafastEnabled: createBooleanSetter("geminiUltrafastEnabled"),
   setGeminiUltrafastModel: createStringSetter("geminiUltrafastModel"),
+  setGeminiUltrafastPreview: createStringSetter("geminiUltrafastPreview"),
+  setGeminiUltrafastLanguages: createStringSetter("geminiUltrafastLanguages"),
   setPreferredLanguage: createStringSetter("preferredLanguage"),
   setChineseScriptPreference: (value: ChineseScriptPreference) =>
     createStringSetter("chineseScriptPreference")(normalizeChineseScriptPreference(value)),

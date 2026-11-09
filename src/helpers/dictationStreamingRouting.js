@@ -255,6 +255,10 @@ export function buildStreamingSessionOptions({
   if (providerName === "tinfoil-realtime" && !voiceAgentRequested) {
     options.preview = true;
   }
+  // Ultrafast's multi-language hint: Gemini Live takes a list of language codes.
+  if (providerName === "gemini" && settings.ultrafastLanguageHints?.length > 1) {
+    options.languages = [...settings.ultrafastLanguageHints];
+  }
   if (providerName === "orukeet") {
     options.model = ORUKEET_MODEL;
     if (options.mode !== "byok" && pipelineOptions) options.pipelineOptions = pipelineOptions;
