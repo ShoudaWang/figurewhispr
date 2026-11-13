@@ -80,6 +80,21 @@ export function buildUltrafastLanguageClause(codes, getLabel = (code) => code) {
   return clause;
 }
 
+// Han and kana, and CJK/full-width punctuation (，。！？：；、「」（）). Hangul is left
+// out: Korean puts spaces between words.
+const CJK_SPACED =
+  /([\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}　-〿＀-￯])[ \t 　]+(?=[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}　-〿＀-￯])/gu;
+
+/**
+ * Removes the spaces Gemini sometimes puts between Chinese or Japanese words
+ * ("在大人 的 陪同下 ， 一起"), as if word-segmenting. Spaces between CJK and
+ * Latin text or digits ("需要 34 个小时") stay.
+ */
+export function collapseCjkSpaces(text) {
+  if (typeof text !== "string" || !text) return text;
+  return text.replace(CJK_SPACED, "$1");
+}
+
 function joinLabels(labels) {
   if (labels.length <= 2) return labels.join(" and ");
   return `${labels.slice(0, -1).join(", ")}, and ${labels[labels.length - 1]}`;

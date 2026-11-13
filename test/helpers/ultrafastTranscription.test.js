@@ -5,6 +5,7 @@ import { buildStreamingSessionOptions } from "../../src/helpers/dictationStreami
 import {
   ULTRAFAST_PREVIEW_DEFAULT,
   buildUltrafastLanguageClause,
+  collapseCjkSpaces,
   formatUltrafastLanguages,
   parseUltrafastLanguages,
   formatUltrafastPreview,
@@ -155,4 +156,20 @@ test("Gemini Live sessions carry several hinted languages; other providers do no
   assert.equal(gemini.language, undefined);
   const deepgram = buildStreamingSessionOptions({ providerName: "deepgram", settings });
   assert.equal(deepgram.languages, undefined);
+});
+
+test("spaces Gemini puts between Chinese or Japanese words are removed", () => {
+  assert.equal(
+    collapseCjkSpaces("在大人 的 陪同下 ， 一起 骑 自行车 ， 河边 扔 小 石头 滑滑梯 。"),
+    "在大人的陪同下，一起骑自行车，河边扔小石头滑滑梯。"
+  );
+  assert.equal(collapseCjkSpaces("ねぇ 、 メール を 送って"), "ねぇ、メールを送って");
+  // Spaces between CJK and Latin text or digits, English, and Korean stay.
+  assert.equal(collapseCjkSpaces("这个任务大概需要 34 个小时。"), "这个任务大概需要 34 个小时。");
+  assert.equal(collapseCjkSpaces("我们用 Gemini 做 dictation 吧"), "我们用 Gemini 做 dictation 吧");
+  assert.equal(collapseCjkSpaces("Okay, I need 34 units."), "Okay, I need 34 units.");
+  assert.equal(collapseCjkSpaces("안녕하세요 반갑습니다"), "안녕하세요 반갑습니다");
+  // Line breaks between CJK sentences are kept.
+  assert.equal(collapseCjkSpaces("第一段。\n第二段。"), "第一段。\n第二段。");
+  assert.equal(collapseCjkSpaces(""), "");
 });

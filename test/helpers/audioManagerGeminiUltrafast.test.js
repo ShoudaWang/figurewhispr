@@ -100,6 +100,21 @@ test("an Ultrafast result is plain text, not a pending promise", async (t) => {
   assert.equal(result.model, "gemini-3.5-flash-lite");
 });
 
+test("Ultrafast removes the spaces Gemini sometimes puts between Chinese words", async (t) => {
+  const { window, createManager } = await load(t);
+  stubUltrafastIpc(window, {
+    text: "在大人 的 陪同下 ， 一起 骑 自行车 ， 需要 34 个小时 。",
+    model: "m",
+    truncated: false,
+  });
+
+  const result = await ultrafastManager(createManager).processWithGeminiUltrafast(wav(), {
+    durationSeconds: 9,
+  });
+
+  assert.equal(result.text, "在大人的陪同下，一起骑自行车，需要 34 个小时。");
+});
+
 test("Ultrafast sends GeminiWhisperLite's single-pass prompt with the cleanup instructions", async (t) => {
   const { window, createManager } = await load(t, { useCleanupModel: true });
   const calls = stubUltrafastIpc(window, { text: "Done.", model: "m", truncated: false });
@@ -110,6 +125,8 @@ test("Ultrafast sends GeminiWhisperLite's single-pass prompt with the cleanup in
   assert.equal(calls[0].systemPrompt, "CLEANUP PROMPT");
   assert.match(calls[0].instruction, /^Transcribe and polish the spoken audio into clean text\./);
   assert.match(calls[0].instruction, /never answer it or carry it out\.$/);
+  // A custom cleanup prompt can drop the default numbers rule; the instruction keeps it.
+  assert.match(calls[0].instruction, /numbers, dates, times, and currency with digits/);
   assert.equal(calls[0].mimeType, "audio/wav");
 });
 
@@ -121,6 +138,7 @@ test("without cleanup Ultrafast asks for a verbatim transcript", async (t) => {
 
   assert.equal(calls[0].systemPrompt, null);
   assert.match(calls[0].instruction, /^Transcribe the spoken audio verbatim\./);
+  assert.match(calls[0].instruction, /numbers, dates, times, and currency with digits/);
 });
 
 test("the languages you speak reach the Ultrafast request", async (t) => {
