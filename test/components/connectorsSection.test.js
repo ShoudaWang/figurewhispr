@@ -1,3 +1,5 @@
+// These cover the OpenWhispr account mode (plans, sign-in); accountsDisabled.test.js covers the default build.
+process.env.VITE_ENABLE_OPENWHISPR_ACCOUNTS = "true";
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const React = require("react");

@@ -67,6 +67,10 @@ const {
   createConnectorPolicyResolver,
   createConnectorAuthLookup,
 } = require("./connectors/connectorIpc");
+const {
+  withLocalConnectorPolicy,
+  withLocalConnectorScope,
+} = require("./connectors/localConnectorScope");
 const { createNoteAttendeesLookup, searchContacts } = require("./connectors/contactSearch");
 // The renderer's ModelRegistry is not main-loadable; the raw registry data is
 // packaged, and the route resolver only needs {id, baseUrl} per provider.
@@ -7211,24 +7215,29 @@ class IPCHandlers {
       registerConnectorIpc({
         ipcMain,
         manager: this.connectorManager,
-        getPolicyState: createConnectorPolicyResolver({
-          getAuthHeader: createConnectorAuthLookup({
-            hasBearerToken: () => Boolean(tokenStore.get()),
-            windowFor: (event) => BrowserWindow.fromWebContents(event.sender),
-            authHeaderFor: getAuthHeaderFromWindow,
-          }),
-          getPolicy: (options) => workspacePolicyManager.getPolicy(options),
-          peekPolicy: (options) => workspacePolicyManager.peekPolicy(options),
-          getAuthGeneration: () => tokenStore.getState().generation,
-        }),
+        // Without OpenWhispr accounts: always allowed, under one local
+        // account (localConnectorScope.js).
+        getPolicyState: withLocalConnectorPolicy(
+          createConnectorPolicyResolver({
+            getAuthHeader: createConnectorAuthLookup({
+              hasBearerToken: () => Boolean(tokenStore.get()),
+              windowFor: (event) => BrowserWindow.fromWebContents(event.sender),
+              authHeaderFor: getAuthHeaderFromWindow,
+            }),
+            getPolicy: (options) => workspacePolicyManager.getPolicy(options),
+            peekPolicy: (options) => workspacePolicyManager.peekPolicy(options),
+            getAuthGeneration: () => tokenStore.getState().generation,
+          })
+        ),
         // The account bound to the credential in use, the same binding
         // get-active-account-scope serves (not the separately synced
         // database scope, which lags a sign-in or account switch).
-        getAccountScope: () =>
+        getAccountScope: withLocalConnectorScope(() =>
           accountScopeBinding.resolveActiveAccountScope({
             ...tokenStore.getState(),
             binding: accountScopeBinding.read(),
-          }),
+          })
+        ),
         findContacts: (query) =>
           searchContacts(this.databaseManager.getContactLookupSources(), query),
         noteAttendees: createNoteAttendeesLookup({

@@ -18,6 +18,7 @@ import { McpPane } from "./integrations/McpPane";
 import { CliPane } from "./integrations/CliPane";
 import type { SkillChatStart, SkillOpenRequest } from "../types/skills";
 import {
+  DEFAULT_INTEGRATIONS_SECTION,
   INTEGRATIONS_SECTION_ICONS,
   INTEGRATIONS_SECTIONS,
   sectionMeta,
@@ -42,13 +43,18 @@ interface IntegrationsViewProps {
 export default function IntegrationsView({
   isPaid,
   onUpgrade,
-  section,
+  section: requestedSection,
   onSectionChange,
   onStartSkillChat,
   openSkillRequest,
   onOpenSkillRequestHandled,
 }: IntegrationsViewProps): ReactElement {
   const { t } = useTranslation();
+  // A section this build doesn't list (API keys and MCP need OpenWhispr
+  // accounts) opens the default one instead of a blank pane.
+  const section = INTEGRATIONS_SECTIONS.includes(requestedSection)
+    ? requestedSection
+    : DEFAULT_INTEGRATIONS_SECTION;
   const isMac = window.electronAPI?.getPlatform?.() === "darwin";
   const connectorAccess = useConnectorAccess();
   const readyConnectors = useConnectorStatusStore(

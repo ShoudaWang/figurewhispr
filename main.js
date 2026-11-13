@@ -531,11 +531,14 @@ function initializeCoreManagers() {
   // The same account receipts are filed under (ipcHandlers' getAccountScope):
   // the one bound to the credential in use. databaseManager's scope doesn't
   // move when one signed-in token replaces another.
-  const getConnectorAccountScope = () =>
-    accountScopeBinding.resolveActiveAccountScope({
-      ...require("./src/helpers/tokenStore").getState(),
-      binding: accountScopeBinding.read(),
-    });
+  // Without OpenWhispr accounts, one local account (localConnectorScope.js).
+  const getConnectorAccountScope = require("./src/helpers/connectors/localConnectorScope")
+    .withLocalConnectorScope(() =>
+      accountScopeBinding.resolveActiveAccountScope({
+        ...require("./src/helpers/tokenStore").getState(),
+        binding: accountScopeBinding.read(),
+      })
+    );
   const getConnectorAccountId = connectorAccountIdFrom(getConnectorAccountScope);
   const connectorCredentials = createConnectorCredentials({
     store: createCredentialStore({

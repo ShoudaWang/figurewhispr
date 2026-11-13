@@ -1,18 +1,33 @@
 import type { ComponentType } from "react";
+import { ACCOUNTS_ENABLED } from "../../config/accounts.ts";
 import { Calendar, Key, Link2, Network, SkillStack, Terminal } from "../icons";
 
 export type IntegrationsSection = "connectors" | "skills" | "calendars" | "api" | "mcp" | "cli";
 
 export const DEFAULT_INTEGRATIONS_SECTION: IntegrationsSection = "calendars";
 
-export const INTEGRATIONS_SECTION_GROUPS: ReadonlyArray<{
+// API keys and the MCP server are OpenWhispr Cloud services, reached with an
+// OpenWhispr account; builds without accounts don't list them.
+const CLOUD_ONLY_SECTIONS: ReadonlySet<IntegrationsSection> = new Set(["api", "mcp"]);
+
+export function integrationsSectionGroups(accountsEnabled: boolean = ACCOUNTS_ENABLED): ReadonlyArray<{
   id: "assistant" | "meetings" | "developer";
   sections: readonly IntegrationsSection[];
-}> = [
-  { id: "meetings", sections: ["calendars"] },
-  { id: "assistant", sections: ["connectors", "skills"] },
-  { id: "developer", sections: ["api", "mcp", "cli"] },
-];
+}> {
+  const groups = [
+    { id: "meetings", sections: ["calendars"] },
+    { id: "assistant", sections: ["connectors", "skills"] },
+    { id: "developer", sections: ["api", "mcp", "cli"] },
+  ] as const;
+  return groups.map((group) => ({
+    id: group.id,
+    sections: accountsEnabled
+      ? group.sections
+      : group.sections.filter((section) => !CLOUD_ONLY_SECTIONS.has(section)),
+  }));
+}
+
+export const INTEGRATIONS_SECTION_GROUPS = integrationsSectionGroups();
 
 export const INTEGRATIONS_SECTION_ICONS: Record<
   IntegrationsSection,
@@ -34,12 +49,14 @@ export interface SectionMetaInput {
   /** Connectors decide their plan and org policy as the Connectors pane does. */
   connectors: { isPaid: boolean; blockedByOrg: boolean; ready: number };
   connectedCalendars: number;
+  /** Without OpenWhispr accounts there are no plans, so no plan badges. */
+  accountsEnabled?: boolean;
 }
 
 /** The status shown beside a section in the nav: what's connected, or which plan it needs. */
 export function sectionMeta(
   section: IntegrationsSection,
-  { isPaid, connectors, connectedCalendars }: SectionMetaInput
+  { isPaid, connectors, connectedCalendars, accountsEnabled = ACCOUNTS_ENABLED }: SectionMetaInput
 ): SectionMeta | null {
   switch (section) {
     case "connectors":
@@ -56,7 +73,7 @@ export function sectionMeta(
       return isPaid ? null : { kind: "badge", badge: "pro" };
     case "cli":
       // Local mode is free; saying so is the point of surfacing it to free plans.
-      return isPaid ? null : { kind: "badge", badge: "free" };
+      return isPaid || !accountsEnabled ? null : { kind: "badge", badge: "free" };
   }
 }
 

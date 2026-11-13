@@ -82,3 +82,72 @@ test("onboarding's own choices are never overwritten", async (t) => {
   store.finishOpenWhisprCloudMigration();
   assert.equal(storage.getItem("transcriptionMode"), "local");
 });
+
+test("connectors are open without an OpenWhispr account or plan", async () => {
+  const { hasConnectorAccess } = await import("../../src/utils/connectorEligibility.ts");
+  const signedOutFree = { status: "idle" };
+  assert.equal(hasConnectorAccess(false, signedOutFree, false), true);
+  // With accounts they still need a signed-in paid plan.
+  assert.equal(hasConnectorAccess(false, signedOutFree, true, true), false);
+  assert.equal(hasConnectorAccess(true, signedOutFree, false, true), false);
+  assert.equal(hasConnectorAccess(true, signedOutFree, true, true), true);
+});
+
+test("Integrations drops the OpenWhispr Cloud sections and plan badges", async () => {
+  // The section icons are JSX.
+  globalThis.React ??= require("react");
+  const { INTEGRATIONS_SECTIONS, integrationsSectionGroups, sectionMeta } = await import(
+    "../../src/components/integrations/integrationsSections.ts"
+  );
+  assert.deepEqual([...INTEGRATIONS_SECTIONS], ["calendars", "connectors", "skills", "cli"]);
+  assert.deepEqual(
+    integrationsSectionGroups(true).flatMap((group) => group.sections),
+    ["calendars", "connectors", "skills", "api", "mcp", "cli"]
+  );
+  const free = {
+    isPaid: false,
+    connectors: { isPaid: true, blockedByOrg: false, ready: 0 },
+    connectedCalendars: 0,
+  };
+  assert.equal(sectionMeta("cli", free), null);
+  assert.equal(sectionMeta("connectors", free), null);
+  assert.deepEqual(sectionMeta("connectors", { ...free, connectors: { ...free.connectors, ready: 2 } }), {
+    kind: "count",
+    value: 2,
+  });
+});
+
+test("the main process files connectors under one local account, always allowed", async () => {
+  const {
+    LOCAL_CONNECTOR_SCOPE,
+    withLocalConnectorScope,
+    withLocalConnectorPolicy,
+  } = require("../../src/helpers/connectors/localConnectorScope.js");
+  const openWhisprScope = () => null;
+  const openWhisprPolicy = async () => "signed_out";
+
+  const scope = withLocalConnectorScope(openWhisprScope);
+  assert.equal(scope(), LOCAL_CONNECTOR_SCOPE);
+  assert.equal(scope().accountId, "local");
+  assert.equal(await withLocalConnectorPolicy(openWhisprPolicy)(), "allowed");
+
+  // With accounts, the OpenWhispr account and policy are used unchanged.
+  assert.equal(withLocalConnectorScope(openWhisprScope, true), openWhisprScope);
+  assert.equal(withLocalConnectorPolicy(openWhisprPolicy, true), openWhisprPolicy);
+});
+
+test("the assistant never asks for an OpenWhispr sign-in to use connectors", async () => {
+  const { resolveUnavailableCapabilities } = await import("../../src/config/agentCapabilities.ts");
+  const unavailable = resolveUnavailableCapabilities({
+    supportsTools: true,
+    isSignedIn: false,
+    webSearch: { allowed: true, blockedByOrg: false },
+    calendarConnected: true,
+    connectors: { hasPlan: true, allowed: true, blockedByOrg: false, statuses: {} },
+    locations: { account: "account", plans: "plans", connectors: "connectors", calendars: "calendars", models: "models" },
+  });
+  assert.equal(
+    unavailable.some((entry) => entry.reason === "signedOut" && entry.delivers),
+    false
+  );
+});

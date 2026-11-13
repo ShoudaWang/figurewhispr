@@ -4,7 +4,7 @@ import { usePolicyStore } from "../stores/policyStore";
 import { isConnectorsAllowed, isConnectorsBlockedByOrg } from "../stores/policyRules";
 import { getUsageState, subscribeUsage } from "../lib/usageStore";
 import { readIsSubscribed, subscribeIsSubscribed } from "../lib/subscriptionFlag";
-import { hasConnectorPlan } from "../utils/connectorEligibility";
+import { hasConnectorAccess } from "../utils/connectorEligibility";
 
 export interface ConnectorAccess {
   /** The same plan check that decides whether the chat gets the connector tools. */
@@ -24,7 +24,7 @@ export function useConnectorAccess(): ConnectorAccess {
   const usage = useSyncExternalStore(subscribeUsage, getUsageState);
   const isSubscribedFlag = useSyncExternalStore(subscribeIsSubscribed, readIsSubscribed);
   return {
-    isPaid: isSignedIn && hasConnectorPlan(usage, isSubscribedFlag),
+    isPaid: hasConnectorAccess(isSignedIn, usage, isSubscribedFlag),
     blockedByOrg,
     connectorsAllowed,
   };

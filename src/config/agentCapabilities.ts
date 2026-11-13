@@ -2,6 +2,7 @@ import { DOCS_ORIGIN } from "../helpers/productHelpFallback";
 import type { ConnectionTarget } from "../types/agentInteractions";
 import type { CalendarProvider } from "../utils/calendarConnect";
 import { getCachedPlatform } from "../utils/platform";
+import { ACCOUNTS_ENABLED } from "./accounts.ts";
 
 /**
  * What the assistant can't do in this conversation, and why. Named in the
@@ -153,7 +154,8 @@ export function resolveUnavailableCapabilities(
     });
   };
 
-  if (!input.isSignedIn) {
+  // Without OpenWhispr accounts connectors run on the user's own logins alone.
+  if (!input.isSignedIn && ACCOUNTS_ENABLED) {
     unavailableConnector(CONNECTORS_NAME, "signedOut", locations.account);
   } else if (connectors.blockedByOrg) {
     // Before the plan: paying wouldn't help while the organization keeps them off.
