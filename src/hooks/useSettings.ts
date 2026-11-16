@@ -241,7 +241,12 @@ function useSettingsInternal() {
     cohereModel,
     preferredLanguage,
     keepLocalModelLoaded,
+    geminiUltrafastEnabled,
   } = store;
+  // Ultrafast dictation never runs a local model (withUltrafastTranscription),
+  // so the Standard mode's local selection isn't preloaded while it's on, and
+  // the main process stops any local server it started.
+  const dictatesLocally = useLocalWhisper && !geminiUltrafastEnabled;
   // Every window runs this sync, and the main process stops the shared
   // llama-server from it, so it must see every scope's resolved local model.
   const policySnapshot = usePolicySnapshot();
@@ -271,7 +276,7 @@ function useSettingsInternal() {
           : whisperModel;
     window.electronAPI
       .syncStartupPreferences({
-        useLocalWhisper,
+        useLocalWhisper: dictatesLocally,
         localTranscriptionProvider,
         model: model || undefined,
         language: preferredLanguage || undefined,
@@ -287,7 +292,7 @@ function useSettingsInternal() {
         )
       );
   }, [
-    useLocalWhisper,
+    dictatesLocally,
     localTranscriptionProvider,
     whisperModel,
     parakeetModel,

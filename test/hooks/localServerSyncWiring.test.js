@@ -49,9 +49,10 @@ async function mountSettings(t) {
   const vite = await createRendererServer(t, {
     cachePrefix: "openwhispr-local-server-sync-wiring-test-",
   });
-  const [{ SettingsProvider }, { usePolicyStore }] = await Promise.all([
+  const [{ SettingsProvider }, { usePolicyStore }, { useSettingsStore }] = await Promise.all([
     vite.ssrLoadModule("/hooks/useSettings.ts"),
     vite.ssrLoadModule("/stores/policyStore.ts"),
+    vite.ssrLoadModule("/stores/settingsStore.ts"),
   ]);
 
   const { createRoot } = require("react-dom/client");
@@ -59,7 +60,7 @@ async function mountSettings(t) {
   await React.act(async () => root.render(React.createElement(SettingsProvider, null, null)));
   rootRef.current = root;
 
-  return { syncs, listeners, usePolicyStore };
+  return { syncs, listeners, usePolicyStore, useSettingsStore };
 }
 
 test("a window reports its policy as unsettled until the fetch lands", async (t) => {
@@ -80,4 +81,22 @@ test("a sign-out resyncs even though the policy stays idle", async (t) => {
 
   await React.act(async () => listeners.scope(null));
   assert.equal(syncs.length, before + 1);
+});
+
+test("Ultrafast never preloads the Standard mode's local model", async (t) => {
+  const { syncs, useSettingsStore } = await mountSettings(t);
+  const standardLocal = {
+    useLocalWhisper: true,
+    localTranscriptionProvider: "nvidia",
+    parakeetModel: "parakeet-unified-en-0.6b",
+  };
+
+  await React.act(async () =>
+    useSettingsStore.setState({ ...standardLocal, geminiUltrafastEnabled: true })
+  );
+  assert.equal(syncs.at(-1).useLocalWhisper, false, "Ultrafast dictates in the cloud");
+
+  await React.act(async () => useSettingsStore.setState({ geminiUltrafastEnabled: false }));
+  assert.equal(syncs.at(-1).useLocalWhisper, true);
+  assert.equal(syncs.at(-1).model, "parakeet-unified-en-0.6b");
 });
