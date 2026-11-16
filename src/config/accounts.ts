@@ -16,3 +16,12 @@ export const ACCOUNTS_ENABLED =
 
 /** OpenWhispr Cloud needs an OpenWhispr account, so it follows the same switch. */
 export const OPENWHISPR_CLOUD_ENABLED = ACCOUNTS_ENABLED;
+
+/**
+ * The Connectors settings (Integrations → Connectors), where Slack, Linear,
+ * GitHub and Gmail are connected. Those logins need OAuth apps that only
+ * OpenWhispr's builds ship, so builds without accounts don't list the
+ * section, and the assistant never offers to connect them or points there.
+ * Email drafts, which need no login, still work in chat.
+ */
+export const CONNECTOR_SETTINGS_ENABLED = ACCOUNTS_ENABLED;

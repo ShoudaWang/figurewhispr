@@ -3,7 +3,8 @@ import i18n from "../../i18n";
 import type { ToolDefinition, ToolExecutionContext, ToolResult } from "./ToolRegistry";
 import { requestInteraction, takeGrantedImage } from "../../stores/agentInteractionStore";
 import { approvalKey } from "../../stores/connectorApprovalStore";
-import { SETTINGS_TARGETS } from "../../helpers/settingsTargets.js";
+import { SETTINGS_TARGETS as ALL_SETTINGS_TARGETS } from "../../helpers/settingsTargets.js";
+import { CONNECTOR_SETTINGS_ENABLED } from "../../config/accounts.ts";
 import { CONNECTION_TARGET_NAMES } from "../../config/agentCapabilities";
 import { getProviderDisplayName } from "../../models/ModelRegistry";
 import { answerText, optionLabel } from "../../utils/interactionAnswers";
@@ -371,11 +372,16 @@ function createApiKeyTool(providers: readonly string[], scope: ChatInferenceScop
   };
 }
 
+// Builds without the Connectors settings can't open them.
+const SETTINGS_TARGETS = CONNECTOR_SETTINGS_ENABLED
+  ? ALL_SETTINGS_TARGETS
+  : ALL_SETTINGS_TARGETS.filter((target) => target !== "integrations.connectors");
+
 const createOpenSettingsTool = (
   scope: NonNullable<InteractionToolOptions["inferenceScope"]>
 ): ToolDefinition => ({
   name: "open_settings",
-  description: `Show the user a button that opens the settings page where they can fix something you can't, and wait until they say they're done. Targets: llms (AI models), speechToText, privacyData (permissions and data), integrations.connectors, integrations.calendars.`,
+  description: `Show the user a button that opens the settings page where they can fix something you can't, and wait until they say they're done. Targets: llms (AI models), speechToText, privacyData (permissions and data), ${SETTINGS_TARGETS.filter((target) => target.startsWith("integrations.")).join(", ")}.`,
   parameters: {
     type: "object",
     properties: {

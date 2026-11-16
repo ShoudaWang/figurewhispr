@@ -93,13 +93,13 @@ test("connectors are open without an OpenWhispr account or plan", async () => {
   assert.equal(hasConnectorAccess(true, signedOutFree, true, true), true);
 });
 
-test("Integrations drops the OpenWhispr Cloud sections and plan badges", async () => {
+test("Integrations drops the OpenWhispr Cloud sections, Connectors and plan badges", async () => {
   // The section icons are JSX.
   globalThis.React ??= require("react");
   const { INTEGRATIONS_SECTIONS, integrationsSectionGroups, sectionMeta } = await import(
     "../../src/components/integrations/integrationsSections.ts"
   );
-  assert.deepEqual([...INTEGRATIONS_SECTIONS], ["calendars", "connectors", "skills", "cli"]);
+  assert.deepEqual([...INTEGRATIONS_SECTIONS], ["calendars", "skills", "cli"]);
   assert.deepEqual(
     integrationsSectionGroups(true).flatMap((group) => group.sections),
     ["calendars", "connectors", "skills", "api", "mcp", "cli"]
@@ -150,4 +150,35 @@ test("the assistant never asks for an OpenWhispr sign-in to use connectors", asy
     unavailable.some((entry) => entry.reason === "signedOut" && entry.delivers),
     false
   );
+});
+
+test("the assistant never points to Connectors settings or offers connector logins", async () => {
+  const { resolveUnavailableCapabilities } = await import("../../src/config/agentCapabilities.ts");
+  const unconnected = { connected: false, configured: true, needsReconnect: false };
+  const unavailable = resolveUnavailableCapabilities({
+    supportsTools: true,
+    isSignedIn: false,
+    webSearch: { allowed: true, blockedByOrg: false },
+    calendarConnected: true,
+    connectors: {
+      hasPlan: true,
+      allowed: true,
+      blockedByOrg: false,
+      statuses: { slack: unconnected, github: unconnected, linear: unconnected },
+    },
+    connectionTargets: ["gmail", "slack"],
+    locations: { account: "account", plans: "plans", connectors: "connectors", calendars: "calendars", models: "models" },
+  });
+  assert.deepEqual(unavailable.filter((entry) => entry.delivers), []);
+
+  const { createInteractionTools } = await import("../../src/services/tools/interactionTools.ts");
+  const openSettings = createInteractionTools({
+    connectionTargets: [],
+    missingKeyProviders: [],
+    screenAccess: false,
+    inferenceScope: "chatAgent",
+  }).find((tool) => tool.name === "open_settings");
+  assert.equal(openSettings.parameters.properties.target.enum.includes("integrations.connectors"), false);
+  assert.ok(openSettings.parameters.properties.target.enum.includes("integrations.calendars"));
+  assert.doesNotMatch(openSettings.description, /integrations\.connectors/);
 });

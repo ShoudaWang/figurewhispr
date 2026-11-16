@@ -2,7 +2,7 @@ import { DOCS_ORIGIN } from "../helpers/productHelpFallback";
 import type { ConnectionTarget } from "../types/agentInteractions";
 import type { CalendarProvider } from "../utils/calendarConnect";
 import { getCachedPlatform } from "../utils/platform";
-import { ACCOUNTS_ENABLED } from "./accounts.ts";
+import { ACCOUNTS_ENABLED, CONNECTOR_SETTINGS_ENABLED } from "./accounts.ts";
 
 /**
  * What the assistant can't do in this conversation, and why. Named in the
@@ -164,7 +164,9 @@ export function resolveUnavailableCapabilities(
     unavailableConnector(CONNECTORS_NAME, "planRequired", locations.plans);
   } else if (!connectors.allowed) {
     unavailableConnector(CONNECTORS_NAME, "policyLoading");
-  } else {
+  } else if (CONNECTOR_SETTINGS_ENABLED) {
+    // Without the Connectors settings there's nowhere to connect one, so
+    // nothing is named as connectable.
     for (const id of CONNECTED_ONE_BY_ONE) {
       const status = connectors.statuses[id];
       // Unknown (status not loaded) says nothing; a build without the

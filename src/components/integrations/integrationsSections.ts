@@ -7,8 +7,9 @@ export type IntegrationsSection = "connectors" | "skills" | "calendars" | "api" 
 export const DEFAULT_INTEGRATIONS_SECTION: IntegrationsSection = "calendars";
 
 // API keys and the MCP server are OpenWhispr Cloud services, reached with an
-// OpenWhispr account; builds without accounts don't list them.
-const CLOUD_ONLY_SECTIONS: ReadonlySet<IntegrationsSection> = new Set(["api", "mcp"]);
+// OpenWhispr account, and Connectors' logins need OpenWhispr's OAuth apps
+// (CONNECTOR_SETTINGS_ENABLED); builds without accounts don't list them.
+const CLOUD_ONLY_SECTIONS: ReadonlySet<IntegrationsSection> = new Set(["api", "mcp", "connectors"]);
 
 export function integrationsSectionGroups(accountsEnabled: boolean = ACCOUNTS_ENABLED): ReadonlyArray<{
   id: "assistant" | "meetings" | "developer";

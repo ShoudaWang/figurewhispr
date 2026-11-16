@@ -1,21 +1,24 @@
 # Connectors in FigureWhispr
 
-FigureWhispr has no OpenWhispr account or plan, so the assistant's connectors
-are always unlocked: they run inside the app on your own logins. What it does
-not have is OpenWhispr's OAuth apps, which only ship in OpenWhispr's release
-builds. Each connector appears under **Integrations → Connectors** once you
-give it an OAuth app of your own.
+FigureWhispr has no OpenWhispr account or plan. Its Integrations page lists
+**Calendars**, **Skills** and the **command line** (local mode,
+`openwhispr --local …`). It doesn't list OpenWhispr's cloud developer features
+(**API keys**, the hosted **MCP server**), which need an OpenWhispr account, or
+**Connectors**, whose Slack, Linear, GitHub and Gmail logins need OAuth apps
+that only OpenWhispr's release builds ship.
 
-OpenWhispr's cloud developer features (**API keys** and the hosted **MCP
-server**) need an OpenWhispr account and are not listed. The **command line**
-works in local mode (`openwhispr --local …`).
-
-Put the values below in `%APPDATA%\FigureWhispr\.env` (one `NAME=value` per
-line), then quit and reopen FigureWhispr.
+The assistant can still draft email (below), and never offers to connect the
+others. The Connectors settings come back only in a build with OpenWhispr
+accounts (`VITE_ENABLE_OPENWHISPR_ACCOUNTS=true`), where they also need an
+OpenWhispr paid plan (`CONNECTOR_SETTINGS_ENABLED` in `src/config/accounts.ts`).
+The notes below are kept for reference: how to give those logins your own
+OAuth apps. Their values go in `%APPDATA%\FigureWhispr\.env` (one `NAME=value`
+per line); quit and reopen FigureWhispr afterwards.
 
 ## Email drafts
 
-Works without setup: the assistant opens a pre-filled draft in your mail app.
+Works without setup in every build: when you ask the assistant to email
+someone, it opens a pre-filled draft in your mail app.
 
 ## Gmail (send email from chat)
 

@@ -33,6 +33,7 @@ import { readSkillCardRecord, SKILL_CARD_TOOLS } from "./skillCardRecord";
 import { getUsageState } from "../../lib/usageStore";
 import { readIsSubscribed } from "../../lib/subscriptionFlag";
 import { hasConnectorAccess } from "../../utils/connectorEligibility";
+import { CONNECTOR_SETTINGS_ENABLED } from "../../config/accounts.ts";
 import { gmailSendStatus, resolveEmailDraftTarget } from "../../utils/emailDraftTarget";
 import {
   ensureConnectorStatus,
@@ -160,14 +161,17 @@ function connectionTargets(
     calendarConnected,
   }: { connectorsAvailable: boolean; calendarConnected: boolean }
 ): ConnectionTarget[] {
-  const targets: ConnectionTarget[] = connectorsAvailable
-    ? CONNECTOR_CONNECTION_TARGETS.filter((id) => {
-        const status = statuses[id];
-        return (
-          status && status.configured !== false && (!status.connected || status.needsReconnect)
-        );
-      })
-    : [];
+  // Without the Connectors settings (CONNECTOR_SETTINGS_ENABLED) the chat
+  // offers no connector logins; email drafts need none.
+  const targets: ConnectionTarget[] =
+    connectorsAvailable && CONNECTOR_SETTINGS_ENABLED
+      ? CONNECTOR_CONNECTION_TARGETS.filter((id) => {
+          const status = statuses[id];
+          return (
+            status && status.configured !== false && (!status.connected || status.needsReconnect)
+          );
+        })
+      : [];
   if (!calendarConnected) {
     targets.push("calendar", ...calendarProviders());
   }
