@@ -1,22 +1,29 @@
 import { useLayoutEffect, useRef, type RefObject } from "react";
 
-interface LinuxPillInteractivityOptions {
+interface PillInputRegionOptions {
   pillRef: RefObject<HTMLElement | null>;
   captureWindow: boolean;
   pillInteractive: boolean;
 }
 
-// Native input shaping leaves hover delivery to the compositor, including
-// when the pointer crosses between XWayland and native Wayland applications.
-export function useLinuxPillInteractivity({
+// The pill window is a transparent box larger than the pill. Main lets clicks
+// through it everywhere but the region reported here, so input there never
+// depends on the renderer seeing hover leave the pill:
+// - Linux shapes the window's input region natively, leaving hover delivery to
+//   the compositor (including across XWayland and native Wayland apps).
+// - Windows hit-tests the cursor against each update; Chromium misses
+//   mouseleave when a quick flick skips the window's few px past the pill.
+const PLATFORMS_WITH_INPUT_REGION = new Set(["linux", "win32"]);
+
+export function usePillInputRegion({
   pillRef,
   captureWindow,
   pillInteractive,
-}: LinuxPillInteractivityOptions): void {
+}: PillInputRegionOptions): void {
   const nativeVisibleRef = useRef(true);
   useLayoutEffect(() => {
     const api = window.electronAPI;
-    if (api?.getPlatform?.() !== "linux") return;
+    if (!PLATFORMS_WITH_INPUT_REGION.has(api?.getPlatform?.() ?? "")) return;
     let disposed = false;
     let generation = 0;
     let pending = false;

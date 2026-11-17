@@ -3,6 +3,7 @@ const assert = require("node:assert/strict");
 const Module = require("node:module");
 const { EventEmitter } = require("node:events");
 let applyInputRegion;
+let cursor = { x: 0, y: 0 };
 
 // Load the real WindowManager with the module surface it touches at require
 // time. setMainWindowInteractivity only reads `this.mainWindow`, so the tests
@@ -14,6 +15,7 @@ Module._load = function loadWindowManagerWithStubs(request, parent, isMain) {
       app: { on: () => undefined },
       screen: {
         getPrimaryDisplay: () => ({}),
+        getCursorScreenPoint: () => cursor,
         on: () => undefined,
       },
       BrowserWindow: class {},
@@ -76,9 +78,8 @@ const hoverCycle = (platform, win = fakeWindow()) => {
   const original = Object.getOwnPropertyDescriptor(process, "platform");
   Object.defineProperty(process, "platform", { value: platform, configurable: true });
   try {
-    const setInteractivity = WindowManager.prototype.setMainWindowInteractivity.bind({
-      mainWindow: win,
-    });
+    const manager = Object.assign(Object.create(WindowManager.prototype), { mainWindow: win });
+    const setInteractivity = (capture) => manager.setMainWindowInteractivity(capture);
     setInteractivity(true);
     setInteractivity(false);
     setInteractivity(true);
@@ -90,8 +91,12 @@ const hoverCycle = (platform, win = fakeWindow()) => {
 
 const INTERACTIVE = { ignore: false, options: undefined };
 
-test("Windows keeps the existing always-interactive behavior", () => {
-  assert.deepEqual(hoverCycle("win32"), [INTERACTIVE, INTERACTIVE, INTERACTIVE]);
+test("Windows lets clicks through the transparent box off the pill", () => {
+  assert.deepEqual(hoverCycle("win32"), [
+    INTERACTIVE,
+    { ignore: true, options: { forward: true } },
+    INTERACTIVE,
+  ]);
 });
 
 test("Linux native capture fallback does not request unsupported forwarding", () => {
@@ -115,6 +120,58 @@ test("a destroyed window is never touched", () => {
   win.isDestroyed = () => true;
 
   assert.deepEqual(hoverCycle("linux", win), []);
+});
+
+test("Windows captures clicks only while the cursor is over the reported pill region", async () => {
+  const original = Object.getOwnPropertyDescriptor(process, "platform");
+  Object.defineProperty(process, "platform", { value: "win32", configurable: true });
+  try {
+    let visible = true;
+    const win = {
+      ...fakeWindow(),
+      isVisible: () => visible,
+      isMinimized: () => false,
+      getContentBounds: () => ({ x: 1000, y: 500, width: 208, height: 120 }),
+    };
+    const manager = Object.assign(Object.create(WindowManager.prototype), { mainWindow: win });
+    const pill = { x: 156, y: 68, width: 40, height: 40, viewportWidth: 208, viewportHeight: 120 };
+    const PASS_THROUGH = { ignore: true, options: { forward: true } };
+
+    manager.setMainWindowInteractivity(false); // window creation
+    assert.deepEqual(win.calls, [PASS_THROUGH]);
+
+    cursor = { x: 1020, y: 515 }; // empty corner of the box
+    assert.equal(await manager.setMainWindowInputRegion(pill), true);
+    assert.deepEqual(win.calls, [PASS_THROUGH], "unchanged state never touches the window");
+
+    cursor = { x: 1176, y: 588 }; // over the pill
+    await manager.setMainWindowInputRegion(pill);
+    assert.deepEqual(win.calls.at(-1), INTERACTIVE);
+
+    cursor = { x: 1300, y: 588 }; // flicked out of the window
+    await manager.setMainWindowInputRegion(pill);
+    assert.deepEqual(win.calls.at(-1), PASS_THROUGH);
+
+    await manager.setMainWindowInputRegion({ ...pill, width: 0, height: 0 }); // suppressed pill
+    assert.deepEqual(win.calls.at(-1), PASS_THROUGH);
+
+    await manager.setMainWindowInputRegion(null); // menu, toast, transcript or drag
+    assert.deepEqual(win.calls.at(-1), INTERACTIVE);
+
+    // CSS px map onto the window's DIP bounds whatever the zoom: here the
+    // cursor's DIP offset (88, 44) is CSS (176, 88), inside the pill.
+    const zoomed = { viewportWidth: 416, viewportHeight: 240 };
+    cursor = { x: 1088, y: 544 };
+    await manager.setMainWindowInputRegion({ ...pill, ...zoomed, x: 312, y: 136 });
+    assert.deepEqual(win.calls.at(-1), PASS_THROUGH);
+    await manager.setMainWindowInputRegion({ ...pill, ...zoomed });
+    assert.deepEqual(win.calls.at(-1), INTERACTIVE);
+
+    visible = false;
+    assert.equal(await manager.setMainWindowInputRegion(pill), false);
+  } finally {
+    Object.defineProperty(process, "platform", original);
+  }
 });
 
 test("Linux reports visibility and restores capture only after a failed shape writer settles", async () => {
@@ -145,39 +202,40 @@ test("Linux reports visibility and restores capture only after a failed shape wr
   }
 });
 
-test("Linux native visibility reports hide, show, minimize and restore to the renderer", () => {
-  const original = Object.getOwnPropertyDescriptor(process, "platform");
-  Object.defineProperty(process, "platform", { value: "linux", configurable: true });
-  const win = new EventEmitter();
-  let visible = true;
-  let minimized = false;
-  const notifications = [];
-  win.isVisible = () => visible;
-  win.isMinimized = () => minimized;
-  win.webContents = Object.assign(new EventEmitter(), {
-    send: (...args) => notifications.push(args),
-  });
-  try {
-    WindowManager.prototype.registerMainWindowEvents.call({
-      mainWindow: win,
-      enforceMainWindowOnTop: () => {},
+for (const platform of ["linux", "win32"])
+  test(`${platform} native visibility reports hide, show, minimize and restore to the renderer`, () => {
+    const original = Object.getOwnPropertyDescriptor(process, "platform");
+    Object.defineProperty(process, "platform", { value: platform, configurable: true });
+    const win = new EventEmitter();
+    let visible = true;
+    let minimized = false;
+    const notifications = [];
+    win.isVisible = () => visible;
+    win.isMinimized = () => minimized;
+    win.webContents = Object.assign(new EventEmitter(), {
+      send: (...args) => notifications.push(args),
     });
-    win.emit("ready-to-show");
-    visible = false;
-    win.emit("hide");
-    visible = true;
-    win.emit("show");
-    minimized = true;
-    win.emit("minimize");
-    minimized = false;
-    win.emit("restore");
-    assert.deepEqual(notifications, [
-      ["main-window-visibility-changed", false],
-      ["main-window-visibility-changed", true],
-      ["main-window-visibility-changed", false],
-      ["main-window-visibility-changed", true],
-    ]);
-  } finally {
-    Object.defineProperty(process, "platform", original);
-  }
-});
+    try {
+      WindowManager.prototype.registerMainWindowEvents.call({
+        mainWindow: win,
+        enforceMainWindowOnTop: () => {},
+      });
+      win.emit("ready-to-show");
+      visible = false;
+      win.emit("hide");
+      visible = true;
+      win.emit("show");
+      minimized = true;
+      win.emit("minimize");
+      minimized = false;
+      win.emit("restore");
+      assert.deepEqual(notifications, [
+        ["main-window-visibility-changed", false],
+        ["main-window-visibility-changed", true],
+        ["main-window-visibility-changed", false],
+        ["main-window-visibility-changed", true],
+      ]);
+    } finally {
+      Object.defineProperty(process, "platform", original);
+    }
+  });

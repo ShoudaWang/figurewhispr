@@ -5,7 +5,7 @@ import { useToast } from "./components/ui/useToast";
 import { useHotkey } from "./hooks/useHotkey";
 import { formatHotkeyListLabel } from "./utils/hotkeys";
 import { useWindowDrag } from "./hooks/useWindowDrag";
-import { useLinuxPillInteractivity } from "./hooks/useLinuxPillInteractivity";
+import { usePillInputRegion } from "./hooks/usePillInputRegion";
 import { useAudioRecording } from "./hooks/useAudioRecording";
 import { useOnboardingAssistantDemo } from "./hooks/useOnboardingAssistantDemo";
 import { useLiveTranscriptPanel } from "./hooks/useLiveTranscriptPanel";
@@ -75,9 +75,11 @@ export default function App() {
   const [mainWindowHorizontalDirection, setMainWindowHorizontalDirection] = useState(null);
 
   const setWindowInteractivity = React.useCallback((shouldCapture) => {
-    // Linux has one pointer-poll owner; native mouseleave must not undo its
-    // drag/menu capture or strand the next hover in click-through mode.
-    if (window.electronAPI?.getPlatform?.() === "linux") return;
+    // Linux and Windows have one input-region owner (usePillInputRegion);
+    // native mouseleave must not undo its drag/menu capture or strand the next
+    // hover in click-through mode.
+    const platform = window.electronAPI?.getPlatform?.();
+    if (platform === "linux" || platform === "win32") return;
     window.electronAPI?.setMainWindowInteractivity?.(shouldCapture);
   }, []);
   const dismissDictationError = React.useCallback(
@@ -482,7 +484,7 @@ export default function App() {
   // masked shrink back from the Live Transcript panel.
   const pillVisuallySuppressed = dictationErrorSuppressesPill || panelReturnResizeActive;
 
-  useLinuxPillInteractivity({
+  usePillInputRegion({
     pillRef: pillPresenceRef,
     captureWindow: isCommandMenuOpen || toastCount > 0 || panelMounted || isDragging,
     pillInteractive: pillIsInteractive && !pillVisuallySuppressed,

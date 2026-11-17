@@ -232,20 +232,48 @@ class WindowManager {
       return;
     }
 
-    if (process.platform === "win32") {
-      // Windows click-through forwarding is unreliable for this floating panel.
-      this.mainWindow.setIgnoreMouseEvents(false);
-      return;
-    }
-
     if (process.platform === "linux") {
       // Native capture is the fallback when the input-region helper is unavailable.
       this.mainWindow.setIgnoreMouseEvents(!shouldCapture);
+    } else if (process.platform === "win32") {
+      // Only window creation reaches here: the renderer's input region owns
+      // Windows capture from then on (setMainWindowInputRegion).
+      this._setWindowsMainCapture(this.mainWindow, shouldCapture);
     } else if (shouldCapture) {
       this.mainWindow.setIgnoreMouseEvents(false);
     } else {
       this.mainWindow.setIgnoreMouseEvents(true, { forward: true });
     }
+  }
+
+  // Region updates arrive every 50 ms; only a change touches the native window.
+  _setWindowsMainCapture(win, capture) {
+    if (this._windowsMainCapture?.window === win && this._windowsMainCapture.capture === capture) {
+      return;
+    }
+    this._windowsMainCapture = { window: win, capture };
+    win.setIgnoreMouseEvents(!capture, capture ? undefined : { forward: true });
+  }
+
+  // The pill window is a transparent box well larger than the pill (room for
+  // the tooltip, glow and cancel control), so off the pill it lets clicks
+  // through to whatever sits behind it. A null region captures the whole box
+  // (menu, toast, live transcript, drag).
+  _applyWindowsInputRegion(win, region) {
+    let capture = true;
+    if (region) {
+      const bounds = win.getContentBounds();
+      const cursor = screen.getCursorScreenPoint();
+      const x = ((cursor.x - bounds.x) * region.viewportWidth) / bounds.width;
+      const y = ((cursor.y - bounds.y) * region.viewportHeight) / bounds.height;
+      capture =
+        x >= region.x &&
+        x < region.x + region.width &&
+        y >= region.y &&
+        y < region.y + region.height;
+    }
+    this._setWindowsMainCapture(win, capture);
+    return win.isVisible() && !win.isMinimized();
   }
 
   _mainWindowInputRegion() {
@@ -259,7 +287,9 @@ class WindowManager {
 
   async setMainWindowInputRegion(region) {
     const win = this.mainWindow;
-    if (process.platform !== "linux" || !win || win.isDestroyed()) return false;
+    if (!win || win.isDestroyed()) return false;
+    if (process.platform === "win32") return this._applyWindowsInputRegion(win, region);
+    if (process.platform !== "linux") return false;
     try {
       await this._mainWindowInputRegion().set(region);
       return !win.isDestroyed() && win.isVisible() && !win.isMinimized();
@@ -1914,10 +1944,10 @@ class WindowManager {
       return;
     }
 
-    if (process.platform === "linux") {
+    if (process.platform === "linux" || process.platform === "win32") {
       const win = this.mainWindow;
       // backgroundThrottling:false keeps document.visibilityState visible even
-      // after hide(). Native visibility owns the Linux input-region updates.
+      // after hide(). Native visibility owns the input-region updates.
       for (const event of ["show", "hide", "minimize", "restore"]) {
         win.on(event, () => {
           win.webContents.send(

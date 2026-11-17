@@ -51,13 +51,11 @@ async function mountPill(t, { platform = "linux", visible = true } = {}) {
   const container = installHookDom(t);
   globalThis.document.hidden = false;
   const vite = await createRendererServer(t);
-  const { useLinuxPillInteractivity } = await vite.ssrLoadModule(
-    "/hooks/useLinuxPillInteractivity.ts"
-  );
+  const { usePillInputRegion } = await vite.ssrLoadModule("/hooks/usePillInputRegion.ts");
   t.mock.timers.enable({ apis: ["setInterval"] });
   let props = { pillRef, captureWindow: false, pillInteractive: true };
   function Harness() {
-    useLinuxPillInteractivity(props);
+    usePillInputRegion(props);
     return null;
   }
   root = createRoot(container);
@@ -112,6 +110,13 @@ test("Linux measures the rendered pill and follows cancel emergence, docking and
     viewportWidth: 400,
     viewportHeight: 500,
   });
+});
+
+test("Windows reports the pill region too, so main lets clicks through the rest of the box", async (t) => {
+  const mounted = await mountPill(t, { platform: "win32" });
+  assert.deepEqual(mounted.regions, [{ ...PILL_RECT, ...VIEWPORT }]);
+  await mounted.render({ captureWindow: true });
+  assert.deepEqual(mounted.regions.at(-1), null);
 });
 
 test("unchanged geometry is reapplied because native resizes can reset the input region", async (t) => {
@@ -286,7 +291,7 @@ test("unmount queues full input after a pending narrow region and silences later
   assert.equal(mounted.regions.length, writes);
 });
 
-for (const platform of ["darwin", "win32"]) {
+for (const platform of ["darwin"]) {
   test(`${platform} keeps its native interactivity implementation`, async (t) => {
     const mounted = await mountPill(t, { platform });
     await mounted.render({ captureWindow: true });
