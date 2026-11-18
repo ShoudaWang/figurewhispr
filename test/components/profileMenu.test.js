@@ -4,8 +4,9 @@ const { createElement } = require("react");
 const { renderToStaticMarkup } = require("react-dom/server");
 const { createRendererServer, installBrowserGlobals } = require("../lib/rendererTestHarness");
 
-async function loadProfileMenu(t) {
+async function loadProfileMenu(t, { accountsEnabled = true } = {}) {
   t.after(() => {
+    delete globalThis.__google;
     delete globalThis.__auth;
     delete globalThis.__menuItems;
     delete globalThis.__planLabel;
@@ -18,7 +19,15 @@ async function loadProfileMenu(t) {
       "/hooks/useUsage": "export const useUsage = () => null;",
       "/hooks/useAccountPlan":
         "export const useAccountPlan = () => ({ planLabel: globalThis.__planLabel ?? null });",
-      "/MemberAvatar": "export default function MemberAvatar() { return null; }",
+      "/hooks/useGoogleAccountStatus":
+        "export const useGoogleAccountStatus = () => globalThis.__google ?? null;",
+      "/config/accounts.ts": `export const ACCOUNTS_ENABLED = ${accountsEnabled};`,
+      "/MemberAvatar": `
+        import React from "react";
+        export default function MemberAvatar({ image }) {
+          return React.createElement("img", { "data-avatar": image ?? "initials" });
+        }
+      `,
       // Renders the menu open and records each item's handler under its text.
       "/ui/dropdown-menu": `
         import React from "react";
@@ -38,8 +47,9 @@ async function loadProfileMenu(t) {
   });
   const { default: ProfileMenu } = await vite.ssrLoadModule("/components/ProfileMenu.tsx");
   const opened = [];
-  const render = (auth) => {
+  const render = (auth, google) => {
     globalThis.__auth = auth;
+    globalThis.__google = google;
     globalThis.__menuItems = new Map();
     return renderToStaticMarkup(
       createElement(ProfileMenu, {
@@ -107,4 +117,53 @@ test("an account presented offline says so in place of the plan", async (t) => {
 
   assert.match(markup, />settingsPage\.account\.offline</);
   assert.doesNotMatch(markup, />Pro</);
+});
+
+// Without OpenWhispr accounts the profile is the Google account from Settings → Account.
+const google = (status) => ({
+  configured: true,
+  clientSource: "settings",
+  signedIn: false,
+  email: null,
+  name: null,
+  picture: null,
+  ...status,
+});
+
+test("without accounts, the Google status still loading holds the slot", async (t) => {
+  const { render } = await loadProfileMenu(t, { accountsEnabled: false });
+
+  const markup = render(undefined, null);
+
+  assert.doesNotMatch(markup, /<button/);
+});
+
+test("without accounts, signed out of Google, the avatar offers Sign in", async (t) => {
+  const { render, opened } = await loadProfileMenu(t, { accountsEnabled: false });
+
+  const markup = render(undefined, google({ signedIn: false }));
+
+  assert.match(markup, /aria-label="common\.signIn"/);
+  assert.doesNotMatch(markup, /data-avatar/);
+  assert.deepEqual(opened, []);
+});
+
+test("signed in to Google, the header shows the Google profile photo", async (t) => {
+  const { render, opened } = await loadProfileMenu(t, { accountsEnabled: false });
+  const photo = "https://lh3.googleusercontent.com/a/photo=s96-c";
+
+  const markup = render(
+    undefined,
+    google({ signedIn: true, name: "Ada Lovelace", email: "ada@example.com", picture: photo })
+  );
+
+  assert.ok(markup.includes(`data-avatar="${photo}"`), markup);
+  assert.match(markup, /Ada Lovelace/);
+  assert.match(markup, /ada@example\.com/);
+  assert.deepEqual(
+    [...globalThis.__menuItems.keys()],
+    ["settingsModal.sections.account.label", "googleAccount.signOut"]
+  );
+  globalThis.__menuItems.get("settingsModal.sections.account.label")();
+  assert.deepEqual(opened, ["account"]);
 });

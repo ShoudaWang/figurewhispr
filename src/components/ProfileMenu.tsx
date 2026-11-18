@@ -13,6 +13,8 @@ import {
 import { useAuth } from "../hooks/useAuth";
 import { useUsage } from "../hooks/useUsage";
 import { useAccountPlan } from "../hooks/useAccountPlan";
+import { useGoogleAccountStatus } from "../hooks/useGoogleAccountStatus";
+import { ACCOUNTS_ENABLED } from "../config/accounts.ts";
 
 const triggerClass =
   "flex h-8 w-8 shrink-0 items-center justify-center rounded-full outline-none transition-opacity duration-150 hover:opacity-85 active:opacity-75 focus-visible:ring-2 focus-visible:ring-primary/40";
@@ -25,7 +27,84 @@ interface ProfileMenuProps {
   onSignOut: () => void;
 }
 
-export default function ProfileMenu({
+export default function ProfileMenu(props: ProfileMenuProps): React.ReactElement {
+  return ACCOUNTS_ENABLED ? (
+    <AccountProfileMenu {...props} />
+  ) : (
+    <GoogleProfileMenu onOpenSettings={props.onOpenSettings} />
+  );
+}
+
+function SignInButton({
+  onOpenSettings,
+}: Pick<ProfileMenuProps, "onOpenSettings">): React.ReactElement {
+  const { t } = useTranslation();
+  return (
+    <button
+      type="button"
+      onClick={() => onOpenSettings("account")}
+      aria-label={t("common.signIn")}
+      title={t("common.signIn")}
+      className={triggerClass}
+    >
+      <UserCircle size={20} className="text-foreground/55" />
+    </button>
+  );
+}
+
+// Without OpenWhispr accounts the profile is the Google account used for
+// settings sync (Settings → Account), shown with its Google photo.
+export function GoogleProfileMenu({
+  onOpenSettings,
+}: Pick<ProfileMenuProps, "onOpenSettings">): React.ReactElement {
+  const { t } = useTranslation();
+  const status = useGoogleAccountStatus();
+
+  if (!status) return <span aria-hidden="true" className="h-8 w-8 shrink-0" />;
+  if (!status.signedIn) return <SignInButton onOpenSettings={onOpenSettings} />;
+
+  const name = status.name || status.email || t("sidebar.defaultUser");
+  const signOut = () => void window.electronAPI?.googleAccount?.signOut().catch(() => {});
+
+  return (
+    <DropdownMenu modal={false}>
+      <DropdownMenuTrigger
+        aria-label={t("sidebar.accountMenu", { name })}
+        title={status.email ?? name}
+        className={triggerClass}
+      >
+        <MemberAvatar name={status.name} email={status.email} image={status.picture} />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        <div className="flex items-center gap-2.5 px-2 pt-1 pb-2">
+          <MemberAvatar name={status.name} email={status.email} image={status.picture} />
+          <div className="min-w-0 flex-1">
+            <p dir="auto" className="truncate text-[13px] font-medium text-foreground">
+              {name}
+            </p>
+            {status.email && status.email !== name && (
+              <p className="truncate text-[11px] text-muted-foreground">
+                <bdi dir="ltr">{status.email}</bdi>
+              </p>
+            )}
+          </div>
+        </div>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onSelect={() => onOpenSettings("account")} className={itemClass}>
+          <UserCircle size={15} className={itemIconClass} />
+          {t("settingsModal.sections.account.label")}
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onSelect={signOut} className={itemClass}>
+          <LogOut size={15} className={itemIconClass} />
+          {t("googleAccount.signOut")}
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+function AccountProfileMenu({
   onOpenSettings,
   onOpenReferrals,
   onSignOut,
@@ -40,19 +119,7 @@ export default function ProfileMenu({
   if (!isLoaded) return <span aria-hidden="true" className="h-8 w-8 shrink-0" />;
 
   // Signed out there is nothing to choose between: Profile is where sign-in lives.
-  if (!isSignedIn || !user) {
-    return (
-      <button
-        type="button"
-        onClick={() => onOpenSettings("account")}
-        aria-label={t("common.signIn")}
-        title={t("common.signIn")}
-        className={triggerClass}
-      >
-        <UserCircle size={20} className="text-foreground/55" />
-      </button>
-    );
-  }
+  if (!isSignedIn || !user) return <SignInButton onOpenSettings={onOpenSettings} />;
 
   const name = user.name || t("sidebar.defaultUser");
 
