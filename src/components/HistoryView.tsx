@@ -15,6 +15,7 @@ import type { TranscriptionItem as TranscriptionItemType } from "../types/electr
 import { formatDateGroup } from "../utils/dateFormatting";
 import { useUpcomingEvents } from "../hooks/useUpcomingEvents";
 import UpcomingMeetings from "./UpcomingMeetings";
+import { useCalendarProviders } from "../hooks/useCalendarProviders";
 import { useSettingsStore } from "../stores/settingsStore";
 import { effectiveLocalHistoryEnabled } from "../stores/policyRules";
 import { usePolicyStore } from "../stores/policyStore";
@@ -61,6 +62,7 @@ export default function HistoryView({
   userName,
 }: HistoryViewProps) {
   const { t } = useTranslation();
+  const calendarProviders = useCalendarProviders();
   const locale = useUiLocale();
   const personalDataRetentionEnabled = useSettingsStore((s) => s.dataRetentionEnabled);
   const dataRetentionEnabled = usePolicyStore((policyState) =>
@@ -255,6 +257,10 @@ export default function HistoryView({
             events={events}
             isLoading={eventsLoading}
             isConnected={isConnected}
+            canConnect={Boolean(
+              calendarProviders &&
+              (calendarProviders.google || calendarProviders.microsoft || calendarProviders.apple)
+            )}
             onConnectCalendar={onOpenIntegrations}
           />
         </div>

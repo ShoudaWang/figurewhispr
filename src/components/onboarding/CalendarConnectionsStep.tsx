@@ -6,6 +6,7 @@ import { useSettingsStore } from "../../stores/settingsStore";
 import { useSystemAudioPermission } from "../../hooks/useSystemAudioPermission";
 import { canManageSystemAudioInApp } from "../../utils/systemAudioAccess";
 import { connectCalendar, type CalendarProvider } from "../../utils/calendarConnect";
+import { useCalendarProviders } from "../../hooks/useCalendarProviders";
 import googleCalendarIcon from "../../assets/icons/google-calendar.svg";
 import microsoftCalendarIcon from "../../assets/icons/microsoft-calendar.webp";
 import appleCalendarIcon from "../../assets/icons/apple-calendar.webp";
@@ -25,6 +26,7 @@ export default function CalendarConnectionsStep() {
   const [error, setError] = useState<string | null>(null);
   const [appleDenied, setAppleDenied] = useState(false);
   const isMac = window.electronAPI?.getPlatform?.() === "darwin";
+  const available = useCalendarProviders();
 
   const ensureSystemAudio = useCallback(async () => {
     if (systemAudio.granted || !canManageSystemAudioInApp(systemAudio)) return true;
@@ -102,7 +104,8 @@ export default function CalendarConnectionsStep() {
           },
         ]
       : []),
-  ];
+    // Providers without an OAuth client in this build can't connect.
+  ].filter((provider) => provider.connected || available?.[provider.id]);
 
   return (
     // Figma: Onboarding / Frame 2147203458 — column, hugging its content. Sizes

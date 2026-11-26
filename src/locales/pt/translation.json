@@ -4644,7 +4644,13 @@
       "systemAudioDescription": "Para transcrever reuniões, o FigureWhispr precisa da permissão de Áudio do Sistema para capturar o áudio dos outros participantes. Nunca gravamos a sua tela. Você será levado às Configurações do Sistema para ativá-la.",
       "openSettings": "Abrir Configurações do Sistema",
       "connectFailed": "Falha na conexão",
-      "connectFailedDescription": "Ocorreu um erro ao conectar ao Google Calendar. Tente novamente."
+      "connectFailedDescription": "Ocorreu um erro ao conectar ao Google Calendar. Tente novamente.",
+      "browser": {
+        "connectedTitle": "O Google Calendar está conectado",
+        "connectedBody": "Você pode fechar esta aba e voltar para o FigureWhispr.",
+        "failedTitle": "O Google Calendar não foi conectado",
+        "failedBody": "Volte para o FigureWhispr para tentar novamente."
+      }
     },
     "microsoftCalendar": {
       "title": "Microsoft Calendar",
@@ -4658,7 +4664,13 @@
       "disconnectConfirm": "Desconectar {{email}}?",
       "disconnectDescription": "As notas de reunião não serão mais gravadas deste calendário.",
       "connectFailed": "Falha na conexão",
-      "connectFailedDescription": "Ocorreu um erro ao conectar ao Microsoft Calendar. Tente novamente."
+      "connectFailedDescription": "Ocorreu um erro ao conectar ao Microsoft Calendar. Tente novamente.",
+      "browser": {
+        "connectedTitle": "O Microsoft Calendar está conectado",
+        "connectedBody": "Você pode fechar esta aba e voltar para o FigureWhispr.",
+        "failedTitle": "O Microsoft Calendar não foi conectado",
+        "failedBody": "Volte para o FigureWhispr para tentar novamente."
+      }
     },
     "appleCalendar": {
       "title": "Calendário da Apple",

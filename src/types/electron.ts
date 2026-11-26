@@ -77,6 +77,13 @@ export interface MainWindowInputRegion {
 
 export type ChineseScriptPreference = "simplified" | "traditional" | "as-transcribed";
 
+/** Which calendars this build can connect (an OAuth client, or macOS for Apple). */
+export interface CalendarProviderAvailability {
+  google: boolean;
+  microsoft: boolean;
+  apple: boolean;
+}
+
 export interface GoogleAccountStatus {
   configured: boolean;
   clientSource: "settings" | "environment" | "none";
@@ -3552,6 +3559,7 @@ declare global {
         requestId?: string
       ) => Promise<{ success: boolean; email?: string; error?: string }>;
       calendarCancelConnect?: (requestId: string) => Promise<boolean>;
+      calendarGetProviders?: () => Promise<CalendarProviderAvailability>;
       gcalDisconnect?: (email?: string) => Promise<{ success: boolean; error?: string }>;
       gcalGetConnectionStatus?: () => Promise<{
         connected: boolean;

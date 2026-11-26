@@ -721,7 +721,13 @@
       "systemAudioDescription": "لتفريغ الاجتماعات، يحتاج FigureWhispr إلى إذن صوت النظام لالتقاط صوت المشاركين الآخرين. نحن لا نسجل شاشتك أبدًا. سيتم توجيهك إلى إعدادات النظام لتمكين ذلك.",
       "openSettings": "فتح إعدادات النظام",
       "connectFailed": "فشل الاتصال",
-      "connectFailedDescription": "حدث خطأ ما أثناء الاتصال بتقويم Google. يرجى المحاولة مرة أخرى."
+      "connectFailedDescription": "حدث خطأ ما أثناء الاتصال بتقويم Google. يرجى المحاولة مرة أخرى.",
+      "browser": {
+        "connectedTitle": "تم توصيل تقويم Google",
+        "connectedBody": "يمكنك إغلاق هذا التبويب والعودة إلى FigureWhispr.",
+        "failedTitle": "لم يتم توصيل تقويم Google",
+        "failedBody": "عد إلى FigureWhispr للمحاولة مرة أخرى."
+      }
     },
     "microsoftCalendar": {
       "title": "تقويم Microsoft",
@@ -735,7 +741,13 @@
       "disconnectConfirm": "هل تريد قطع اتصال {{email}}؟",
       "disconnectDescription": "لن يتم تسجيل ملاحظات الاجتماع من هذا التقويم بعد الآن.",
       "connectFailed": "فشل الاتصال",
-      "connectFailedDescription": "حدث خطأ ما أثناء الاتصال بتقويم Microsoft. يرجى المحاولة مرة أخرى."
+      "connectFailedDescription": "حدث خطأ ما أثناء الاتصال بتقويم Microsoft. يرجى المحاولة مرة أخرى.",
+      "browser": {
+        "connectedTitle": "تم توصيل تقويم Microsoft",
+        "connectedBody": "يمكنك إغلاق هذا التبويب والعودة إلى FigureWhispr.",
+        "failedTitle": "لم يتم توصيل تقويم Microsoft",
+        "failedBody": "عد إلى FigureWhispr للمحاولة مرة أخرى."
+      }
     },
     "appleCalendar": {
       "title": "تقويم Apple",

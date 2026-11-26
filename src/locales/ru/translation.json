@@ -4751,7 +4751,13 @@
       "systemAudioDescription": "Для транскрипции встреч FigureWhispr нужно разрешение «Системное аудио» для записи звука других участников. Мы никогда не записываем ваш экран. Вы будете перенаправлены в Системные настройки для включения.",
       "openSettings": "Открыть Системные настройки",
       "connectFailed": "Ошибка подключения",
-      "connectFailedDescription": "При подключении к Google Calendar произошла ошибка. Попробуйте снова."
+      "connectFailedDescription": "При подключении к Google Calendar произошла ошибка. Попробуйте снова.",
+      "browser": {
+        "connectedTitle": "Google Calendar подключён",
+        "connectedBody": "Вы можете закрыть эту вкладку и вернуться в FigureWhispr.",
+        "failedTitle": "Google Calendar не был подключён",
+        "failedBody": "Вернитесь в FigureWhispr, чтобы попробовать снова."
+      }
     },
     "microsoftCalendar": {
       "title": "Microsoft Calendar",
@@ -4765,7 +4771,13 @@
       "disconnectConfirm": "Отключить {{email}}?",
       "disconnectDescription": "Заметки встреч больше не будут записываться из этого календаря.",
       "connectFailed": "Ошибка подключения",
-      "connectFailedDescription": "При подключении к Microsoft Calendar произошла ошибка. Попробуйте снова."
+      "connectFailedDescription": "При подключении к Microsoft Calendar произошла ошибка. Попробуйте снова.",
+      "browser": {
+        "connectedTitle": "Microsoft Calendar подключён",
+        "connectedBody": "Вы можете закрыть эту вкладку и вернуться в FigureWhispr.",
+        "failedTitle": "Microsoft Calendar не был подключён",
+        "failedBody": "Вернитесь в FigureWhispr, чтобы попробовать снова."
+      }
     },
     "appleCalendar": {
       "title": "Календарь Apple",

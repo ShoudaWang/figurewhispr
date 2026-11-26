@@ -51,6 +51,26 @@ Then give them to FigureWhispr, either way:
 
   A client saved in Settings takes precedence over the environment.
 
+## Google Calendar
+
+Integrations → Calendars → **Google Calendar** reuses the same Desktop client
+(unless a build sets its own `GOOGLE_CALENDAR_CLIENT_ID`). In that client's
+Cloud project:
+
+1. **APIs & Services → Library**: enable the **Google Calendar API**.
+2. **Google Auth Platform → Data Access**: add the scopes
+   `https://www.googleapis.com/auth/calendar.events.readonly` and
+   `https://www.googleapis.com/auth/calendar.calendarlist.readonly`. With an
+   _Internal_ audience no review is needed; _External_ works for test users
+   only.
+
+Calendar has its own consent and tokens, so it can use a different Google
+account than settings sync, and disconnecting it doesn't sign you out.
+Without any Google client, the Home page's "Connect your calendar" card and the
+Google Calendar row stay hidden. Microsoft Calendar needs
+`MICROSOFT_CALENDAR_CLIENT_ID`, which only OpenWhispr's builds ship, so it's
+hidden too.
+
 ## Gemini Ultrafast
 
 Settings → Speech to Text → Dictation → **Gemini Ultrafast** sends the

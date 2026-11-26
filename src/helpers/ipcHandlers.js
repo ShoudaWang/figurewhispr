@@ -13543,6 +13543,23 @@ class IPCHandlers {
       )
     );
 
+    // Which calendars can be connected in this build: Google and Microsoft
+    // need an OAuth client, Apple needs macOS.
+    ipcMain.handle("calendar-get-providers", () => {
+      const has = (manager) => {
+        try {
+          return Boolean(manager?.oauth?.getClientId());
+        } catch {
+          return false;
+        }
+      };
+      return {
+        google: has(this.googleCalendarManager),
+        microsoft: has(this.microsoftCalendarManager),
+        apple: process.platform === "darwin",
+      };
+    });
+
     ipcMain.handle("gcal-disconnect", async (_event, email) => {
       try {
         this.googleCalendarManager.disconnect(email);

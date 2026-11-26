@@ -1,5 +1,6 @@
 const { net } = require("electron");
 const { runOAuthLoopbackFlow, OAuthFlowError } = require("./oauthLoopbackFlow");
+const { calendarResultPage } = require("./connectors/oauthResultPage");
 
 const GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
 const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
@@ -11,18 +12,41 @@ class GoogleCalendarOAuth {
     this.databaseManager = databaseManager;
   }
 
+  // OpenWhispr's release builds bake in a dedicated Calendar client. Without
+  // one, Calendar reuses the Desktop OAuth client saved for Google sign-in
+  // (Settings → Account); its Cloud project needs the Calendar API and the
+  // calendar read-only scopes (docs/GOOGLE_SIGN_IN.md). The ID and secret
+  // always come from the same client.
+  getClientConfig() {
+    const envId = (process.env.GOOGLE_CALENDAR_CLIENT_ID || "").trim();
+    if (envId) {
+      return { clientId: envId, clientSecret: process.env.GOOGLE_CALENDAR_CLIENT_SECRET };
+    }
+    // Required lazily: googleAccount pulls in Electron's safeStorage and windows.
+    const { clientId, clientSecret } = require("./googleAccount").getClientConfig();
+    return { clientId: clientId || undefined, clientSecret: clientSecret || undefined };
+  }
+
   getClientId() {
-    return process.env.GOOGLE_CALENDAR_CLIENT_ID;
+    return this.getClientConfig().clientId;
   }
 
   getClientSecret() {
-    return process.env.GOOGLE_CALENDAR_CLIENT_SECRET;
+    return this.getClientConfig().clientSecret;
   }
 
   startOAuthFlow({ signal } = {}) {
+    if (!this.getClientId()) {
+      // Fail fast instead of opening the browser on a client_id=undefined URL,
+      // which Google answers with "OAuth client was not found".
+      throw new Error(
+        "Google Calendar needs a Google OAuth client: add one under Settings → Account."
+      );
+    }
     return runOAuthLoopbackFlow({
       signal,
       errorParam: "gcal_error",
+      renderResultPage: calendarResultPage("integrations.googleCalendar"),
       buildAuthUrl: (redirectUri, state, codeChallenge) => {
         const params = new URLSearchParams({
           client_id: this.getClientId(),
@@ -82,7 +106,7 @@ class GoogleCalendarOAuth {
     const body = new URLSearchParams({
       code,
       client_id: this.getClientId(),
-      client_secret: this.getClientSecret(),
+      ...(this.getClientSecret() ? { client_secret: this.getClientSecret() } : {}),
       redirect_uri: redirectUri,
       grant_type: "authorization_code",
       code_verifier: codeVerifier,
@@ -94,7 +118,7 @@ class GoogleCalendarOAuth {
   async refreshAccessToken(refreshToken) {
     const body = new URLSearchParams({
       client_id: this.getClientId(),
-      client_secret: this.getClientSecret(),
+      ...(this.getClientSecret() ? { client_secret: this.getClientSecret() } : {}),
       refresh_token: refreshToken,
       grant_type: "refresh_token",
     }).toString();

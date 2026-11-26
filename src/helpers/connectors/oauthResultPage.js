@@ -30,4 +30,23 @@ function connectorResultPage(
     });
 }
 
-module.exports = { renderOAuthResultPage, connectorResultPage };
+// The page after a calendar's OAuth redirect, worded from
+// integrations.<provider>.browser.*. Builds with OpenWhispr accounts keep
+// OpenWhispr's hosted desktop-callback page (null), which hands off to the app
+// through the openwhispr:// protocol; other builds must never send the browser
+// there, since that would open OpenWhispr rather than this app.
+function calendarResultPage(i18nPrefix, { env = process.env, i18n = null } = {}) {
+  if (env.VITE_ENABLE_OPENWHISPR_ACCOUNTS === "true") return null;
+  return ({ ok }) => {
+    // Required at render time: i18nMain pulls in Electron.
+    const translator = i18n ?? require("../i18nMain").i18nMain;
+    const copy = (key) => translator.t(`${i18nPrefix}.browser.${key}`);
+    return renderOAuthResultPage({
+      ok,
+      title: copy(ok ? "connectedTitle" : "failedTitle"),
+      body: copy(ok ? "connectedBody" : "failedBody"),
+    });
+  };
+}
+
+module.exports = { renderOAuthResultPage, connectorResultPage, calendarResultPage };

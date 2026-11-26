@@ -4623,7 +4623,13 @@
       "systemAudioDescription": "要转录会议，FigureWhispr 需要系统音频权限来录制其他参与者的音频。我们绝不会录制您的屏幕。您将被引导至系统设置以启用此权限。",
       "openSettings": "打开系统设置",
       "connectFailed": "连接失败",
-      "connectFailedDescription": "连接 Google Calendar 时出错。请重试。"
+      "connectFailedDescription": "连接 Google Calendar 时出错。请重试。",
+      "browser": {
+        "connectedTitle": "Google 日历已连接",
+        "connectedBody": "您可以关闭此标签页并返回 FigureWhispr。",
+        "failedTitle": "Google 日历未连接",
+        "failedBody": "请返回 FigureWhispr 重试。"
+      }
     },
     "microsoftCalendar": {
       "title": "Microsoft 日历",
@@ -4637,7 +4643,13 @@
       "disconnectConfirm": "断开 {{email}}？",
       "disconnectDescription": "将不再从此日历记录会议笔记。",
       "connectFailed": "连接失败",
-      "connectFailedDescription": "连接 Microsoft Calendar 时出错。请重试。"
+      "connectFailedDescription": "连接 Microsoft Calendar 时出错。请重试。",
+      "browser": {
+        "connectedTitle": "Microsoft 日历已连接",
+        "connectedBody": "您可以关闭此标签页并返回 FigureWhispr。",
+        "failedTitle": "Microsoft 日历未连接",
+        "failedBody": "请返回 FigureWhispr 重试。"
+      }
     },
     "appleCalendar": {
       "title": "Apple 日历",

@@ -28,6 +28,8 @@ interface UpcomingMeetingsProps {
   events: CalendarEvent[];
   isLoading: boolean;
   isConnected: boolean;
+  /** False when this build has no calendar it can connect: the card stays hidden. */
+  canConnect?: boolean;
   onConnectCalendar: () => void;
 }
 
@@ -389,6 +391,7 @@ export default function UpcomingMeetings({
   events,
   isLoading,
   isConnected,
+  canConnect = true,
   onConnectCalendar,
 }: UpcomingMeetingsProps) {
   const { t } = useTranslation();
@@ -414,7 +417,7 @@ export default function UpcomingMeetings({
       )}
 
       {/* Calendar not connected */}
-      {!isLoading && !isConnected && (
+      {!isLoading && !isConnected && canConnect && (
         <EmptyStateCard
           className="px-4 py-8"
           icon={Calendar}
